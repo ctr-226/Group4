@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+# 导入Teacher,Student
+from .models import Teacher,Student
+
+# 注册Teacher,Student到admin中
+admin.site.register(Teacher)
+admin.site.register(Student)
