@@ -1,9 +1,12 @@
 # 引入path
-from django.urls import path
+from django.urls import path,include
 from . import views
-# 正在部署的应用的名称
-app_name = 'User_Profile'
+
 
 urlpatterns = [
-    #path('',view,namespace='')),
+    path('login/',views.login,name='login'),
+    path('logout/',views.logout,name='logout'),
+    path('register/',views.register,name='register'),
+    path('student_profile_update/',views.student_profile_update,name='student_profile_update'),
+    path('teacher_profile_update/',views.teacher_profile_update,name='teacher_profile_update'),
 ]
