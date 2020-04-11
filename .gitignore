@@ -24,3 +24,5 @@ wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
+/.idea/
+*.sqlite/
