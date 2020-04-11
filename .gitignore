@@ -26,3 +26,5 @@ share/python-wheels/
 .installed.cfg
 /.idea/
 *.sqlite/
+*.pyc/
+*.swp/
