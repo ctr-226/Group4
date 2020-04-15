@@ -28,3 +28,4 @@ share/python-wheels/
 *.sqlite/
 *.pyc/
 *.swp/
+*.DS_Store/
