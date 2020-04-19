@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    首页
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+s
+{% block content %}
+<div class="form-wrapper">
+   <form method="post" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+           <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+             <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+           </div>
+        {% endfor %}
+      <div class="button-wrapper submit">
+         <input type="submit" value="Submit" />
+      </div>
+   </form>
+</div>
+{% endblock %}
