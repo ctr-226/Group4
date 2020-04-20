@@ -9,7 +9,7 @@ from django.utils import timezone
 class Student(models.Model):
 	student_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
 	# 学生姓名 最长100字符
-	name = models.CharField(max_length=100)
+	namellll = models.CharField(max_length=100)
 
 	# 学生年龄 限定正整数
 	age = models.PositiveIntegerField(default=15)
