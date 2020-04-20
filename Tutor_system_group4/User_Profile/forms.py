@@ -49,8 +49,3 @@ class UserRegisterForm(forms.Form):
             raise forms.ValidationError("Password mismatch. Please enter again.")
 
         return password2
-
-
-class UserLoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField()
