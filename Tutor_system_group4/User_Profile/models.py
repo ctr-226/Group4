@@ -14,12 +14,12 @@ class Student(models.Model):
 	# 学生年龄 限定正整数
 	age = models.PositiveIntegerField(default=15)
 
-	# 学生性别 chioce (u'内部存储名，u'外部显示名')
+	# 学生性别 choice (u'内部存储名，u'外部显示名')
 	GENDER_CHOICE = ((u'M', u'男'), (u'F', u'女'))
 
 	gender = models.CharField(max_length=2, choices=GENDER_CHOICE, default=u'M')
 
-	# 学生年级 chioce (u'内部存储名，u'外部显示名')
+	# 学生年级 choice (u'内部存储名，u'外部显示名')
 	GRADE_CHOICE_STUDENT = (
 		(u'0', u'小学一年级至三年级'),
 		(u'1', u'小学四年级至六年级'),
@@ -53,7 +53,7 @@ class Teacher(models.Model):
 	# 教师年龄 限定正整数
 	age = models.PositiveIntegerField(default=20)
 
-	# 教师性别 chioce (u'内部存储名，u'外部显示名')
+	# 教师性别 choice (u'内部存储名，u'外部显示名')
 	GENDER_CHOICE = (
 		(u'M', u'男'),
 		(u'F', u'女')
