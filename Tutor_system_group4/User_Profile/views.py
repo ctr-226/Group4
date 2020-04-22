@@ -55,7 +55,8 @@ def register(request):
             # 使用内置User自带create_user方法创建用户，不需要使用save()
             new_user = User.objects.create_user(username=username, password=password)
             if user_attribute == '0':
-
+                new_user.is_teacher = True
+                new_user.save()
                 # 如果直接使用objects.create()方法后不需要使用save()
                 teacher_profile = Teacher(teacher_user=new_user)
                 teacher_profile.name = username
@@ -63,6 +64,8 @@ def register(request):
                 teacher_profile.phone = phone
                 teacher_profile.save()
             else:
+                new_user.is_student = True
+                new_user.save()
                 student_profile = Student(student_user=new_user)
                 student_profile.name = username
                 student_profile.mailbox = email
