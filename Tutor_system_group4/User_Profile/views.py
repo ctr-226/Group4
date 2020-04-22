@@ -3,10 +3,10 @@ from typing import Any, Union
 from django.db import models
 from django.shortcuts import render
 
-# 导入数据模型ArticlePost
-from .models import Teacher, Student
+# 导入数据模型
+from .models import Teacher, Student, User
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib import auth
 from .forms import UserRegisterForm
 # , UserLoginForm
@@ -39,15 +39,19 @@ def register(request):
 			user_attribute = form.cleaned_data['user_attribute']
 			# 使用内置User自带create_user方法创建用户，不需要使用save()
 			new_user = User.objects.create_user(username=username, password=password)
-			if user_attribute == 0:
-
+			if user_attribute == '0':
+				new_user.is_teacher = True
+				new_user.save()
 				# 如果直接使用objects.create()方法后不需要使用save()
 				teacher_profile = Teacher(teacher_user=new_user)
+
 				teacher_profile.name = username
 				teacher_profile.mailbox = email
 				teacher_profile.phone = phone
 				teacher_profile.save()
 			else:
+				new_user.is_student = True
+				new_user.save()
 				student_profile = Student(student_user=new_user)
 				student_profile.name = username
 				student_profile.mailbox = email
