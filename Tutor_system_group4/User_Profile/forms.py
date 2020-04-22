@@ -53,4 +53,4 @@ class UserRegisterForm(forms.Form):
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
-	password = forms.CharField()
+    password = forms.CharField()
