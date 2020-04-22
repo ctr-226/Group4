@@ -1,11 +1,10 @@
-# 导入数据模型ArticlePost
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
+# 导入数据模型
+from django.contrib.auth import authenticate, login, get_user_model
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import UserRegisterForm, UserLoginForm
-from .models import Teacher, Student
+from .models import Teacher, Student, User
 
 
 # 登入
@@ -16,14 +15,13 @@ def user_login(request):
             # 清洗出合法数据
             username = user_login_form.cleaned_data['username']
             password = user_login_form.cleaned_data['password']
-            user_attribute = user_login_form.cleaned_data['user_attribute']
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                # if user.is_student
-                # 将用户数据保存在 session 中，即实现了登录动作
-
-                return HttpResponse("登陆成功")
+                if user.is_student == True:
+                    return redirect("User_Profile:student_profile_update")
+                elif user.is_teacher == True:
+                    return redirect("User_Profile:teacher_profile_update")
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:
