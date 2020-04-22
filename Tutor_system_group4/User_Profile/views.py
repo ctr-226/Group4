@@ -10,7 +10,6 @@ from .models import Teacher, Student
 
 # 登入
 def user_login(request):
-    user = None
     if request.method == 'POST':
         user_login_form = UserLoginForm(request.POST)
         if user_login_form.is_valid():
@@ -18,25 +17,12 @@ def user_login(request):
             username = user_login_form.cleaned_data['username']
             password = user_login_form.cleaned_data['password']
             user_attribute = user_login_form.cleaned_data['user_attribute']
-            # 检验账号、密码是否正确匹配数据库中的某个用户
-            # 如果均匹配则返回这个 user 对象
-            # 如果作为学生登录，先在学生表格查看是否有这个学生的信息
-            if user_attribute == '1':
-                filter_result = Student.objects.filter(name__exact=username)
-                if len(filter_result) > 0:
-                    user = authenticate(username=username, password=password)
-                else:
-                    return HttpResponse("Your username doesn't exist.")
-                # 如果作为老师登录，先在老师表格查看是否有这个老师的信息
-            elif user_attribute == '0':
-                filter_result = Teacher.objects.filter(name__exact=username)
-                if len(filter_result) > 0:
-                    user = authenticate(username=username, password=password)
-                else:
-                    return HttpResponse("Your username doesn't exist.")
+            user = authenticate(username=username, password=password)
             if user:
-                # 将用户数据保存在 session 中，即实现了登录动作
                 login(request, user)
+                # if user.is_student
+                # 将用户数据保存在 session 中，即实现了登录动作
+
                 return HttpResponse("登陆成功")
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
