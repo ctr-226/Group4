@@ -52,6 +52,5 @@ class UserRegisterForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(max_length=50)
-    password = forms.CharField()
-    user_attribute = forms.ChoiceField(choices=((0, '教员'), (1, '学员'),), required=True)
+    username = forms.CharField()
+	password = forms.CharField()
