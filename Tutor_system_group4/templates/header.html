@@ -8,10 +8,20 @@
       <!-- 导航入口 -->
       <div>
         <ul class="navbar-nav">
-          <!-- 条目 -->
-          <li class="nav-item">
-            <a class="nav-link" href="#">个人中心</a>
-          </li>
+          {% if user.is_authenticated %}
+            <!-- 如果用户已经登录，则显示用户名 -->
+            <li class="nav-item">
+              <a class="nav-link" href="#" >{{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'User_Profile:logout' %}">退出登录</a>
+            </li>
+          {% else %}
+            <!--如果用户未登录，则显示“登录”-->
+            <li class="nav-item">
+              <a class ="nav-link" href="{% url 'User_Profile:login' %}">登录</a>
+            </li>
+          {% endif %}
         </ul>
       </div>
   
