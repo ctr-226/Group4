@@ -1,26 +1,35 @@
 from django.db import models
 # 导入内建的User模型。
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 # timezone 用于处理时间相关事务。
 from django.utils import timezone
+from django.conf import settings
+
+
+class User(AbstractUser):
+	is_student = models.BooleanField(default=False)
+	is_teacher = models.BooleanField(default=False)
+
+
+# REQUIRED_FIELDS = ['is_student', 'is_teacher']
 
 
 # 学生数据模型
 class Student(models.Model):
-	student_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
-
+	student_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+										related_name='student_profile')
 	# 学生姓名 最长100字符
-	name = models.CharField(max_length=100)
+	name = models.CharField(max_length=100, default=' ')
 
 	# 学生年龄 限定正整数
 	age = models.PositiveIntegerField(default=15)
 
-	# 学生性别 chioce (u'内部存储名，u'外部显示名')
+	# 学生性别 choice (u'内部存储名，u'外部显示名')
 	GENDER_CHOICE = ((u'M', u'男'), (u'F', u'女'))
 
 	gender = models.CharField(max_length=2, choices=GENDER_CHOICE, default=u'M')
 
-	# 学生年级 chioce (u'内部存储名，u'外部显示名')
+	# 学生年级 choice (u'内部存储名，u'外部显示名')
 	GRADE_CHOICE_STUDENT = (
 		(u'0', u'小学一年级至三年级'),
 		(u'1', u'小学四年级至六年级'),
@@ -36,7 +45,7 @@ class Student(models.Model):
 	grade = models.CharField(max_length=2, choices=GRADE_CHOICE_STUDENT, default=u'5')
 
 	# 邮箱
-	mailbox = models.EmailField(unique=True)
+	mailbox = models.EmailField()
 
 	# 联系电话
 	phone = models.CharField(max_length=12)
@@ -48,14 +57,14 @@ class Student(models.Model):
 
 # 教师数据模型暂时去掉了独一无二性
 class Teacher(models.Model):
-	teacher_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='teacher_profile')
-	
+	teacher_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+										related_name='teacher_profile')
 	# 教师姓名 最长100字符
 	name = models.CharField(max_length=100, blank=True)
 	# 教师年龄 限定正整数
 	age = models.PositiveIntegerField(default=20)
 
-	# 教师性别 chioce (u'内部存储名，u'外部显示名')
+	# 教师性别 choice (u'内部存储名，u'外部显示名')
 	GENDER_CHOICE = (
 		(u'M', u'男'),
 		(u'F', u'女')
@@ -78,7 +87,7 @@ class Teacher(models.Model):
 	grade = models.CharField(max_length=2, choices=GRADE_CHOICE_TEACHER, default=u'1')
 
 	# 邮箱
-	mailbox = models.EmailField(unique=True)
+	mailbox = models.EmailField()
 
 	# 联系电话
 	phone = models.CharField(max_length=12)

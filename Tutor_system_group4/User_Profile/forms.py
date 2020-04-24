@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 # 引入 Profile 模型
 from .models import Student,Teacher
+from .models import User
 import re
 
 class StudentProfileForm(forms.ModelForm):
