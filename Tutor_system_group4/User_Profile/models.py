@@ -8,6 +8,7 @@ from django.utils import timezone
 # 学生数据模型
 class Student(models.Model):
 	student_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
+
 	# 学生姓名 最长100字符
 	name = models.CharField(max_length=100)
 
@@ -48,6 +49,7 @@ class Student(models.Model):
 # 教师数据模型暂时去掉了独一无二性
 class Teacher(models.Model):
 	teacher_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='teacher_profile')
+	
 	# 教师姓名 最长100字符
 	name = models.CharField(max_length=100, blank=True)
 	# 教师年龄 限定正整数
