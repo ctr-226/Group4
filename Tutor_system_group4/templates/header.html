@@ -10,9 +10,15 @@
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
             <!-- 如果用户已经登录，则显示用户名 -->
-            <li class="nav-item">
-              <a class="nav-link" href="#" >{{ user.username }}</a>
-            </li>
+            {% if user.is_student %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'User_Profile:student_profile_update' %}" >{{ user.username }}</a>
+              </li>
+            {% elif user.is_teacher %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'User_Profile:teacher_profile_update' %}" >{{ user.username }}</a>
+              </li>
+            {% endif %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'User_Profile:logout' %}">退出登录</a>
             </li>
