@@ -1,6 +1,8 @@
 from django.db import models
 # 导入内建的User模型。
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth import get_user_model
+
 # timezone 用于处理时间相关事务。
 from django.utils import timezone
 from django.conf import settings
@@ -10,7 +12,7 @@ class User(AbstractUser):
 	is_student = models.BooleanField(default=False)
 	is_teacher = models.BooleanField(default=False)
 
-
+User = get_user_model()
 # REQUIRED_FIELDS = ['is_student', 'is_teacher']
 
 
