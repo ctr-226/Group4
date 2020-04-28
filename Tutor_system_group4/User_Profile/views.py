@@ -1,5 +1,5 @@
 # 导入数据模型
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login,logout, get_user_model
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -105,8 +105,8 @@ def user_login(request):
 
 # 登出
 def user_logout(request):
-    context = {}
-    return render(request, 'User_Profile/logout.html', context)
+    logout(request)
+    return redirect("User_Profile:login")
 
 
 # 注册
