@@ -12,11 +12,11 @@
             <!-- 如果用户已经登录，则显示用户名 -->
             {% if user.is_student %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'User_Profile:student_profile_update' %}" >{{ user.username }}</a>
+                <a class="nav-link" href="{% url 'User_Profile:student_profile_update' user.id %}" >{{ user.username }}</a>
               </li>
             {% elif user.is_teacher %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'User_Profile:teacher_profile_update' %}" >{{ user.username }}</a>
+                <a class="nav-link" href="{% url 'User_Profile:teacher_profile_update' user.id %}" >{{ user.username }}</a>
               </li>
             {% endif %}
             <li class="nav-item">
