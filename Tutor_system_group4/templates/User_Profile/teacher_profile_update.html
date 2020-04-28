@@ -21,29 +21,38 @@
                     <div class="form-group col-md-4">
                         <label for="gender">性别</label>
                         <select class="form-control" id="gender" name="gender">
-                            <option value="M">男</option>
-                            <option value="F">女</option>
+                            {% if request.user.teacher_profile.gender == 'M' %}
+                                <option value="M" selected>男</option>
+                                <option value="F">女</option>
+                            {% else %}
+                                <option value="M">男</option>
+                                <option value="F" selected>女</option>
+                            {% endif %}
                         </select>
                     </div>
 
                     <div class="form-group col-md-4">
-                    <label for="grade">年级</label>
-                    <select class="form-control" id="grade" name="grade">
-                        <option value="0">大一</option>
-                        <option value="1">大二</option>
-                        <option value="2">大三</option>
-                        <option value="3">大四</option>
-                        <option value="4">研一</option>
-                        <option value="5">研二</option>
-                        <option value="6">研三</option>
-                        <option value="7">其他</option>
-                    </select>
+                        <label for="grade">年级</label>
+                        <select class="form-control" id="grade" name="grade">
+                            <!-- 根据当前用户的年级来规定下拉菜单预设值 -->
+                            <script language="javascript">
+                                const grades = ["大一", "大二", "大三", "大四", "研一", "研二", "研三", "其他"];
+                                for (var i = 0; i < 8; i++) {
+                                    var g = {{ request.user.teacher_profile.grade }};
+                                    // ===代表数值和类型都相同 pycharm的建议 我并不懂
+                                    if (i === g) {
+                                        // 写入html输出
+                                        document.write("<option value=\"" + i + "\" selected>" + grades[i] + "</option>");
+                                    } else document.write("<option value=\"" + i + "\" >" + grades[i] + "</option>");
+                                }
+                            </script>
+                        </select>
 
-                </div>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">提交</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock content %}
