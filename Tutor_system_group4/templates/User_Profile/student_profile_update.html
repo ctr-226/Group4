@@ -4,28 +4,29 @@
 {% block title %} 学生信息修改 {% endblock title %}
 
 {% block content %}
-<div class="container">
-	<div class="row">
-		<div class="col-12">
-			<br>
-			<div class="col-md-4">学生姓名：{{student_profile.name}}</div>
-			<br>
-			<form method="post" action=".">
-				{% csrf_token %}
-				<div class="form-group col-md-4">
-					<label for="age">年龄</label>
-					<input type="int" class="form-control" id="age" name="age" value="{{ profile.age }}">
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <div class="col-md-4">学生姓名：{{ request.user.username }}</div>
+                <br>
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    <div class="form-group col-md-4">
+                        <label for="age">年龄</label>
+                        <input type="text" class="form-control" id="age" name="age"
+                               value="{{ request.user.student_profile.age }}">
+                    </div>
 
-                <div class="form-group col-md-4">
-                    <label for="gender">性别</label>
-                    <select class="form-control" id="gender" name="gender">
-                        <option value="M">男</option>
-                        <option value="F">女</option>
-                    </select>
-                </div>
+                    <div class="form-group col-md-4">
+                        <label for="gender">性别</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="M">男</option>
+                            <option value="F">女</option>
+                        </select>
+                    </div>
 
-                <div class="form-group col-md-4">
+                    <div class="form-group col-md-4">
                     <label for="grade">年级</label>
                     <select class="form-control" id="grade" name="grade">
                         <option value="0">小学一年级至三年级</option>
