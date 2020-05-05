@@ -15,7 +15,7 @@
                 <h5>还没有账号？</h5>
                 <h5>点击<a href='{% url "User_Profile:register" %}'>注册账号</a>加入我们吧！</h5>
                 <br>
-                <form method="post" action=".">
+                <form method="post" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     <!-- 账号 -->
                     <div class="form-group">
