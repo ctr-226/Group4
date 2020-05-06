@@ -1,5 +1,5 @@
 # 导入数据模型
-from django.contrib.auth import authenticate, login,logout, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -17,9 +17,10 @@ from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
-#信息编辑
+
+# 信息编辑
 @login_required(login_url='/user/login/')
-def student_profile_update(request,id):
+def student_profile_update(request, id):
     user = User.objects.get(id=id)
     student_profile = Student.objects.get(student_user_id=id)
 
@@ -37,7 +38,7 @@ def student_profile_update(request,id):
             return redirect("User_Profile:student_profile_update", id=id)
         else:
             return HttpResponse("注册表单输入有误。请重新输入")
-    
+
     elif request.method == 'GET':
         student_form = StudentProfileForm()
         context = {'form': student_form}
@@ -45,8 +46,9 @@ def student_profile_update(request,id):
     else:
         return HttpResponse("请使用GET或POST请求数据")
 
+
 @login_required(login_url='/user/login/')
-def teacher_profile_update(request,id):
+def teacher_profile_update(request, id):
     user = User.objects.get(id=id)
     teacher_profile = Teacher.objects.get(teacher_user_id=id)
 
@@ -64,7 +66,7 @@ def teacher_profile_update(request,id):
             return redirect("User_Profile:teacher_profile_update", id=id)
         else:
             return HttpResponse("注册表单输入有误。请重新输入")
-    
+
     elif request.method == 'GET':
         teacher_form = TeacherProfileForm()
         context = {'form': teacher_form}
@@ -84,14 +86,14 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                #此处在redirect时应想办法传入id参数
+                # 此处在redirect时应想办法传入id参数
                 id = user.id
                 if user.is_student == True:
-                    return redirect("User_Profile:student_profile_update",id=id)
+                    return redirect("User_Profile:student_profile_update", id=id)
                 elif user.is_teacher == True:
-                    return redirect("User_Profile:teacher_profile_update",id=id)
-                #return redirect("User_Profile:profile_update")
-                #return redirect("User_Profile:profile_update", id=id)
+                    return redirect("User_Profile:teacher_profile_update", id=id)
+                # return redirect("User_Profile:profile_update")
+                # return redirect("User_Profile:profile_update", id=id)
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:
@@ -102,6 +104,7 @@ def user_login(request):
         return render(request, 'User_Profile/login.html', context)
     else:
         return HttpResponse("请使用GET或POST请求数据")
+
 
 # 登出
 def user_logout(request):
@@ -144,4 +147,3 @@ def register(request):
     else:
         form = UserRegisterForm()
         return render(request, 'User_Profile/register.html', {'form': form})
-
