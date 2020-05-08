@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    课程详情
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class = "row">
+            <h1 class = "col-12">{{course.nick_name}}</h1>
+
+            {% if course.state_match %}
+            <!--使用.get_**_display方法显示**的CHOICE值-->
+            </p class = "lead" >{{course.get_grade_course_display}}  {{course.get_subject_display}}  上课中</p>
+            {% else %}
+            </p class = "lead" >{{course.get_grade_course_display}}  {{course.get_subject_display}}  可申请</p>
+            {% endif %}
+            
+
+        </div>
+    </div>
+
+{% endblock content %}
