@@ -35,15 +35,21 @@ def manage_course(request, id):
     user = User.objects.get(id=id)
     context = {}
     if user.is_teacher:
-        course_list = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=True)
-        #course_match = CourseDetail.objects.filter(teacher__id=id, state_match=True)
-        #course_unmatched = CourseDetail.objects.filter(teacher__id=id, state_match=False)
-        course_list = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=True)
-        context = {'course_match': course_match, 'course_unmatched': course_unmatched}
-
+        course_match = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=True)
+        # course_match = CourseDetail.objects.filter(teacher.id=id, state_match=True)
+        # course_unmatched = CourseDetail.objects.filter(teacher__id=id, state_match=False)
+        course_unmatched = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=False)
+        course_applying = []
+        student_applying = []
+        for course in course_unmatched:
+            if course.student_applied.all():
+                course_applying.append(course)
+                student_applying.append(course.student_applied.all())
+        context = {'course_match': course_match, 'course_unmatched': course_unmatched,
+                   'course_applying': course_applying, 'student_applying': student_applying}
         return render(request, 'Course/teacher_subject_detail.html', context)
     if user.is_student:
-        course_match = CourseDetail.objects.filter(student__id=id, state_match=True)
-        course_unmatched = CourseDetail.objects.filter(student__id=id, state_match=False)
-        context = {'course_match': course_match, 'course_unmatched': course_unmatched}
+        course_match = Student.objects.get(id=id).coursedetail_set.filter(state_match=True)
+        course_applying = Student.objects.get(id=id).applied_Student.all()
+        context = {'course_match': course_match, 'course_applying': course_applying}
         return render(request, 'Course/student_subject_detail.html', context)
