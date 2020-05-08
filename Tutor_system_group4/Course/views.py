@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from User_Profile.models import Student
+from User_Profile.models import Student, Teacher, User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from .models import CourseDetail
@@ -23,4 +23,17 @@ def detail_course(request, id):
 
 
 def manage_course(request, id):
-    return None
+    user = User.objects.get(id=id)
+    context = {}
+    if user.is_teacher:
+        # course_list = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=True)
+        course_match = CourseDetail.objects.filter(teacher__id=id, state_match=True)
+        course_unmatched = CourseDetail.objects.filter(teacher__id=id, state_match=False)
+        context = {'course_match': course_match, 'course_unmatched': course_unmatched}
+
+        return render(request, '/Course/teacher_subject_detail.html', context)
+    if user.is_student:
+        course_match = CourseDetail.objects.filter(student__id=id, state_match=True)
+        course_unmatched = CourseDetail.objects.filter(student__id=id, state_match=False)
+        context = {'course_match': course_match, 'course_unmatched': course_unmatched}
+        return render(request, '/Course/student_subject_detail.html', context)

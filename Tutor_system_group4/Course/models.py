@@ -36,3 +36,4 @@ class CourseDetail(models.Model):
     subject = models.CharField(max_length=10, choices=SUBJECT_CHOICE)
     comment = models.CharField(max_length=100, default='')
     state_match = models.BooleanField()
+
