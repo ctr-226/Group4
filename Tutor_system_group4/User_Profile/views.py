@@ -1,13 +1,19 @@
 # 导入数据模型
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
+from django.db import models
 from django.shortcuts import render
 
-from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
 from .models import Teacher, Student, User
+from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
+from django.contrib import auth
+
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
 
@@ -82,9 +88,9 @@ def user_login(request):
                 login(request, user)
                 # 此处在redirect时应想办法传入id参数
                 id = user.id
-                if user.is_student:
+                if user.is_student == True:
                     return redirect("User_Profile:student_profile_update", id=id)
-                elif user.is_teacher:
+                elif user.is_teacher == True:
                     return redirect("User_Profile:teacher_profile_update", id=id)
                 # return redirect("User_Profile:profile_update")
                 # return redirect("User_Profile:profile_update", id=id)
