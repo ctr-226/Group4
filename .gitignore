@@ -30,3 +30,4 @@ share/python-wheels/
 *.DS_Store
 .sqlite3
 liuhuquestion.md
+Tutor_system_group4/db.sqlite3
