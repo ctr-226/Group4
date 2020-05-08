@@ -7,7 +7,6 @@ from django.utils import timezone
 
 
 class CourseDetail(models.Model):
-    student = models.ForeignKey(Student, null=True, blank=True, on_delete=models.SET_NULL)
     teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.SET_NULL)
     nick_name = models.CharField(max_length=50, blank=True)
     GRADE_CHOICE_COURSE = (
@@ -34,5 +33,32 @@ class CourseDetail(models.Model):
         ('geo', '地理'),
     )
     subject = models.CharField(max_length=10, choices=SUBJECT_CHOICE)
+
+    # 简介
+    introduction = models.CharField(max_length=150, default='')
+
+    # 课程收费估计
+    charge = models.IntegerField(verbose_name='课程收费', default=0)
+
+    # 评论
     comment = models.CharField(max_length=100, default='')
+
+    # 课程设立的时间
+    time_set = models.TimeField(auto_now_add=True)
+
+    # 课程成功匹配的时间
+    time_match = models.TimeField(default=timezone.now)
+
+    # 课程是否匹配，1=匹配成功 0=未匹配成功
     state_match = models.BooleanField()
+
+    # 课程和学生多对一关系，记录成功匹配的学生
+    student_agreed = models.ForeignKey(Student, null=True, blank=True, on_delete=models.SET_NULL,
+                                       verbose_name='成功匹配', related_name='agreed_Student')
+
+    # 课程和学生多对多关系，记录申请选课的学生
+    student_applied = models.ManyToManyField(Student, related_name='applied_Student', verbose_name='申请学员')
+
+    # 返回课程名
+    def __str__(self):
+        return self.nick_name
