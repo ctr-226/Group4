@@ -18,8 +18,13 @@ def increase_course(request):
 
 
 # 同意申请
-def agree_match(request):
-    return None
+def agree_match(request, coursedetail_id):
+    course_applying = CourseDetail.objects.get(id=coursedetail_id)
+    selected_student = course_applying.student_applied.get(student_applied_id=request.POST['choice'])
+    course_applying.student_agreed = selected_student
+    course_applying.state_match = True
+    course_applying.save()
+    return redirect('Course:manage_course')
 
 
 # 课程详细内容
@@ -31,9 +36,9 @@ def detail_course(request, id):
 
 
 # 课程管理
-def manage_course(request, id):
-    user = User.objects.get(id=id)
-    context = {}
+def manage_course(request):
+    user = User.objects.get(id=request.user.id)
+    # context = {}
     if user.is_teacher:
         course_match = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=True)
         # course_match = CourseDetail.objects.filter(teacher.id=id, state_match=True)
