@@ -59,4 +59,5 @@ def manage_course(request):
         course_match = Student.objects.get(id=ID).coursedetail_set.filter(state_match=True)
         course_applying = Student.objects.get(id=ID).applied_Student.all()
         context = {'course_match': course_match, 'course_applying': course_applying}
+
         return render(request, 'Course/student_subject_detail.html', context)
