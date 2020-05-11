@@ -1,0 +1,25 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load static %}
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    课程管理
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+    {% for course in course_unmatched  %}
+        <form action="{% url 'Course:agree_match' course.id %}" method="post">
+        {% csrf_token %}
+        {% for student in course.student_applied.all %}
+            <div class="custom-radio">
+                <label><input type="radio" name="choice" value="{{ student.id }}">{{ student.id }}</label>
+            </div>
+        {% endfor %}
+        <button type="submit">select</button>
+        </form>
+    {% endfor %}
+    {%  for course in course_match %}
+        <div>{{ course.nick_name }}</div>
+    {% endfor %}
+{% endblock content %}

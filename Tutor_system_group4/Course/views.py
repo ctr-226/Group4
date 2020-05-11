@@ -20,7 +20,7 @@ def increase_course(request):
 # 同意申请
 def agree_match(request, coursedetail_id):
     course_applying = CourseDetail.objects.get(id=coursedetail_id)
-    selected_student = course_applying.student_applied.get(student_applied_id=request.POST['choice'])
+    selected_student = Student.objects.get(id=request.POST['choice'])
     course_applying.student_agreed = selected_student
     course_applying.state_match = True
     course_applying.save()
@@ -37,24 +37,26 @@ def detail_course(request, id):
 
 # 课程管理
 def manage_course(request):
-    user = User.objects.get(id=request.user.id)
+    ID = request.user.id
+    user = User.objects.get(id=ID)
     # context = {}
     if user.is_teacher:
-        course_match = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=True)
-        # course_match = CourseDetail.objects.filter(teacher.id=id, state_match=True)
+
+        course_match = user.teacher_profile.coursedetail_set.filter(state_match=True)
+        # course_match = CourseDetail.objects.filter(teacher_id=id, state_match=True)
         # course_unmatched = CourseDetail.objects.filter(teacher__id=id, state_match=False)
-        course_unmatched = Teacher.objects.get(id=id).coursedetail_set.filter(state_match=False)
-        course_applying = []
-        student_applying = []
+        course_unmatched = user.teacher_profile.coursedetail_set.filter(state_match=False)
+        course_list = {}
         for course in course_unmatched:
             if course.student_applied.all():
-                course_applying.append(course)
-                student_applying.append(course.student_applied.all())
+                # course_applying.append(course)
+                # student_applying.append(course.student_applied.all())
+                course_list[course] = course.student_applied.all()
         context = {'course_match': course_match, 'course_unmatched': course_unmatched,
-                   'course_applying': course_applying, 'student_applying': student_applying}
+                   'course_list': course_list}
         return render(request, 'Course/teacher_subject_detail.html', context)
     if user.is_student:
-        course_match = Student.objects.get(id=id).coursedetail_set.filter(state_match=True)
-        course_applying = Student.objects.get(id=id).applied_Student.all()
+        course_match = Student.objects.get(id=ID).coursedetail_set.filter(state_match=True)
+        course_applying = Student.objects.get(id=ID).applied_Student.all()
         context = {'course_match': course_match, 'course_applying': course_applying}
         return render(request, 'Course/student_subject_detail.html', context)
