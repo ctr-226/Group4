@@ -8,18 +8,54 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-    {% for course in course_unmatched  %}
-        <form action="{% url 'Course:agree_match' course.id %}" method="post">
-        {% csrf_token %}
-        {% for student in course.student_applied.all %}
-            <div class="custom-radio">
-                <label><input type="radio" name="choice" value="{{ student.id }}">{{ student.id }}</label>
+    <div class="container" style="height: 100px">
+    <p>hello</p>
+    </div>
+    <div class="container">
+    <div class="nav col-md nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">待同意课程</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">已匹配课程</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">课程评论</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">添加课程</a>
+    </div>
+    </div>
+<div class="container">
+    <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <div class="row">
+        {% for course in course_unmatched  %}
+            <div class="card col-md-6 ">
+                <div class="card-body">
+                    <h5 class="card-title">{{ course.nick_name }}</h5>
+                    <p class="card-text">{{ course.get_grade_course_display }}{{ course.get_subject_display }}</p>
+                </div>
+
+                <form action="{% url 'Course:agree_match' course.id %}" method="post">
+                    {% csrf_token %}
+                    {% for student in course.student_applied.all %}
+                        <div class="custom-radio">
+                            <label><input type="radio" name="choice" value="{{ student.id }}">{{ student.id }}</label>
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit">select</button>
+                </form>
             </div>
         {% endfor %}
-        <button type="submit">select</button>
-        </form>
-    {% endfor %}
-    {%  for course in course_match %}
-        <div>{{ course.nick_name }}</div>
-    {% endfor %}
+        </div>
+        </div>
+
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            {%  for course in course_match %}
+                <div>{{ course.nick_name }}</div>
+            {% endfor %}
+        </div>
+
+
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+    </div>
+
+</div>
+
 {% endblock content %}
