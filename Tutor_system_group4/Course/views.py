@@ -16,8 +16,8 @@ from .forms import CourseForm
 
 # 增加课程
 @login_required(login_url='/user/login/')
-def increase_course(request,teacher_id):
-    user = User.objects.get(id=teacher_id)
+def increase_course(request):
+    user = User.objects.get(id=request.user.id)
     if user.is_teacher == True:
         if request.method == "POST":
             if request.user != user:
@@ -26,9 +26,11 @@ def increase_course(request,teacher_id):
             course_form = CourseForm(request.POST)
             if course_form.is_valid():
                 new_course = course_form.save(commit=False)
-                #可能还要存一些表单给不了的数据
+                #还要存一些表单给不了的数据
+                new_course.teacher = user
+                new_course.state_match = 0
                 new_course.save()
-                return redirect("Course:increase_course",teacher_id=teacher_id)
+                return redirect("Course:increase_course")
 
         elif request.method == "GET":
             course_form = CourseForm()

@@ -9,4 +9,4 @@ import re
 class CourseForm(forms.ModelForm):
     class meta:
         model = CourseDetail
-        fields = ['nick_name','grade_course', 'subject']
+        fields = ['nick_name','grade_course', 'subject', 'introduction', 'charge']
