@@ -95,4 +95,4 @@ def index(request):
 
 
 def filter(request):
-    return HttpResponse("这是条件筛选")
+    return render(request, 'filter.html')
