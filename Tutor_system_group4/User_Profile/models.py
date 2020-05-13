@@ -27,7 +27,7 @@ class Student(models.Model):
     name = models.CharField(max_length=100, default=' ')
 
     # 学生年龄 限定正整数
-    age = models.PositiveIntegerField(blank=True, null=True)
+    age = models.PositiveIntegerField(null=True)
 
     # 学生性别 choice (u'内部存储名，u'外部显示名')
     GENDER_CHOICE = ((u'M', u'男'), (u'F', u'女'))
@@ -67,7 +67,7 @@ class Teacher(models.Model):
     # 教师姓名 最长100字符
     name = models.CharField(max_length=100, blank=True)
     # 教师年龄 限定正整数
-    age = models.PositiveIntegerField(blank=True, null=True)
+    age = models.PositiveIntegerField(default=20)
 
     # 教师性别 choice (u'内部存储名，u'外部显示名')
     GENDER_CHOICE = (

@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('User_Profile.urls'), name='user'),
     path('course/', include('Course.urls'), name='course'),
-    # path('index/', views.)
+    # path('index/', )
 ]
