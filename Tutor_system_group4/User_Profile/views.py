@@ -3,16 +3,14 @@ from django.contrib.auth import authenticate, login,logout, get_user_model
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
+from django.urls import reverse
 from django.db import models
-from django.shortcuts import render
 
 from .models import Teacher, Student, User
 from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import User
-from django.contrib import auth
 
-from django.urls import reverse
+from django.contrib import auth
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
@@ -90,8 +88,6 @@ def user_login(request):
                     return redirect("User_Profile:student_profile_update",id=id)
                 elif user.is_teacher == True:
                     return redirect("User_Profile:teacher_profile_update",id=id)
-                #return redirect("User_Profile:profile_update")
-                #return redirect("User_Profile:profile_update", id=id)
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:
