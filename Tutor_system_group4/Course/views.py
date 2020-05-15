@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from django.contrib import auth
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from .models import CourseDetail
@@ -28,7 +28,7 @@ def increase_course(request):
                 new_course = course_form.save(commit=False)
                 #还要存一些表单给不了的数据
                 new_course.teacher = user
-                new_course.state_match = 0
+                new_course.state_match = False
                 new_course.save()
                 return redirect("Course:increase_course")
 
@@ -43,8 +43,16 @@ def increase_course(request):
 
 
 # 课程申请匹配
-def match(request):
-    return None
+def match(request, coursedetail_id):
+    course_applying = CourseDetail.objects.get(id=coursedetail_id)
+    applicant = User.objects.get(id=request.user.id)
+    #虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
+    if applicant.is_student == True:
+        return HttpResponse("申请选课")
+        #多对多中间表加一个元组
+    else:
+        return HttpResponse("只有学生可以申请选课")
+    return redirect('Course: detail_course')
 
 # 同意申请
 def agree_match(request, coursedetail_id):
@@ -53,11 +61,10 @@ def agree_match(request, coursedetail_id):
     course_applying.student_agreed = selected_student
     course_applying.state_match = True
     course_applying.save()
-    return redirect('Course:manage_course')
+    return redirect('Course: manage_course')
 
 
 # 课程详细内容
-
 def detail_course(request, id):
     course = CourseDetail.objects.get(id=id)
     context = {'course': course}
