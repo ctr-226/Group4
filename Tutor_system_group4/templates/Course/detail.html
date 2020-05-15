@@ -7,16 +7,61 @@
 
 {% block content %}
     <div class="container mt-3">
-        <div class="row">
-            <h1 class="col-12">{{ course.nick_name }}</h1>
-
-            {% if course.state_match %}
+        <div>
+            <div class = "col-12">
+                <h1 >{{course.nick_name}}</h1>
+                <p class = "lead">{{course.introduction}}</p>
+            <block>
                 <!--使用.get_**_display方法显示**的CHOICE值-->
-                </p class = "lead" >{{ course.get_grade_course_display }}  {{ course.get_subject_display }}  上课中</p>
-            {% else %}
-                </p class = "lead" >{{ course.get_grade_course_display }}  {{ course.get_subject_display }}  可申请</p>
-            {% endif %}
+                <p>{{course.get_grade_course_display}}  {{course.get_subject_display}}</p>
+                {% if course.state_match %}
+                <p class = "text-danger" >上课中</p>
+                {% else %}
+                <p class="text-success">可申请</p>
+                {% endif %}
+                <p>授课老师：<a href = "#">{{course.teacher.name}}</a></p>
+                <p>课程收费：{{course.charge}}/小时</p>
+                <p>课程评论：{{course.comment}}</p>
+            </block>
+            </div>
 
+            
+
+                <h3 class = "text-center">申请学生名单</h3>
+                    <table class = "table">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>联系电话</th>
+                                <th>邮箱</th>
+                                {% if request.user.id == course.teacher.id %}
+                                    <th>    </th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in course.student_applied.all %}
+                            <tr>
+                                <td><a href = "#">{{student.name}}</a></td>
+                                <td>{{student.phone}}</td>
+                                <td>{{student.mailbox}}</td>
+                                {% if request.user.id == course.teacher.id %}
+                                    {% if course.state_match %}
+                                    <td><a type="button" class="btn btn-disabled" >接受申请</a></td>
+                                    {% else %}
+                                    <td><a type="button" class="btn btn-success" href ='#' >接受申请</a></td>
+                                    {% endif %}
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+            <div>
+                <p>{{student.name}}</p>
+            </div>
+
+            
 
         </div>
     </div>
