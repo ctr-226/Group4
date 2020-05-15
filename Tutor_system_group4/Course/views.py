@@ -8,142 +8,164 @@ from django.contrib import auth
 
 from .forms import CourseForm
 from .models import CourseDetail
+
+
 # Create your views here.
 # 首页导航
 def index(request):
     if request.user.is_authenticated:
         user = User.objects.get(id=id)
         Courseall = CourseDetail.objects.all()
-        Course = Courseall.filter(state_match = 0)
+        Course = Courseall.filter(state_match=0)
         if request.method == 'GET':
-            gender_choice=request.Get.get("gender")
-            subject_choice=request.Get.get("subject")
-            grade_choice=request.Get.get("grade")
-            if gender_choice=="9":
-                if subject_choice=="0":
-                    if grade_choice=="0":
-                        if request.GET.get("charge")=="1":
+            gender_choice = request.Get.get("gender")
+            subject_choice = request.Get.get("subject")
+            grade_choice = request.Get.get("grade")
+            if gender_choice == "9":
+                if subject_choice == "0":
+                    if grade_choice == "0":
+                        if request.GET.get("charge") == "1":
                             Course_show = Course.objects.filter(charge__lte=30)
-                        elif request.GET.get("charge")=="2":
+                        elif request.GET.get("charge") == "2":
                             Course_show = Course.objects.filter(charge__range=[30, 50])
-                        elif request.GET.get("charge")=="3":
+                        elif request.GET.get("charge") == "3":
                             Course_show = Course.objects.filter(charge__range=[50, 70])
-                        elif request.GET.get("charge")=="4":
+                        elif request.GET.get("charge") == "4":
                             Course_show = Course.objects.filter(charge__range=[70, 100])
-                        elif request.GET.get("charge")=="5":
+                        elif request.GET.get("charge") == "5":
                             Course_show = Course.objects.filter(charge__gt=100)
                         else:
                             Course_show = Course
                     else:
-                        if request.GET.get("charge")=="1":
+                        if request.GET.get("charge") == "1":
                             Course_show = Course.objects.filter(charge__lte=30).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="2":
-                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="3":
-                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="4":
-                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="5":
+                        elif request.GET.get("charge") == "2":
+                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(
+                                grade_course=grade_choice)
+                        elif request.GET.get("charge") == "3":
+                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(
+                                grade_course=grade_choice)
+                        elif request.GET.get("charge") == "4":
+                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(
+                                grade_course=grade_choice)
+                        elif request.GET.get("charge") == "5":
                             Course_show = Course.objects.filter(charge__gt=100).filter(grade_course=grade_choice)
                         else:
                             Course_show = Course.objects.filter(grade_course=grade_choice)
                 else:
-                    if grade_choice=="0":
-                        if request.GET.get("charge")=="1":
+                    if grade_choice == "0":
+                        if request.GET.get("charge") == "1":
                             Course_show = Course.objects.filter(charge__lte=30).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="2":
+                        elif request.GET.get("charge") == "2":
                             Course_show = Course.objects.filter(charge__range=[30, 50]).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="3":
+                        elif request.GET.get("charge") == "3":
                             Course_show = Course.objects.filter(charge__range=[50, 70]).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="4":
+                        elif request.GET.get("charge") == "4":
                             Course_show = Course.objects.filter(charge__range=[70, 100]).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="5":
+                        elif request.GET.get("charge") == "5":
                             Course_show = Course.objects.filter(charge__gt=100).filter(subject=subject_choice)
                         else:
                             Course_show = Course
                     else:
-                        if request.GET.get("charge")=="1":
-                            Course_show = Course.objects.filter(charge__lte=30).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="2":
-                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="3":
-                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="4":
-                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="5":
-                            Course_show = Course.objects.filter(charge__gt=100).filter(grade_course=grade_choice).filter(subject=subject_choice)
+                        if request.GET.get("charge") == "1":
+                            Course_show = Course.objects.filter(charge__lte=30).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "2":
+                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "3":
+                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "4":
+                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "5":
+                            Course_show = Course.objects.filter(charge__gt=100).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
                         else:
-                            Course_show = Course.objects.filter(grade_course=grade_choice).filter(subject=subject_choice)
+                            Course_show = Course.objects.filter(grade_course=grade_choice).filter(
+                                subject=subject_choice)
             else:
-                if subject_choice=="0":
-                    if grade_choice=="0":
-                        if request.GET.get("charge")=="1":
+                if subject_choice == "0":
+                    if grade_choice == "0":
+                        if request.GET.get("charge") == "1":
                             Course_show = Course.objects.filter(charge__lte=30)
-                        elif request.GET.get("charge")=="2":
+                        elif request.GET.get("charge") == "2":
                             Course_show = Course.objects.filter(charge__range=[30, 50])
-                        elif request.GET.get("charge")=="3":
+                        elif request.GET.get("charge") == "3":
                             Course_show = Course.objects.filter(charge__range=[50, 70])
-                        elif request.GET.get("charge")=="4":
+                        elif request.GET.get("charge") == "4":
                             Course_show = Course.objects.filter(charge__range=[70, 100])
-                        elif request.GET.get("charge")=="5":
+                        elif request.GET.get("charge") == "5":
                             Course_show = Course.objects.filter(charge__gt=100)
                         else:
                             Course_show = Course
                     else:
-                        if request.GET.get("charge")=="1":
+                        if request.GET.get("charge") == "1":
                             Course_show = Course.objects.filter(charge__lte=30).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="2":
-                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="3":
-                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="4":
-                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(grade_course=grade_choice)
-                        elif request.GET.get("charge")=="5":
+                        elif request.GET.get("charge") == "2":
+                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(
+                                grade_course=grade_choice)
+                        elif request.GET.get("charge") == "3":
+                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(
+                                grade_course=grade_choice)
+                        elif request.GET.get("charge") == "4":
+                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(
+                                grade_course=grade_choice)
+                        elif request.GET.get("charge") == "5":
                             Course_show = Course.objects.filter(charge__gt=100).filter(grade_course=grade_choice)
                         else:
                             Course_show = Course.objects.filter(grade_course=grade_choice)
                 else:
-                    if grade_choice=="0":
-                        if request.GET.get("charge")=="1":
+                    if grade_choice == "0":
+                        if request.GET.get("charge") == "1":
                             Course_show = Course.objects.filter(charge__lte=30).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="2":
+                        elif request.GET.get("charge") == "2":
                             Course_show = Course.objects.filter(charge__range=[30, 50]).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="3":
+                        elif request.GET.get("charge") == "3":
                             Course_show = Course.objects.filter(charge__range=[50, 70]).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="4":
+                        elif request.GET.get("charge") == "4":
                             Course_show = Course.objects.filter(charge__range=[70, 100]).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="5":
+                        elif request.GET.get("charge") == "5":
                             Course_show = Course.objects.filter(charge__gt=100).filter(subject=subject_choice)
                         else:
                             Course_show = Course
                     else:
-                        if request.GET.get("charge")=="1":
-                            Course_show = Course.objects.filter(charge__lte=30).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="2":
-                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="3":
-                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="4":
-                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(grade_course=grade_choice).filter(subject=subject_choice)
-                        elif request.GET.get("charge")=="5":
-                            Course_show = Course.objects.filter(charge__gt=100).filter(grade_course=grade_choice).filter(subject=subject_choice)
+                        if request.GET.get("charge") == "1":
+                            Course_show = Course.objects.filter(charge__lte=30).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "2":
+                            Course_show = Course.objects.filter(charge__range=[30, 50]).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "3":
+                            Course_show = Course.objects.filter(charge__range=[50, 70]).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "4":
+                            Course_show = Course.objects.filter(charge__range=[70, 100]).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
+                        elif request.GET.get("charge") == "5":
+                            Course_show = Course.objects.filter(charge__gt=100).filter(
+                                grade_course=grade_choice).filter(subject=subject_choice)
                         else:
-                            Course_show = Course.objects.filter(grade_course=grade_choice).filter(subject=subject_choice)
+                            Course_show = Course.objects.filter(grade_course=grade_choice).filter(
+                                subject=subject_choice)
 
             context = {'course': Course_show}
             return render(request, 'filter.html', context)
         else:
             return HttpResponse("请使用GET请求数据")
-        #context = {}
-        #return render(request, 'filter.html', context)
-        #return HttpResponse("Hello World!")
+        # context = {}
+        # return render(request, 'filter.html', context)
+        # return HttpResponse("Hello World!")
     else:
-        #return HttpResponse("Hello")
+        # return HttpResponse("Hello")
         return render(request, 'index.html')
 
+
 @login_required(login_url='/user/login/')
-def filter(request,id):
+def filter(request, id):
     return render(request, 'filter.html')
+
 
 # 增加课程
 @login_required(login_url='/user/login/')
@@ -177,9 +199,9 @@ def increase_course(request):
 def match(request, coursedetail_id):
     course_applying = CourseDetail.objects.get(id=coursedetail_id)
     applicant = User.objects.get(id=request.user.id)
-    #虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
+    # 虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
     if applicant.is_student == True:
-        #多对多中间表加一个元组
+        # 多对多中间表加一个元组
         course_applying.student_applied.add(applicant)
         course_applying.save()
         return redirect('Course: detail_course')
