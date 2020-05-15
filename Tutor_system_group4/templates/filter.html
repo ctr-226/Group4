@@ -77,28 +77,30 @@
     </div>
     <br>
     <!--课程信息的卡片容器 -->
-    <div class="container">
-        <div class="row mt-2">
-            <div class="col-4 mb-4">
-                <!-- 卡片容器 -->
-                <div class="card h-100">
-                    <!-- 标题 -->
-                    <h4 class="card-header">这是课程名称
-                        <span class="text-muted" style="font-size:0.5em">这是年级-科目</span>
-                    </h4>
-                    <!-- 摘要 -->
-                    <div class="card-body">
-                        <p class="card-text">这是课程简介...</p>
-                    </div>
-                    <!-- 注脚 -->
-                    <div class="card-footer">
-                        <span class="pt-2" style="float:right">这是老师姓名</span>
-                        <a href="#" class="btn btn-primary">了解课程</a>
+    {% for  cours in course %}
+        <div class="container">
+            <div class="row mt-2">
+                <div class="col-4 mb-4">
+                    <!-- 卡片容器 -->
+                    <div class="card h-100">
+                        <!-- 标题 -->
+                        <h4 class="card-header">{{ cours.nick_name }}
+                            <span class="text-muted" style="font-size:0.5em">这是年级-科目</span>
+                        </h4>
+                        <!-- 摘要 -->
+                        <div class="card-body">
+                            <p class="card-text">这是课程简介...</p>
+                        </div>
+                        <!-- 注脚 -->
+                        <div class="card-footer">
+                            <span class="pt-2" style="float:right">这是老师姓名</span>
+                            <a href="#" class="btn btn-primary">了解课程</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {% endfor %}
     <!-- jQuery部分，呈现选择效果 -->
     <script>
         $(document).ready(function () {
@@ -178,8 +180,8 @@
                 $("#select4 .select-all").addClass("selected").siblings().removeClass("selected");
             });
 
-            $(".select dd").on("click", function () {
-                if ($(".select-result dd").length > 1) {
+            $(".select button").on("click", function () {
+                if ($(".select-result button").length >= 1) {
                     $(".select-no").hide();
                 } else {
                     $(".select-no").show();
