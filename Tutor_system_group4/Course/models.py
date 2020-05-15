@@ -8,7 +8,9 @@ from django.utils import timezone
 
 class CourseDetail(models.Model):
     teacher = models.ForeignKey(Teacher, null=True, blank=True, on_delete=models.SET_NULL)
+
     nick_name = models.CharField(max_length=50, blank=True)
+
     GRADE_CHOICE_COURSE = (
         (u'0', u'小学一年级至三年级'),
         (u'1', u'小学四年级至六年级'),
@@ -21,6 +23,7 @@ class CourseDetail(models.Model):
         (u'8', u'其他')
     )
     grade_course = models.CharField(max_length=2, choices=GRADE_CHOICE_COURSE)
+
     SUBJECT_CHOICE = (
         ('zh', '语文'),
         ('math', '数学'),

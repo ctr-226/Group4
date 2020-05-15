@@ -1,19 +1,46 @@
-from django.shortcuts import render
-from User_Profile.models import Student, Teacher, User
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import redirect, get_object_or_404
-from .models import CourseDetail
+from User_Profile.models import Student, User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.shortcuts import render
+
+from .forms import CourseForm
+from .models import CourseDetail
 
 
 # Create your views here.
-# 课程申请匹配
-def match(request):
-    return None
-
 
 # 增加课程
+@login_required(login_url='/user/login/')
 def increase_course(request):
+    user = User.objects.get(id=request.user.id)
+    if user.is_teacher == True:
+        if request.method == "POST":
+            if request.user != user:
+                return HttpResponse("你没有权限修改此用户信息。")
+
+            course_form = CourseForm(request.POST)
+            if course_form.is_valid():
+                new_course = course_form.save(commit=False)
+                # 还要存一些表单给不了的数据
+                new_course.teacher = user
+                new_course.state_match = 0
+                new_course.save()
+                return redirect("Course:increase_course")
+
+        elif request.method == "GET":
+            course_form = CourseForm()
+            context = {'form': course_form}
+            return render(request, 'Course/increase_course.html', context)
+        else:
+            return HttpResponse("请使用GET或POST请求数据")
+    else:
+        return HttpResponse("只有老师才能开设新课程哦")
+
+
+# 课程申请匹配
+def match(request):
     return None
 
 
@@ -61,3 +88,11 @@ def manage_course(request):
         context = {'course_match': course_match, 'course_applying': course_applying}
 
         return render(request, 'Course/student_subject_detail.html', context)
+
+
+def index(request):
+    return HttpResponse("这是首页")
+
+
+def filter(request):
+    return render(request, 'filter.html')
