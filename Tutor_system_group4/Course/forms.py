@@ -6,7 +6,16 @@ from django.contrib.auth.models import User
 from .models import CourseDetail
 import re
 
+
 class CourseForm(forms.ModelForm):
     class meta:
         model = CourseDetail
-        fields = ['nick_name','grade_course', 'subject', 'introduction', 'charge']
+        fields = ['nick_name', 'grade_course', 'subject', 'introduction', 'charge']
+
+
+class FilterForm(forms.Form):
+    class_grade = forms.CharField()
+    teacher_grade = forms.CharField()
+    charge = forms.CharField()
+    subject = forms.CharField()
+    gender = forms.CharField()

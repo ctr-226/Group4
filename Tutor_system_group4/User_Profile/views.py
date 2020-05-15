@@ -89,7 +89,7 @@ def user_login(request):
                 if user.is_student == True:
                     return redirect("User_Profile:student_profile_update", id=id)
                 elif user.is_teacher == True:
-                    return redirect("User_Profile:teacher_profile_update",id=id)
+                    return redirect("User_Profile:teacher_profile_update", id=id)
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:

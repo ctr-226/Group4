@@ -1,8 +1,4 @@
-from django.shortcuts import render
 from User_Profile.models import Student, Teacher, User
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import redirect, get_object_or_404
-from .models import CourseDetail
 from django.contrib.auth.decorators import login_required
 
 
@@ -10,8 +6,8 @@ from django.contrib import auth
 #from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from .models import CourseDetail
 from .forms import CourseForm
+from .models import CourseDetail
 # Create your views here.
 
 # 增加课程
@@ -26,7 +22,7 @@ def increase_course(request):
             course_form = CourseForm(request.POST)
             if course_form.is_valid():
                 new_course = course_form.save(commit=False)
-                #还要存一些表单给不了的数据
+                # 还要存一些表单给不了的数据
                 new_course.teacher = user
                 new_course.state_match = False
                 new_course.save()
@@ -53,6 +49,7 @@ def match(request, coursedetail_id):
     else:
         return HttpResponse("只有学生可以申请选课")
     return redirect('Course: detail_course')
+
 
 # 同意申请
 def agree_match(request, coursedetail_id):
@@ -97,3 +94,11 @@ def manage_course(request):
         context = {'course_match': course_match, 'course_applying': course_applying}
 
         return render(request, 'Course/student_subject_detail.html', context)
+
+
+def index(request):
+    return HttpResponse("这是首页")
+
+
+def filter(request):
+    return render(request, 'filter.html')

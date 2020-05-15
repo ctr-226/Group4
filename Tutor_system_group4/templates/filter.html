@@ -1,0 +1,166 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load static %}
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    课程筛选
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+    <div class="container">
+        <div class="row mt-3">
+            <form method="post" action="." enctype="multipart/form-data">
+                {% csrf_token %}
+                <ul class="select">
+                    <li class="select-list">
+                        <label id="select1">
+                            <label for="id_grade">年级：</label>
+                            <button type="button" class="select-all selected" value="9"><a href="#">全部</a></button>
+                            <button type="button" value="0"><a href="#">小学一年级至三年级</a></button>
+                            <button type="button" value="1"><a href="#">小学四年级至六年级</a></button>
+                            <button type="button" value="2"><a href="#">初一</a></button>
+                            <button type="button" value="3"><a href="#">初二</a></button>
+                            <button type="button" value="4"><a href="#">初三</a></button>
+                            <button type="button" value="5"><a href="#">高一</a></button>
+                            <button type="button" value="6"><a href="#">高二</a></button>
+                            <button type="button" value="7"><a href="#">高三</a></button>
+                            <button type="button" value="8"><a href="#">其他</a></button>
+                        </label>
+                    </li>
+                    <li class="select-list">
+                        <label id="select2">
+                            <label for="id_subject">科目：</label>
+                            <button type="button" class="select-all selected" value="0"><a href="#">全部</a></button>
+                            <button type="button" value="zh"><a href="#">语文</a></button>
+                            <button type="button" value="math"><a href="#">数学</a></button>
+                            <button type="button" value="en"><a href="#">英语</a></button>
+                            <button type="button" value="phy"><a href="#">物理</a></button>
+                            <button type="button" value="che"><a href="#">化学</a></button>
+                            <button type="button" value="bio"><a href="#">生物</a></button>
+                            <button type="button" value="pol"><a href="#">政治</a></button>
+                            <button type="button" value="his"><a href="#">历史</a></button>
+                            <button type="button" value="geo"><a href="#">地理</a></button>
+                        </label>
+                    </li>
+                    <li class="select-list">
+                        <label id="select3">
+                            <label for="id_charge">时薪：</label>
+                            <button type="button" class="select-all selected" value="0"><a href="#">全部</a></button>
+                            <button type="button" value="1"><a href="#">30元以下</a></button>
+                            <button type="button" value="2"><a href="#">30~50元</a></button>
+                            <button type="button" value="3"><a href="#">50~70元</a></button>
+                            <button type="button" value="4"><a href="#">70~100元</a></button>
+                            <button type="button" value="5"><a href="#">100元以上</a></button>
+                        </label>
+                    </li>
+                    <li class="select-list">
+                        <label id="select4">
+                            <label for="id_gender">性别：</label>
+                            <button type="button" class="select-all selected" value="0"><a href="#">全部</a></button>
+                            <button type="button" value="M"><a href="#">男</a></button>
+                            <button type="button" value="F"><a href="#">女</a></button>
+                        </label>
+                    </li>
+                    <li class="select-result">
+                        <dl>
+                            <dt>已选条件：</dt>
+                            <dd class="select-no">暂时没有选择过滤条件</dd>
+                        </dl>
+                    </li>
+
+                </ul>
+                <button type="submit" class="btn btn-primary">筛选</button>
+            </form>
+        </div>
+    </div>
+    <!-- jQuery部分，呈现选择效果 -->
+    <script>
+        $(document).ready(function () {
+            $("#select1 button").click(function () {
+                $(this).addClass("selected").siblings().removeClass("selected");
+                if ($(this).hasClass("select-all")) {
+                    $("#selectA").remove();
+                } else {
+                    var copyThisA = $(this).clone();
+                    if ($("#selectA").length > 0) {
+                        $("#selectA a").html($(this).text());
+                    } else {
+                        $(".select-result dl").append(copyThisA.attr("id", "selectA"));
+                    }
+                }
+            });
+
+            $("#select2 button").click(function () {
+                $(this).addClass("selected").siblings().removeClass("selected");
+                if ($(this).hasClass("select-all")) {
+                    $("#selectB").remove();
+                } else {
+                    var copyThisB = $(this).clone();
+                    if ($("#selectB").length > 0) {
+                        $("#selectB a").html($(this).text());
+                    } else {
+                        $(".select-result dl").append(copyThisB.attr("id", "selectB"));
+                    }
+                }
+            });
+
+            $("#select3 button").click(function () {
+                $(this).addClass("selected").siblings().removeClass("selected");
+                if ($(this).hasClass("select-all")) {
+                    $("#selectC").remove();
+                } else {
+                    var copyThisC = $(this).clone();
+                    if ($("#selectC").length > 0) {
+                        $("#selectC a").html($(this).text());
+                    } else {
+                        $(".select-result dl").append(copyThisC.attr("id", "selectC"));
+                    }
+                }
+            });
+
+            $("#select4 button").click(function () {
+                $(this).addClass("selected").siblings().removeClass("selected");
+                if ($(this).hasClass("select-all")) {
+                    $("#selectD").remove();
+                } else {
+                    var copyThisD = $(this).clone();
+                    if ($("#selectD").length > 0) {
+                        $("#selectD a").html($(this).text());
+                    } else {
+                        $(".select-result dl").append(copyThisD.attr("id", "selectD"));
+                    }
+                }
+            });
+
+            $("#selectA").on("click", function () {
+                $(this).remove();
+                $("#select1 .select-all").addClass("selected").siblings().removeClass("selected");
+            });
+
+            $("#selectB").on("click", function () {
+                $(this).remove();
+                $("#select2 .select-all").addClass("selected").siblings().removeClass("selected");
+            });
+
+            $("#selectC").on("click", function () {
+                $(this).remove();
+                $("#select3 .select-all").addClass("selected").siblings().removeClass("selected");
+            });
+
+            $("#selectD").on("click", function () {
+                $(this).remove();
+                $("#select4 .select-all").addClass("selected").siblings().removeClass("selected");
+            });
+
+            $(".select dd").on("click", function () {
+                if ($(".select-result dd").length > 1) {
+                    $(".select-no").hide();
+                } else {
+                    $(".select-no").show();
+                }
+            });
+
+        });
+    </script>
+{% endblock content %}

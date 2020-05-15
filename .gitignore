@@ -25,9 +25,10 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 .idea/
+.vscode/
 *.pyc
 *.swp
 *.DS_Store
-.sqlite3
+*.sqlite3
 liuhuquestion.md
 Tutor_system_group4/db.sqlite3
