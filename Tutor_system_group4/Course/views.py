@@ -1,4 +1,4 @@
-from User_Profile.models import Student, Teacher, User
+from User_Profile.models import Student, User
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -219,15 +219,13 @@ def manage_course(request):
         course_list = {}
         for course in course_unmatched:
             if course.student_applied.all():
-                # course_applying.append(course)
-                # student_applying.append(course.student_applied.all())
                 course_list[course] = course.student_applied.all()
         context = {'course_match': course_match, 'course_unmatched': course_unmatched,
                    'course_list': course_list}
         return render(request, 'Course/teacher_subject_detail.html', context)
     if user.is_student:
-        course_match = Student.objects.get(id=ID).coursedetail_set.filter(state_match=True)
-        course_applying = Student.objects.get(id=ID).applied_Student.all()
+        course_match = user.student_profile.agreed_Student.filter(state_match=True)
+        course_applying = user.student_profile.applied_Student.all()
         context = {'course_match': course_match, 'course_applying': course_applying}
 
         return render(request, 'Course/student_subject_detail.html', context)

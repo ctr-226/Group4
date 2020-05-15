@@ -5,3 +5,64 @@
 {% block title %}
     首页
 {% endblock title %}
+
+
+{% block content %}
+    <div class="container col-md-8 m-auto">
+        <div class="card">
+            <div class="card-header">
+                Tips
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>在这里看到你的课程管理</p>
+                    <footer class="blockquote-footer">管理员<!--<cite title="Source Title">Source Title</cite>--></footer>
+                </blockquote>
+            </div>
+        </div>
+        <div class="justify-content-center d-md-flex m-auto" style="height: 100px">
+            <div class="justify-content-center d-md-flex m-auto">
+                <h4>
+                Hello,World!
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="nav col-md nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">正在申请课程</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">已匹配课程</a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">课程评论</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="row">
+                    {% for course in course_applying  %}
+                        <div class="card col-md-4 ">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ course.nick_name }}</h5>
+                                <p class="card-text">{{ course.get_grade_course_display }}  {{ course.get_subject_display }}</p>
+                                <div class="card-text"><p>{{ course.introduction }}</p></div>
+                                <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <div class="row">
+                    {%  for course in course_match %}
+                        <div class="card col-md-4">
+                            <h4 class="card-title" >{{ course.nick_name }}</h4>
+                            <div class="card-text"><p>{{ course.introduction }}</p></div>
+                            <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+        </div>
+    </div>
+{% endblock content %}
