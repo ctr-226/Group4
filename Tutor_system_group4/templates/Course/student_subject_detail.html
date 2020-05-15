@@ -54,7 +54,7 @@
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <div class="row">
                     {%  for course in course_match %}
-                        <div class="card col-md-4">\
+                        <div class="card col-md-4">
                             <h4 class="card-title" >{{ course.nick_name }}</h4>
                             <div class="card-text"><p>{{ course.introduction }}</p></div>
                             <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
