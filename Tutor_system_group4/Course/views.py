@@ -1,10 +1,10 @@
 from User_Profile.models import Student, Teacher, User
 from django.contrib.auth.decorators import login_required
 
-
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
-#from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 from .forms import CourseForm
 from .models import CourseDetail
@@ -44,8 +44,10 @@ def match(request, coursedetail_id):
     applicant = User.objects.get(id=request.user.id)
     #虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
     if applicant.is_student == True:
-        return HttpResponse("申请选课")
         #多对多中间表加一个元组
+        course_applying.student_applied.add(applicant)
+        course_applying.save()
+        return redirect('Course: detail_course')
     else:
         return HttpResponse("只有学生可以申请选课")
     return redirect('Course: detail_course')
@@ -62,9 +64,9 @@ def agree_match(request, coursedetail_id):
 
 
 # 课程详细内容
-def detail_course(request, id):
-    course = CourseDetail.objects.get(id=id)
-    context = {'course': course}
+def detail_course(request, coursedetail_id):
+    course = CourseDetail.objects.get(id=coursedetail_id)
+    context = {'course': course, 'coursedetail_id': coursedetail_id}
     return render(request, 'Course/detail.html', context)
 
 
