@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 from .models import CourseDetail
 import re
 
-
 class CourseForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = CourseDetail
         fields = ['nick_name', 'grade_course', 'subject', 'introduction', 'charge']
 

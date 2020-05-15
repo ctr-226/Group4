@@ -8,5 +8,25 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
+<div class="container mt-3">
+        <div class="row">
+
+            <div class="col-md-6 container m-auto" >
+
+                    <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
+                        <h3>这里是上海交通大学的家教平台</h3>
+                    </div>
+
+               <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                    <div class="col-md-6 container m-auto">
+                        <p>
+                            <button type="button" class="btn btn-primary btn-lg ">教师注册</button>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-primary btn-lg">学生注册</button>
+                        </p>
+                    </div>
 
 {% endblock content %}
