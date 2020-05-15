@@ -91,7 +91,7 @@ def manage_course(request):
 
 
 def index(request):
-    return HttpResponse("这是首页")
+    return render(request,'index.html')
 
 
 def filter(request):
