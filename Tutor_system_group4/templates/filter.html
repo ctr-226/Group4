@@ -65,13 +65,13 @@
                 </li>
                 <li class="select-result">
                     <dl>
-                        <dt>已选条件：</dt>
+                        <dt class="pb-2">已选条件：</dt>
                         <dd class="select-no">暂时没有选择过滤条件</dd>
                     </dl>
                 </li>
             </ul>
         </div>
-        <div class="row-mt">
+        <div class="row-mt-0">
             <button type="submit" class="btn btn-primary">筛选</button>
         </div>
     </div>
@@ -85,21 +85,22 @@
                     <div class="card h-100">
                         <!-- 标题 -->
                         <h4 class="card-header">{{ cours.nick_name }}
-                            <span class="text-muted" style="font-size:0.5em">这是年级-科目</span>
+                            <span class="text-muted"
+                                  style="font-size:0.5em">{{ cours.get_grade_course_display }}—{{ cours.get_subject_display }}</span>
                         </h4>
                         <!-- 摘要 -->
                         <div class="card-body">
-                            <p class="card-text">这是课程简介...</p>
+                            <p class="card-text">{{ cours.introduction }}.</p>
                         </div>
                         <!-- 注脚 -->
                         <div class="card-footer">
-                            <span class="pt-2" style="float:right">这是老师姓名</span>
-                            <a href="#" class="btn btn-primary">了解课程</a>
+                            <span class="pt-2" style="float:right">{{ cours.teacher }}</span>
+                            <a href="{% url 'Course:detail_course' cours.id %}" class="btn btn-primary">了解课程</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endfor %}
     <!-- jQuery部分，呈现选择效果 -->
     <script>
