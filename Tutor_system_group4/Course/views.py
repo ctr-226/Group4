@@ -14,14 +14,14 @@ from .models import CourseDetail
 # 首页导航
 def index(request):
     if request.user.is_authenticated:
-        # user = User.objects.get(id=id)
-        # Course = CourseDetail.objects.all()
+        #user = User.objects.get(id=id)
+        #Course = CourseDetail.objects.all()
         Course = CourseDetail.objects.filter(state_match=0)
-        if request.method == 'POST':
-            gender_choice = request.POST.get("gender", '')
-            subject_choice = request.POST.get("subject", '')
-            grade_choice = request.POST.get("grade", '')
-            charge_choice = request.POST.get("charge", '')
+        if request.method == 'GET':
+            gender_choice = request.GET.get("gender", '')
+            subject_choice = request.GET.get("subject", '')
+            grade_choice = request.GET.get("grade", '')
+            charge_choice = request.GET.get("charge", '')
             if gender_choice == "9" or gender_choice == '':
                 if subject_choice == "0" or subject_choice == '':
                     if grade_choice == "0" or grade_choice == '':
@@ -39,60 +39,44 @@ def index(request):
                             Course_show = Course.filter(state_match=0)
                     else:
                         if charge_choice == "1":
-                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "2":
-                            Course_show = Course.filter(charge__range=[30, 50]).filter(
-                                grade_course=grade_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[30, 50]).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "3":
-                            Course_show = Course.filter(charge__range=[50, 70]).filter(
-                                grade_course=grade_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[50, 70]).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "4":
-                            Course_show = Course.filter(charge__range=[70, 100]).filter(
-                                grade_course=grade_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[70, 100]).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "5":
-                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(state_match=0)
                         else:
                             Course_show = Course.filter(grade_course=grade_choice).filter(state_match=0)
                 else:
                     if grade_choice == "0" or grade_choice == '':
                         if charge_choice == "1":
-                            Course_show = Course.filter(charge__lte=30).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__lte=30).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "2":
-                            Course_show = Course.filter(charge__range=[30, 50]).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__range=[30, 50]).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "3":
-                            Course_show = Course.filter(charge__range=[50, 70]).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__range=[50, 70]).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "4":
-                            Course_show = Course.filter(charge__range=[70, 100]).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__range=[70, 100]).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "5":
-                            Course_show = Course.filter(charge__gt=100).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__gt=100).filter(subject=subject_choice).filter(state_match=0)
                         else:
                             Course_show = Course.filter(subject=subject_choice).filter(state_match=0)
                     else:
                         if charge_choice == "1":
-                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(
-                                subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "2":
-                            Course_show = Course.filter(charge__range=[30, 50]).filter(
-                                grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[30, 50]).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "3":
-                            Course_show = Course.filter(charge__range=[50, 70]).filter(
-                                grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[50, 70]).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "4":
-                            Course_show = Course.filter(charge__range=[70, 100]).filter(
-                                grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[70, 100]).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "5":
-                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(
-                                subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         else:
-                            Course_show = Course.filter(grade_course=grade_choice).filter(
-                                subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
             else:
                 if subject_choice == "0" or subject_choice == '':
                     if grade_choice == "0" or grade_choice == '':
@@ -110,65 +94,49 @@ def index(request):
                             Course_show = Course
                     else:
                         if charge_choice == "1":
-                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "2":
-                            Course_show = Course.filter(charge__range=[30, 50]).filter(
-                                grade_course=grade_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[30, 50]).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "3":
-                            Course_show = Course.filter(charge__range=[50, 70]).filter(
-                                grade_course=grade_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[50, 70]).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "4":
-                            Course_show = Course.filter(charge__range=[70, 100]).filter(
-                                grade_course=grade_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[70, 100]).filter(grade_course=grade_choice).filter(state_match=0)
                         elif charge_choice == "5":
-                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(state_match=0)
                         else:
                             Course_show = Course.filter(grade_course=grade_choice).filter(state_match=0)
                 else:
-                    if grade_choice == "0" or grade_choice == '':
+                    if grade_choice == "0" or grade_choice=='':
                         if charge_choice == "1":
-                            Course_show = Course.filter(charge__lte=30).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__lte=30).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "2":
-                            Course_show = Course.filter(charge__range=[30, 50]).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__range=[30, 50]).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "3":
-                            Course_show = Course.filter(charge__range=[50, 70]).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__range=[50, 70]).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "4":
-                            Course_show = Course.filter(charge__range=[70, 100]).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__range=[70, 100]).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "5":
-                            Course_show = Course.filter(charge__gt=100).filter(subject=subject_choice).filter(
-                                state_match=0)
+                            Course_show = Course.filter(charge__gt=100).filter(subject=subject_choice).filter(state_match=0)
                         else:
                             Course_show = Course.filter(state_match=0)
                     else:
                         if charge_choice == "1":
-                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(
-                                subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__lte=30).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "2":
-                            Course_show = Course.filter(charge__range=[30, 50]).filter(
-                                grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[30, 50]).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "3":
-                            Course_show = Course.filter(charge__range=[50, 70]).filter(
-                                grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[50, 70]).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "4":
-                            Course_show = Course.filter(charge__range=[70, 100]).filter(
-                                grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__range=[70, 100]).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         elif charge_choice == "5":
-                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(
-                                subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(charge__gt=100).filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
                         else:
-                            Course_show = Course.filter(grade_course=grade_choice).filter(
-                                subject=subject_choice).filter(state_match=0)
+                            Course_show = Course.filter(grade_course=grade_choice).filter(subject=subject_choice).filter(state_match=0)
 
             context = {'course': Course_show}
             return render(request, 'filter.html', context)
         else:
-            return HttpResponse("请使用POST请求数据")
+            return HttpResponse("请使用GET请求数据")
     else:
         return render(request, 'index.html')
 
@@ -215,20 +183,20 @@ def match(request, coursedetail_id):
         # 多对多中间表加一个元组
         course_applying.student_applied.add(applicant)
         course_applying.save()
-        return redirect('Course: detail_course', args=(coursedetail_id,))
+        return redirect('Course: detail_course')
     else:
         return HttpResponse("只有学生可以申请选课")
-    return redirect('Course: detail_course', args=(coursedetail_id,))
+    return redirect('Course: detail_course')
 
 
 # 同意申请
 def agree_match(request, coursedetail_id):
-    course_applying = CourseDetail.objects.get(id=int(coursedetail_id))
+    course_applying = CourseDetail.objects.get(id=coursedetail_id)
     selected_student = Student.objects.get(id=request.POST['choice'])
     course_applying.student_agreed = selected_student
     course_applying.state_match = True
     course_applying.save()
-    return redirect('Course:manage_course')
+    return redirect('Course: manage_course')
 
 
 # 课程详细内容
@@ -262,3 +230,6 @@ def manage_course(request):
         context = {'course_match': course_match, 'course_applying': course_applying}
 
         return render(request, 'Course/student_subject_detail.html', context)
+
+def index2(request):
+    return render(request,'index2.html')
