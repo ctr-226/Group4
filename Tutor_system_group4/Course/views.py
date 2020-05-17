@@ -17,11 +17,11 @@ def index(request):
         # user = User.objects.get(id=id)
         # Course = CourseDetail.objects.all()
         Course = CourseDetail.objects.filter(state_match=0)
-        if request.method == 'GET':
-            gender_choice = request.GET.get("gender", '')
-            subject_choice = request.GET.get("subject", '')
-            grade_choice = request.GET.get("grade", '')
-            charge_choice = request.GET.get("charge", '')
+        if request.method == 'POST':
+            gender_choice = request.POST.get("gender", '')
+            subject_choice = request.POST.get("subject", '')
+            grade_choice = request.POST.get("grade", '')
+            charge_choice = request.POST.get("charge", '')
             if gender_choice == "9" or gender_choice == '':
                 if subject_choice == "0" or subject_choice == '':
                     if grade_choice == "0" or grade_choice == '':
@@ -168,7 +168,7 @@ def index(request):
             context = {'course': Course_show}
             return render(request, 'filter.html', context)
         else:
-            return HttpResponse("请使用GET请求数据")
+            return HttpResponse("请使用POST请求数据")
     else:
         return render(request, 'index.html')
 
