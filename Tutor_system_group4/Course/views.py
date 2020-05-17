@@ -215,20 +215,20 @@ def match(request, coursedetail_id):
         # 多对多中间表加一个元组
         course_applying.student_applied.add(applicant)
         course_applying.save()
-        return redirect('Course: detail_course')
+        return redirect('Course: detail_course', args=(coursedetail_id,))
     else:
         return HttpResponse("只有学生可以申请选课")
-    return redirect('Course: detail_course')
+    return redirect('Course: detail_course', args=(coursedetail_id,))
 
 
 # 同意申请
 def agree_match(request, coursedetail_id):
-    course_applying = CourseDetail.objects.get(id=coursedetail_id)
+    course_applying = CourseDetail.objects.get(id=int(coursedetail_id))
     selected_student = Student.objects.get(id=request.POST['choice'])
     course_applying.student_agreed = selected_student
     course_applying.state_match = True
     course_applying.save()
-    return redirect('Course: manage_course')
+    return redirect('Course:manage_course')
 
 
 # 课程详细内容

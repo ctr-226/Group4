@@ -38,6 +38,7 @@
                     {% for course in course_unmatched %}
                         <div class="card col-md-4 ">
                             <div class="card-body">
+
                                 <h4 class="card-title">课程名称：{{ course.nick_name }}</h4>
                                 <p class="card-text">
                                     课程年级：{{ course.get_grade_course_display }}<br>课程科目：{{ course.get_subject_display }}
@@ -45,7 +46,8 @@
                                 <p class="card-text">课程介绍：{{ course.introduction }}</p>
                                 <p class="card-text text-primary">正在申请的学生：</p>
 
-                                <form action="{% url 'Course:agree_match' course.id %}" method="post">{% csrf_token %}
+                                <form action="{% url 'Course:agree_match' course.id %}" method="post">
+                                    {% csrf_token %}
                                     <div class="btn-group-vertical" data-toggle="buttons">
 
                                         {% for student in course.student_applied.all %}
@@ -65,6 +67,7 @@
                                     <button class="btn btn-block btn-lg btn-primary" type="submit">select</button>
                                 </form>
                             </div>
+                        <a class="card-link" href="{% url "Course:detail_course" course.id %}">详细信息</a>
                         </div>
                     {% endfor %}
 
