@@ -17,11 +17,11 @@ def index(request):
         # user = User.objects.get(id=id)
         # Course = CourseDetail.objects.all()
         Course = CourseDetail.objects.filter(state_match=0)
-        if request.method == 'GET':
-            gender_choice = request.GET.get("gender", '')
-            subject_choice = request.GET.get("subject", '')
-            grade_choice = request.GET.get("grade", '')
-            charge_choice = request.GET.get("charge", '')
+        if request.method == 'POST':
+            gender_choice = request.POST.get("gender", '')
+            subject_choice = request.POST.get("subject", '')
+            grade_choice = request.POST.get("grade", '')
+            charge_choice = request.POST.get("charge", '')
             if gender_choice == "9" or gender_choice == '':
                 if subject_choice == "0" or subject_choice == '':
                     if grade_choice == "0" or grade_choice == '':
@@ -168,7 +168,7 @@ def index(request):
             context = {'course': Course_show}
             return render(request, 'filter.html', context)
         else:
-            return HttpResponse("请使用GET请求数据")
+            return HttpResponse("请使用POST请求数据")
     else:
         return render(request, 'index.html')
 
@@ -215,20 +215,20 @@ def match(request, coursedetail_id):
         # 多对多中间表加一个元组
         course_applying.student_applied.add(applicant)
         course_applying.save()
-        return redirect('Course: detail_course')
+        return redirect('Course: detail_course', args=(coursedetail_id,))
     else:
         return HttpResponse("只有学生可以申请选课")
-    return redirect('Course: detail_course')
+    return redirect('Course: detail_course', args=(coursedetail_id,))
 
 
 # 同意申请
 def agree_match(request, coursedetail_id):
-    course_applying = CourseDetail.objects.get(id=coursedetail_id)
+    course_applying = CourseDetail.objects.get(id=int(coursedetail_id))
     selected_student = Student.objects.get(id=request.POST['choice'])
     course_applying.student_agreed = selected_student
     course_applying.state_match = True
     course_applying.save()
-    return redirect('Course: manage_course')
+    return redirect('Course:manage_course')
 
 
 # 课程详细内容
