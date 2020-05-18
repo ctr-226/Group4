@@ -84,10 +84,11 @@
     </div>
     <br>
     <!--课程信息的卡片容器 -->
-    {% for  cours in course %}
+
 
         <div class="container">
             <div class="row mt-2">
+                {% for  cours in course %}
                 <div class="col-4 mb-4">
                     <!-- 卡片容器 -->
                     <div class="card h-100">
@@ -107,9 +108,10 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-    {% endfor %}
+
     <!-- jQuery部分，呈现选择效果 -->
     <script>
         $(document).ready(function () {

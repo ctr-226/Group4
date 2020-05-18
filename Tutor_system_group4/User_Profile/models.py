@@ -27,7 +27,7 @@ class Student(models.Model):
     name = models.CharField(max_length=100, default=' ')
 
     # 学生年龄 限定正整数
-    age = models.PositiveIntegerField(blank=True)
+    age = models.PositiveIntegerField(blank=True, null=True)
 
     # 学生性别 choice (u'内部存储名，u'外部显示名')
     GENDER_CHOICE = ((u'M', u'男'), (u'F', u'女'))

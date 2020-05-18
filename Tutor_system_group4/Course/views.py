@@ -1,10 +1,7 @@
 from User_Profile.models import Student, User
 from django.contrib.auth.decorators import login_required
-
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import auth
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 from .forms import CourseForm
 from .models import CourseDetail
