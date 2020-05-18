@@ -173,8 +173,6 @@ def index(request):
             print(Course_show)
             return render(request, 'filter.html', context)
         else:
-            context = {'course': Course}
-            return render(request, 'filter.html', context)
             return HttpResponse("请使用POST请求数据")
     else:
         return render(request, 'index.html')
