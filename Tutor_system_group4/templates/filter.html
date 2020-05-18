@@ -8,76 +8,84 @@
 
 {% block content %}
     <div class="container">
-        <div class="row mt-3">
-            <ul class="select">
-                <li class="select-list">
-                    <label id="select1">
-                        <label for="id_grade">年级：</label>
-                        <button type="button" class="select-all selected" value="9" name="grade"><a href="#">全部</a>
-                        </button>
-                        <button type="button" value="0" name="grade"><a href="#">小学一年级至三年级</a></button>
-                        <button type="button" value="1" name="grade"><a href="#">小学四年级至六年级</a></button>
-                        <button type="button" value="2" name="grade"><a href="#">初一</a></button>
-                        <button type="button" value="3" name="grade"><a href="#">初二</a></button>
-                        <button type="button" value="4" name="grade"><a href="#">初三</a></button>
-                        <button type="button" value="5" name="grade"><a href="#">高一</a></button>
-                        <button type="button" value="6" name="grade"><a href="#">高二</a></button>
-                        <button type="button" value="7" name="grade"><a href="#">高三</a></button>
-                        <button type="button" value="8" name="grade"><a href="#">其他</a></button>
-                    </label>
-                </li>
-                <li class="select-list">
-                    <label id="select2">
-                        <label for="id_subject">科目：</label>
-                        <button type="button" class="select-all selected" value="0" name="subject"><a href="#">全部</a>
-                        </button>
-                        <button type="button" value="zh" name="subject"><a href="#">语文</a></button>
-                        <button type="button" value="math" name="subject"><a href="#">数学</a></button>
-                        <button type="button" value="en" name="subject"><a href="#">英语</a></button>
-                        <button type="button" value="phy" name="subject"><a href="#">物理</a></button>
-                        <button type="button" value="che" name="subject"><a href="#">化学</a></button>
-                        <button type="button" value="bio" name="subject"><a href="#">生物</a></button>
-                        <button type="button" value="pol" name="subject"><a href="#">政治</a></button>
-                        <button type="button" value="his" name="subject"><a href="#">历史</a></button>
-                        <button type="button" value="geo" name="subject"><a href="#">地理</a></button>
-                    </label>
-                </li>
-                <li class="select-list">
-                    <label id="select3">
-                        <label for="id_charge">时薪：</label>
-                        <button type="button" class="select-all selected" value="0" name="charge"><a href="#">全部</a>
-                        </button>
-                        <button type="button" value="1" name="charge"><a href="#">30元以下</a></button>
-                        <button type="button" value="2" name="charge"><a href="#">30~50元</a></button>
-                        <button type="button" value="3" name="charge"><a href="#">50~70元</a></button>
-                        <button type="button" value="4" name="charge"><a href="#">70~100元</a></button>
-                        <button type="button" value="5" name="charge"><a href="#">100元以上</a></button>
-                    </label>
-                </li>
-                <li class="select-list">
-                    <label id="select4">
-                        <label for="id_gender">性别：</label>
-                        <button type="button" class="select-all selected" value="0" name="gender"><a href="#">全部</a>
-                        </button>
-                        <button type="button" value="M" name="gender"><a href="#">男</a></button>
-                        <button type="button" value="F" name="gender"><a href="#">女</a></button>
-                    </label>
-                </li>
-                <li class="select-result">
-                    <dl>
-                        <dt class="pb-2">已选条件：</dt>
-                        <dd class="select-no">暂时没有选择过滤条件</dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-        <div class="row-mt-0">
-            <button type="submit" class="btn btn-primary">筛选</button>
-        </div>
+        <form action="{% url "index" %}" method="get">
+
+            <div class="row mt-3">
+                <ul class="select">
+                    <li class="select-list">
+                        <label id="select1">
+                            <label for="id_grade">年级：</label>
+                            <button type="button" class="select-all selected"><input type="hidden" value="9"
+                                                                                     name="grade"><a>全部</a>
+                            </button>
+                            <button type="button"><input type="hidden" value="0"><a>小学一年级至三年级</a></button>
+                            <button type="button"><input type="hidden" value="1"><a>小学四年级至六年级</a></button>
+                            <button type="button"><input type="hidden" value="2"><a>初一</a></button>
+                            <button type="button"><input type="hidden" value="3"><a>初二</a></button>
+                            <button type="button"><input type="hidden" value="4"><a>初三</a></button>
+                            <button type="button"><input type="hidden" value="5"><a>高一</a></button>
+                            <button type="button"><input type="hidden" value="6"><a>高二</a></button>
+                            <button type="button"><input type="hidden" value="7"><a>高三</a></button>
+                            <button type="button"><input type="hidden" value="8"><a>其他</a></button>
+                        </label>
+                    </li>
+                    <li class="select-list">
+                        <label id="select2">
+                            <label for="id_subject">科目：</label>
+                            <button type="button" class="select-all selected"><input type="hidden" value="0"
+                                                                                     name="subject"><a>全部</a>
+                            </button>
+                            <button type="button"><input type="hidden" value="zh"><a>语文</a></button>
+                            <button type="button"><input type="hidden" value="math"><a>数学</a></button>
+                            <button type="button"><input type="hidden" value="en"><a>英语</a></button>
+                            <button type="button"><input type="hidden" value="phy"><a>物理</a></button>
+                            <button type="button"><input type="hidden" value="che"><a>化学</a></button>
+                            <button type="button"><input type="hidden" value="bio"><a>生物</a></button>
+                            <button type="button"><input type="hidden" value="pol"><a>政治</a></button>
+                            <button type="button"><input type="hidden" value="his"><a>历史</a></button>
+                            <button type="button"><input type="hidden" value="geo"><a>地理</a></button>
+                        </label>
+                    </li>
+                    <li class="select-list">
+                        <label id="select3">
+                            <label for="id_charge">时薪：</label>
+                            <button type="button" class="select-all selected"><input type="hidden" value="0"
+                                                                                     name="charge"><a>全部</a>
+                            </button>
+                            <button type="button"><input type="hidden" value="1"><a>30元以下</a></button>
+                            <button type="button"><input type="hidden" value="2"><a>30~50元</a></button>
+                            <button type="button"><input type="hidden" value="3"><a>50~70元</a></button>
+                            <button type="button"><input type="hidden" value="4"><a>70~100元</a></button>
+                            <button type="button"><input type="hidden" value="5"><a>100元以上</a></button>
+                        </label>
+                    </li>
+                    <li class="select-list">
+                        <label id="select4">
+                            <label for="id_gender">性别：</label>
+                            <button type="button" class="select-all selected"><input type="hidden" value="0"
+                                                                                     name="gender"><a>全部</a>
+                            </button>
+                            <button type="button"><input type="hidden" value="M"><a>男</a></button>
+                            <button type="button"><input type="hidden" value="F"><a>女</a></button>
+                        </label>
+                    </li>
+                    <li class="select-result">
+                        <dl>
+                            <dt class="pb-2">已选条件：</dt>
+                            <dd class="select-no">暂时没有选择过滤条件</dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+            <div class="row-mt-0">
+                <button type="submit" class="btn btn-primary">筛选</button>
+            </div>
+        </form>
     </div>
     <br>
     <!--课程信息的卡片容器 -->
     {% for  cours in course %}
+
         <div class="container">
             <div class="row mt-2">
                 <div class="col-4 mb-4">
@@ -95,7 +103,7 @@
                         <!-- 注脚 -->
                         <div class="card-footer">
                             <span class="pt-2" style="float:right">{{ cours.teacher }}</span>
-                            <a href="{% url 'Course:detail_course' cours.id %}" class="btn btn-primary">了解课程</a>
+                            <a href="{% url "Course:detail_course" cours.id %}" class="btn btn-primary">了解课程</a>
                         </div>
                     </div>
                 </div>
@@ -107,11 +115,14 @@
         $(document).ready(function () {
             $("#select1 button").click(function () {
                 $(this).addClass("selected").siblings().removeClass("selected");
+                $(this).children("input").attr("name", "grade");
+                $(this).siblings().children("input").removeAttr("name");
                 if ($(this).hasClass("select-all")) {
                     $("#selectA").remove();
                 } else {
                     var copyThisA = $(this).clone();
                     if ($("#selectA").length > 0) {
+                        $("#selectA input").val($(this).children("input").val());
                         $("#selectA a").html($(this).text());
                     } else {
                         $(".select-result dl").append(copyThisA.attr("id", "selectA"));
@@ -121,11 +132,14 @@
 
             $("#select2 button").click(function () {
                 $(this).addClass("selected").siblings().removeClass("selected");
+                $(this).children("input").attr("name", "subject");
+                $(this).siblings().children("input").removeAttr("name");
                 if ($(this).hasClass("select-all")) {
                     $("#selectB").remove();
                 } else {
                     var copyThisB = $(this).clone();
                     if ($("#selectB").length > 0) {
+                        $("#selectB input").val($(this).children("input").val());
                         $("#selectB a").html($(this).text());
                     } else {
                         $(".select-result dl").append(copyThisB.attr("id", "selectB"));
@@ -135,11 +149,14 @@
 
             $("#select3 button").click(function () {
                 $(this).addClass("selected").siblings().removeClass("selected");
+                $(this).children("input").attr("name", "charge");
+                $(this).siblings().children("input").removeAttr("name");
                 if ($(this).hasClass("select-all")) {
                     $("#selectC").remove();
                 } else {
                     var copyThisC = $(this).clone();
                     if ($("#selectC").length > 0) {
+                        $("#selectC input").val($(this).children("input").val());
                         $("#selectC a").html($(this).text());
                     } else {
                         $(".select-result dl").append(copyThisC.attr("id", "selectC"));
@@ -149,14 +166,18 @@
 
             $("#select4 button").click(function () {
                 $(this).addClass("selected").siblings().removeClass("selected");
+                $(this).children("input").attr("name", "gender");
+                $(this).siblings().children("input").removeAttr("name");
                 if ($(this).hasClass("select-all")) {
                     $("#selectD").remove();
                 } else {
                     var copyThisD = $(this).clone();
                     if ($("#selectD").length > 0) {
+                        $("#selectD input").val($(this).children("input").val());
                         $("#selectD a").html($(this).text());
                     } else {
                         $(".select-result dl").append(copyThisD.attr("id", "selectD"));
+                        //$(".select-result button").append(copyThisD.children());
                     }
                 }
             });
