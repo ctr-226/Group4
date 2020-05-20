@@ -137,8 +137,8 @@ def register(request):
                 student_profile.mailbox = email
                 student_profile.phone = phone
                 student_profile.save()
-
             return HttpResponseRedirect('/user/login/')
+
         #else:
             #return HttpResponse("注册表单输入有误。请重新输入~")
 
