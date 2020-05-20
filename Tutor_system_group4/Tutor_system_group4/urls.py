@@ -22,7 +22,7 @@ urlpatterns = [
     path('user/', include('User_Profile.urls'), name='user'),
     path('course/', include('Course.urls'), name='course'),
     path('', views.index, name='index'),
-    # path('filter/', views.filter, name='filter'),
-    # path('index2/', views.index2, name='index2'),
+    #path('filter/', views.filter, name='filter'),
+    path('index2/', views.index2, name='index2'),
 
 ]
