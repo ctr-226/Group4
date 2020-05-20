@@ -139,9 +139,6 @@ def register(request):
                 student_profile.save()
             return HttpResponseRedirect('/user/login/')
 
-        #else:
-            #return HttpResponse("注册表单输入有误。请重新输入~")
-
     else:
         form = UserRegisterForm()
         return render(request, 'User_Profile/register.html', {'form': form})
