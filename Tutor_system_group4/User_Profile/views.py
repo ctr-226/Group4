@@ -129,7 +129,6 @@ def register(request):
                 teacher_profile.mailbox = email
                 teacher_profile.phone = phone
                 teacher_profile.save()
-                return HttpResponseRedirect('/user/login/')
             else:
                 new_user.is_student = True
                 new_user.save()
@@ -138,9 +137,10 @@ def register(request):
                 student_profile.mailbox = email
                 student_profile.phone = phone
                 student_profile.save()
-                return HttpResponseRedirect('/user/login/')
-        else:
-            return HttpResponse("注册表单输入有误。请重新输入~")
+
+            return HttpResponseRedirect('/user/login/')
+        #else:
+            #return HttpResponse("注册表单输入有误。请重新输入~")
 
     else:
         form = UserRegisterForm()
