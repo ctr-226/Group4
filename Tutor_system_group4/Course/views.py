@@ -54,6 +54,7 @@ def index(request):
     else:
         return render(request, 'index.html')
 
+
 # 增加课程
 @login_required(login_url='/user/login/')
 def increase_course(request):
@@ -139,5 +140,6 @@ def manage_course(request):
 
         return render(request, 'Course/student_subject_detail.html', context)
 
+
 def index2(request):
-    return render(request,'index2.html')
+    return render(request, 'index2.html')
