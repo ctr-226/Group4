@@ -8,6 +8,19 @@
         <div class="row">
             <div class="col-12">
                 <br>
+                {% if request.user.student_profile.avatar %}
+                    <div class="col-md-4">头像</div>
+                    <img src="{{ request.user.student_profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4">
+                {% endif %}
+                <br>
+                <br>
+                <form ... enctype="multipart/form-data">{% csrf_token %}
+                    <!-- avatar -->
+                    <div class="form-group">
+                        <label for="avatar">上传头像</label>
+                        <input type="file" class="form-control-file" name="avatar" id="avatar">
+                    </div>
+                
                 <div class="col-md-4">学生姓名：{{ request.user.username }}</div>
                 <br>
                 <form method="post" action=".">
