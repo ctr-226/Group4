@@ -142,6 +142,8 @@ def register(request):
                 student_profile.phone = phone
                 student_profile.save()
             return HttpResponseRedirect('/user/login/')
+        else:
+            return HttpResponse("提供的表单不符合规则")
 
     else:
         form = UserRegisterForm()
