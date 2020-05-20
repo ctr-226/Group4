@@ -13,7 +13,7 @@ from .models import CourseDetail
 # Create your views here.
 # 游客首页
 def index2(request):
-    course = CourseDetail.objects.all()
+    course = CourseDetail.objects.filter(state_match=0)
     context = {'course': course}
     return render(request, 'index2.html', context)
 
@@ -149,6 +149,3 @@ def manage_course(request):
 
         return render(request, 'Course/student_subject_detail.html', context)
 
-
-def index2(request):
-    return render(request, 'index2.html')
