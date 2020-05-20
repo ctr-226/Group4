@@ -11,11 +11,17 @@ from .models import CourseDetail
 
 
 # Create your views here.
-# 首页导航
+# 游客首页
+def index2(request):
+    course = CourseDetail.objects.all()
+    context = {'course': course}
+    return render(request, 'index2.html', context)
+
+# 首页筛选
 def index(request):
     if request.user.is_authenticated:
         # 初步筛选未匹配课程
-        Course = CourseDetail.objects.filter(state_match=0)
+        course_0 = CourseDetail.objects.filter(state_match=0)
         if request.method == 'GET':
             # 获取前端筛选选项
             gender_choice = request.GET.get("gender", '')
@@ -26,9 +32,9 @@ def index(request):
             # 条件判断筛选课程
             # 年级筛选
             if grade_choice == "9" or grade_choice == '':
-                course_1 = Course
+                course_1 = course_0
             else:
-                course_1 = Course.filter(grade_course=grade_choice)
+                course_1 = course_0.filter(grade_course=grade_choice)
             # 科目筛选
             if subject_choice == "0" or subject_choice == '':
                 course_2 = course_1
