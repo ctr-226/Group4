@@ -44,7 +44,7 @@ class CourseDetail(models.Model):
     charge = models.IntegerField(verbose_name='课程收费', default=0)
 
     # 评论
-    comment = models.CharField(max_length=100, default='')
+    comment = models.CharField(max_length=100, default='', null=True, blank=True)
 
     # 课程设立的时间
     time_set = models.TimeField(auto_now_add=True)
@@ -60,7 +60,7 @@ class CourseDetail(models.Model):
                                        verbose_name='成功匹配', related_name='agreed_Student')
 
     # 课程和学生多对多关系，记录申请选课的学生
-    student_applied = models.ManyToManyField(Student, related_name='applied_Student', verbose_name='申请学员')
+    student_applied = models.ManyToManyField(Student, null=True, blank=True, related_name='applied_Student', verbose_name='申请学员')
 
     # 返回课程名
     def __str__(self):
