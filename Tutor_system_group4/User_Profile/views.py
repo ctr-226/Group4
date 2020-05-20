@@ -26,12 +26,14 @@ def student_profile_update(request, id):
         if request.user != user:
             return HttpResponse("你没有权限修改此用户信息。")
 
-        student_form = StudentProfileForm(request.POST)
+        student_form = StudentProfileForm(request.POST, request.FILES)
         if student_form.is_valid():
             profile_cd = student_form.cleaned_data
             student_profile.age = profile_cd['age']
             student_profile.gender = profile_cd['gender']
             student_profile.grade = profile_cd['grade']
+            if 'avatar' in request.FILES:
+                profile.avatar = profile_cd["avatar"]
             student_profile.save()
             return redirect("User_Profile:student_profile_update", id=id)
         else:
@@ -54,12 +56,14 @@ def teacher_profile_update(request, id):
         if request.user != user:
             return HttpResponse("你没有权限修改此用户信息。")
 
-        teacher_form = TeacherProfileForm(request.POST)
+        teacher_form = TeacherProfileForm(request.POST, request.FILES)
         if teacher_form.is_valid():
             profile_cd = teacher_form.cleaned_data
             teacher_profile.age = profile_cd['age']
             teacher_profile.gender = profile_cd['gender']
             teacher_profile.grade = profile_cd['grade']
+            if 'avatar' in request.FILES:
+                profile.avatar = profile_cd["avatar"]
             teacher_profile.save()
             return redirect("User_Profile:teacher_profile_update", id=id)
         else:
