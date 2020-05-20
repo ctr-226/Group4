@@ -77,7 +77,7 @@
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <div class="row">
                     {% for course in course_match %}
-                        <div class="card col-md-4">
+                        <div class="card col-md-4 mb-2">
                             <h4 class="card-title">{{ course.nick_name }}</h4>
                             <div class="card-text"><p>{{ course.introduction }}</p></div>
                             <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
@@ -87,7 +87,23 @@
             </div>
 
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                ...
+                <div class="row ">
+                    {% for course in course_match %}
+                        {% if course.comment %}
+                        <div class="card col-md-12 mb-2">
+                            <div class="card-header">
+                            对{{ course.nick_name }}的评论
+                            </div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>{{ course.comment }}</p>
+                                    <footer class="blockquote-footer">{{ course.student_agreed }}<!--<cite title="Source Title">Source Title</cite>--></footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
