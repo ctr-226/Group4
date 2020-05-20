@@ -28,40 +28,42 @@
             
 
                 <h3 class = "text-center">申请学生名单</h3>
-                    <table class = "table">
-                        <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>联系电话</th>
-                                <th>邮箱</th>
-                                {% if request.user.id == course.teacher.id %}
-                                    <th>    </th>
+                <table class = "table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>联系电话</th>
+                            <th>邮箱</th>
+                            {% if request.user.id == course.teacher.id %}
+                                <th>    </th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in course.student_applied.all %}
+                        <tr>
+                            <td><a href = "#">{{student.name}}</a></td>
+                            <td>{{student.phone}}</td>
+                            <td>{{student.mailbox}}</td>
+                            {% if request.user.id == course.teacher.id %}
+                                {% if course.state_match %}
+                                <td><a type="button" class="btn btn-disabled" >接受申请</a></td>
+                                {% else %}
+                                <td><a type="button" class="btn btn-success" href ='#' >接受申请</a></td>
                                 {% endif %}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for student in course.student_applied.all %}
-                            <tr>
-                                <td><a href = "#">{{student.name}}</a></td>
-                                <td>{{student.phone}}</td>
-                                <td>{{student.mailbox}}</td>
-                                {% if request.user.id == course.teacher.id %}
-                                    {% if course.state_match %}
-                                    <td><a type="button" class="btn btn-disabled" >接受申请</a></td>
-                                    {% else %}
-                                    <td><a type="button" class="btn btn-success" href ='#' >接受申请</a></td>
-                                    {% endif %}
-                                {% endif %}
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                    
 
             <div>
                 <p>{{student.name}}</p>
             </div>
             
             </br>
+			<a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
             <!-- 学生申请课程的按钮，会调用match函数
             <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
             -->
