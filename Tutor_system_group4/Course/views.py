@@ -112,6 +112,7 @@ def agree_match(request, coursedetail_id):
 
 
 # 课程详细内容
+@login_required(login_url='/user/login/')
 def detail_course(request, coursedetail_id):
     course = CourseDetail.objects.get(id=coursedetail_id)
     context = {'course': course, 'coursedetail_id': coursedetail_id}

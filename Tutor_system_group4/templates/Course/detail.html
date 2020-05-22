@@ -18,7 +18,7 @@
                 {% if course.state_match %}
                 <p class = "text-danger" >上课中</p>
                 {% else %}
-                <p class="text-success"><a href="#">可申请</a></p>
+                <p class = "text-success">可申请<a class = "btn btn-success" href='{% url "Course:match" coursedetail_id %}'>申请</a></p>
                 {% endif %}
                 
                 <p>授课老师：<a href = "#">{{course.teacher.name}}</a></p>
@@ -48,8 +48,8 @@
                                 {% else %}
                                 <td><a type="button" class="btn btn-success" href ='#' >接受申请</a></td>
                                 {% endif %}
-                            </tr>
-                            {% endfor %}
+                        </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
             {% endif %}
