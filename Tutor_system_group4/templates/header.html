@@ -15,34 +15,35 @@
         <!-- 导航入口 -->
         <div>
             <ul class="navbar-nav">
-          {% if user.is_authenticated %}
-            <!-- 如果用户已经登录，则显示用户名下拉菜单 -->
-            
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ user.username }}
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% if user.is_student %}
-                <a class="dropdown-item" href="{% url 'User_Profile:student_profile_update' user.id %}">个人信息</a>
-                {% elif user.is_teacher %}
-                <a class="dropdown-item" href="{% url 'User_Profile:teacher_profile_update' user.id %}">个人信息</a>
-                <a class="dropdown-item" href="{% url 'Course:increase_course' %}">发布课程</a>
+                {% if user.is_authenticated %}
+                    <!-- 如果用户已经登录，则显示用户名下拉菜单 -->
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if user.is_student %}
+                                <a class="dropdown-item" href="{% url 'User_Profile:student_profile_update' user.id %}">个人信息</a>
+                            {% elif user.is_teacher %}
+                                <a class="dropdown-item" href="{% url 'User_Profile:teacher_profile_update' user.id %}">个人信息</a>
+                                <a class="dropdown-item" href="{% url 'Course:increase_course' %}">发布课程</a>
+                            {% endif %}
+                            <a class="dropdown-item" href="{% url 'Course:manage_course' %}  ">我的课程</a>
+                            <a class="divider dropdown-item"></a>
+                            <a class="dropdown-item" href="{% url 'User_Profile:logout' %} ">退出登录</a>
+                        </div>
+                    </li>
+
+
+
+                {% else %}
+                    <!--如果用户未登录，则显示“登录”-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'User_Profile:login' %}">登录</a>
+                    </li>
                 {% endif %}
-                <a class="dropdown-item" href="{% url 'Course:manage_course' %}  ">我的课程</a>
-                <a class="divider dropdown-item" ></a>
-                <a class="dropdown-item" href="{% url 'User_Profile:logout' %} ">退出登录</a>
-              </div> 
-            </li>
-                  
-           
-            
-          {% else %}
-            <!--如果用户未登录，则显示“登录”-->
-            <li class="nav-item">
-              <a class ="nav-link" href="{% url 'User_Profile:login' %}">登录</a>
-            </li>
-          {% endif %}
         </ul>
       </div>
   

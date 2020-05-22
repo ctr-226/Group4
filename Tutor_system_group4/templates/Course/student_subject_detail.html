@@ -44,16 +44,17 @@
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <div class="row">
                     {% if course_applying %}
-                    {% for course in course_applying %}
-                        <div class="card col-md-4 ">
-                            <div class="card-body">
-                                <h5 class="card-title">课程名称：{{ course.nick_name }}</h5>
-                                <p class="card-text">年级科目：{{ course.get_grade_course_display }} {{ course.get_subject_display }}</p>
-                                <div class="card-text"><p>课程简介：{{ course.introduction }}</p></div>
-                                <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
+                        {% for course in course_applying %}
+                            <div class="card col-md-4 ">
+                                <div class="card-body">
+                                    <h5 class="card-title">课程名称：{{ course.nick_name }}</h5>
+                                    <p class="card-text">
+                                        年级科目：{{ course.get_grade_course_display }} {{ course.get_subject_display }}</p>
+                                    <div class="card-text"><p>课程简介：{{ course.introduction }}</p></div>
+                                    <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
                     {% else %}
                         <div class="container">
                             <div class="d-md-flex m-auto" style="height: 200px">
@@ -70,13 +71,13 @@
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <div class="row">
                     {% if course_match %}
-                    {% for course in course_match %}
-                        <div class="card col-md-4">
-                            <h4 class="card-title">课程名称{{ course.nick_name }}</h4>
-                            <div class="card-text"><p>课程简介：{{ course.introduction }}</p></div>
-                            <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
-                        </div>
-                    {% endfor %}
+                        {% for course in course_match %}
+                            <div class="card col-md-4">
+                                <h4 class="card-title">课程名称{{ course.nick_name }}</h4>
+                                <div class="card-text"><p>课程简介：{{ course.introduction }}</p></div>
+                                <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
+                            </div>
+                        {% endfor %}
                     {% else %}
                         <div class="container">
                             <div class=" d-md-flex " style="height: 200px">
@@ -93,35 +94,36 @@
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <div class="row ">
                     {% if course_match %}
-                    {% for course in course_match %}
+                        {% for course in course_match %}
 
 
-                        <div class="card col-md-12 mb-2">
-                            <div class="card-header">
-                            对{{ course.teacher }}的课程：{{ course.nick_name }}评论
+                            <div class="card col-md-12 mb-2">
+                                <div class="card-header">
+                                    对{{ course.teacher }}的课程：{{ course.nick_name }}评论
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>{{ course.comment }}</p>
+                                        <footer class="blockquote-footer">
+                                            {{ course.student_agreed }}<!--<cite title="Source Title">Source Title</cite>--></footer>
+                                    </blockquote>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                    <p>{{ course.comment }}</p>
-                                    <footer class="blockquote-footer">{{ course.student_agreed }}<!--<cite title="Source Title">Source Title</cite>--></footer>
-                                </blockquote>
+
+
+
+                        {% endfor %}
+                    {% else %}
+                        <div class="container">
+                            <div class="justify-content-center d-md-flex" style="height: 200px">
+                                <div class="d-md-flex m-auto">
+                                    <h4>
+                                        暂时没有评论
+                                    </h4>
+                                </div>
                             </div>
                         </div>
-
-
-
-                    {% endfor %}
-                {% else %}
-                            <div class="container">
-                            <div class="justify-content-center d-md-flex" style="height: 200px">
-                            <div class="d-md-flex m-auto">
-                                <h4>
-                                    暂时没有评论
-                                </h4>
-                            </div>
-                            </div>
-                            </div>
-                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
         </div>

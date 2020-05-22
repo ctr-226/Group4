@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -17,16 +16,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='coursedetail',
             name='student_agreed',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='agreed_Student', to='User_Profile.Student', verbose_name='成功匹配'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                    related_name='agreed_Student', to='User_Profile.Student', verbose_name='成功匹配'),
         ),
         migrations.AddField(
             model_name='coursedetail',
             name='student_applied',
-            field=models.ManyToManyField(blank=True, related_name='applied_Student', to='User_Profile.Student', verbose_name='申请学员'),
+            field=models.ManyToManyField(blank=True, related_name='applied_Student', to='User_Profile.Student',
+                                         verbose_name='申请学员'),
         ),
         migrations.AddField(
             model_name='coursedetail',
             name='teacher',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='User_Profile.Teacher'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                    to='User_Profile.Teacher'),
         ),
     ]
