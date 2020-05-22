@@ -16,16 +16,10 @@
                 {% endif %}
                 <br>
                 <br>
-                <form ... enctype="multipart/form-data">{% csrf_token %}
-                    <!-- avatar -->
-                    <div class="form-group">
-                        <label for="avatar">上传头像</label>
-                        <input type="file" class="form-control-file" name="avatar" id="avatar">
-                    </div>
-                </form>
+                
                 <div class="col-md-4">教师姓名：{{ request.user.username }}</div>
                 <br>
-                <form method="post" action=".">
+                <form method="post" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group col-md-4">
                         <label for="age">年龄</label>
@@ -62,7 +56,11 @@
                                 }
                             </script>
                         </select>
-
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label for="avatar">上传头像</label>
+                        <input type="file" class="form-control-file" name="avatar" id="avatar">
                     </div>
 
                     <button type="submit" class="btn btn-primary">提交</button>
