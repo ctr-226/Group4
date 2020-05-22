@@ -25,7 +25,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('User_Profile.urls'), name='user'),
     path('course/', include('Course.urls'), name='course'),
+<<<<<<< HEAD
     path('', views.index, name='index'),
+=======
+    path('index/', views.index, name='index'),
+    # path('filter/', views.filter, name='filter'),
+>>>>>>> 61638aef03548b0d7230e2f34c1fc83c32076bf4
     path('index2/', views.index2, name='index2'),
 
 ]

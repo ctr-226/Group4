@@ -1,10 +1,7 @@
-from User_Profile.models import Student, User , Teacher
+from User_Profile.models import Student, User, Teacher
 from django.contrib.auth.decorators import login_required
-
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import auth
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 from .forms import CourseForm
 from .models import CourseDetail
@@ -16,6 +13,7 @@ def index2(request):
     course = CourseDetail.objects.filter(state_match=0)
     context = {'course': course}
     return render(request, 'index2.html', context)
+
 
 # 首页筛选
 def index(request):
@@ -82,10 +80,11 @@ def increase_course(request):
                 return HttpResponse("你没有权限修改此用户信息。")
 
             course_form = CourseForm(request.POST)
+            this_teacher = Teacher.objects.get(teacher_user_id=request.user.id)
             if course_form.is_valid():
                 new_course = course_form.save(commit=False)
                 # 还要存一些表单给不了的数据
-                new_course.teacher = user
+                new_course.teacher = this_teacher
                 new_course.state_match = False
                 new_course.save()
                 return redirect("Course:increase_course")
@@ -107,7 +106,7 @@ def match(request, coursedetail_id):
     # 虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
     if this_user.is_student == True:
         # 多对多中间表加一个元组
-        #applicant = Student.objects.get(student_user_id=request.user.id)
+        # applicant = Student.objects.get(student_user_id=request.user.id)
         applicant = this_user.student_profile
         course_applying.student_applied.add(applicant)
         course_applying.save()
