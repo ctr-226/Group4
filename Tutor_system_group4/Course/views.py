@@ -54,9 +54,17 @@ def index(request):
             else:
                 course_3 = course_2
             # 教师性别筛选
+            if gender_choice == "0" or gender_choice == '':
+                course_4 = course_3
+            else:
+                course_4 = []
+                for course in course_3:
+                    if course.teacher.gender == gender_choice:
+                        course_4 = course_4 + [course]
+            # course_4 = course_3.filter(CourseDetail.teacher.gender == gender_choice)
 
             # 展示课程向前端
-            context = {'course': course_3}
+            context = {'course': course_4}
             return render(request, 'filter.html', context)
         else:
             return HttpResponse("请使用GET请求数据")
