@@ -29,11 +29,15 @@ def student_profile_update(request, id):
         student_form = StudentProfileForm(request.POST, request.FILES)
         if student_form.is_valid():
             profile_cd = student_form.cleaned_data
+            student_profile.name = profile_cd['name']
             student_profile.age = profile_cd['age']
             student_profile.gender = profile_cd['gender']
             student_profile.grade = profile_cd['grade']
+            student_profile.briefintroduction = profile_cd['briefintroduction']
+            student_profile.phone = profile_cd['phone']
+            student_profile.mailbox = profile_cd['mailbox']
             if 'avatar' in request.FILES:
-                profile.avatar = profile_cd["avatar"]
+                student_profile.avatar = profile_cd["avatar"]
             student_profile.save()
             return redirect("User_Profile:student_profile_update", id=id)
         else:
@@ -41,7 +45,7 @@ def student_profile_update(request, id):
 
     elif request.method == 'GET':
         student_form = StudentProfileForm()
-        context = {'form': student_form}
+        context = {'form': student_form , 'student_profile':student_profile}
         return render(request, 'User_Profile/student_profile_update.html', context)
     else:
         return HttpResponse("请使用GET或POST请求数据")
@@ -59,11 +63,15 @@ def teacher_profile_update(request, id):
         teacher_form = TeacherProfileForm(request.POST, request.FILES)
         if teacher_form.is_valid():
             profile_cd = teacher_form.cleaned_data
+            teacher_profile.name = profile_cd['name']
             teacher_profile.age = profile_cd['age']
             teacher_profile.gender = profile_cd['gender']
             teacher_profile.grade = profile_cd['grade']
+            teacher_profile.briefintroduction = profile_cd['briefintroduction']
+            teacher_profile.phone = profile_cd['phone']
+            teacher_profile.mailbox = profile_cd['mailbox']
             if 'avatar' in request.FILES:
-                profile.avatar = profile_cd["avatar"]
+                teacher_profile.avatar = profile_cd["avatar"]
             teacher_profile.save()
             return redirect("User_Profile:teacher_profile_update", id=id)
         else:
@@ -71,7 +79,7 @@ def teacher_profile_update(request, id):
 
     elif request.method == 'GET':
         teacher_form = TeacherProfileForm()
-        context = {'form': teacher_form}
+        context = {'teacher_form': teacher_form , 'teacher_profile':teacher_profile}
         return render(request, 'User_Profile/teacher_profile_update.html', context)
     else:
         return HttpResponse("请使用GET或POST请求数据")
@@ -148,3 +156,9 @@ def register(request):
     else:
         form = UserRegisterForm()
         return render(request, 'User_Profile/register.html', {'form': form})
+
+
+
+
+
+

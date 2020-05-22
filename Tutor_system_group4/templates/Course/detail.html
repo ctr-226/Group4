@@ -18,10 +18,16 @@
                 {% if course.state_match %}
                 <p class = "text-danger" >上课中</p>
                 {% else %}
-                <p class = "text-success">可申请<a class = "btn btn-success" href='{% url "Course:match" coursedetail_id %}'>申请</a></p>
+                <!-- 学生申请课程的按钮，会调用match函数
+                    <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
+                -->
+                    {% if request.user.is_student and course.state_match == 0 %}
+                        <a class = "btn btn-success" href='{% url "Course:match" coursedetail_id %}'>申请</a>
+                    {% else %}
+                        <a><p class = "text-success">可申请</p></a>
+                    {% endif %}
                 {% endif %}
-                
-                <p>授课老师：<a href = "#">{{course.teacher.name}}</a></p>
+                <p>授课老师：<a href = " {% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id%} ">{{course.teacher.name}}</a></p>
                 <p>课程收费：{{course.charge}}/小时</p>
                 <p>课程评论：{{course.comment}}</p>
             </div>
@@ -40,7 +46,7 @@
                     <tbody>
                         {% for student in course.student_applied.all %}
                         <tr>
-                            <td><a href = "#">{{student.name}}</a></td>
+                            <td><a href = "{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{student.name}}</a></td>
                             <td>{{student.phone}}</td>
                             <td>{{student.mailbox}}</td>
                             {% if course.state_match %}
@@ -55,12 +61,9 @@
             {% endif %}
 
             
-            </br>
-            <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
+
             
-            <!-- 学生申请课程的按钮，会调用match函数
-            <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
-            -->
+            
 
         </div>
     </div>
