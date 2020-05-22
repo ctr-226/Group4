@@ -43,6 +43,7 @@
                             <td><a href = "#">{{student.name}}</a></td>
                             <td>{{student.phone}}</td>
                             <td>{{student.mailbox}}</td>
+<<<<<<< HEAD
                                 {% if course.state_match %}
                                 <td><a type="button" class="btn btn-disabled" >接受申请</a></td>
                                 {% else %}
@@ -50,12 +51,31 @@
                                 {% endif %}
                         </tr>
                         {% endfor %}
+||||||| merged common ancestors
+                                {% if course.state_match %}
+                                <td><a type="button" class="btn btn-disabled" >接受申请</a></td>
+                                {% else %}
+                                <td><a type="button" class="btn btn-success" href ='#' >接受申请</a></td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+=======
+                            {% if course.state_match %}
+                            <td><a type="button" class="btn btn-disabled" >接受申请</a></td>
+                            {% else %}
+                            <td><a type="button" class="btn btn-success" href ='#' >接受申请</a></td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+>>>>>>> b2cca9351ee107c219303b3d0422e4a1f104f31d
                         </tbody>
                     </table>
             {% endif %}
 
             
             </br>
+            <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
+            
             <!-- 学生申请课程的按钮，会调用match函数
             <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
             -->

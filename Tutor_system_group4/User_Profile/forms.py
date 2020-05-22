@@ -34,7 +34,7 @@ class UserRegisterForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data.get('username')
 
-        if len(username) < 4:
+        if len(username) < 2:
             raise forms.ValidationError("Your username must be at least 4 characters long.")
         elif len(username) > 50:
             raise forms.ValidationError("Your username is too long.")
