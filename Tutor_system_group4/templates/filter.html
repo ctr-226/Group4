@@ -94,11 +94,16 @@
                     <li class="select-list">
                         <label id="select4">
                             <label for="id_gender">性别：</label>
-                            <button type="button" class="select-all selected"><input type="hidden" value="0"
-                                                                                     name="gender"><a>全部</a>
-                            </button>
-                            <button type="button"><input type="hidden" value="M"><a>男</a></button>
-                            <button type="button"><input type="hidden" value="F"><a>女</a></button>
+                            <div class="btn-group">
+                                <button type="button" class="select-all selected btn btn-primary"><input type="hidden"
+                                                                                                         value="0"
+                                                                                                         name="gender"><a>全部</a>
+                                </button>
+                                <button type="button" class="btn btn-info"><input type="hidden" value="M"><a>男</a>
+                                </button>
+                                <button type="button" class="btn btn-info"><input type="hidden" value="F"><a>女</a>
+                                </button>
+                            </div>
                         </label>
                     </li>
                     <li class="select-result">
@@ -223,42 +228,37 @@
                 }
             });
 
-            $("#selectA").on("click", function () {
+            $(document).on("click", '#selectA', function () {
                 $(this).remove();
-                $("#select1 .select-all").addClass("selected").siblings().removeClass("selected");
+                $("#select1 .selected").addClass("btn-info").removeClass("btn-primary");
+                $("#select1 .select-all").addClass("selected btn-primary").removeClass("btn-info").siblings().removeClass("selected");
             });
 
-            $("#selectB").on("click", function () {
+            $(document).on("click", '#selectB', function () {
                 $(this).remove();
-                $("#select2 .select-all").addClass("selected").siblings().removeClass("selected");
+                $("#select2 .selected").addClass("btn-info").removeClass("btn-primary");
+                $("#select2 .select-all").addClass("selected btn-primary").removeClass("btn-info").siblings().removeClass("selected");
             });
 
-            $("#selectC").on("click", function () {
+            $(document).on("click", '#selectC', function () {
                 $(this).remove();
-                $("#select3 .select-all").addClass("selected").siblings().removeClass("selected");
+                $("#select3 .selected").addClass("btn-info").removeClass("btn-primary");
+                $("#select3 .select-all").addClass("selected btn-primary").removeClass("btn-info").siblings().removeClass("selected");
             });
 
-            $("#selectD").on("click", function () {
+            $(document).on("click", '#selectD', function () {
                 $(this).remove();
-                $("#select4 .select-all").addClass("selected").siblings().removeClass("selected");
+                $("#select4 .selected").addClass("btn-info").removeClass("btn-primary");
+                $("#select4 .select-all").addClass("selected btn-primary").removeClass("btn-info").siblings().removeClass("selected");
             });
 
-            $(".select button").on("click", function () {
+            $(document).on("click", ".select button", function () {
                 if ($(".select-result button").length >= 1) {
                     $(".select-no").hide();
                 } else {
                     $(".select-no").show();
                 }
             });
-
-            (function ($) {
-                $.getUrlParam = function (name) {
-                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-                    var r = window.location.search.substr(1).match(reg);
-                    if (r != null) return unescape(r[2]);
-                    return null;
-                }
-            })(jQuery);
 
         });
     </script>
