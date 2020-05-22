@@ -1,67 +1,71 @@
-from User_Profile.models import Student, User
+from User_Profile.models import Student, User, Teacher
 from django.contrib.auth.decorators import login_required
-
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import auth
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 from .forms import CourseForm
 from .models import CourseDetail
 
 
-# Create your views here.
-# 游客首页
-def index2(request):
-    course = CourseDetail.objects.filter(state_match=0)
-    context = {'course': course}
-    return render(request, 'index2.html', context)
-
 # 首页筛选
 def index(request):
     if request.user.is_authenticated:
-        # 初步筛选未匹配课程
-        course_0 = CourseDetail.objects.filter(state_match=0)
-        if request.method == 'GET':
-            # 获取前端筛选选项
-            gender_choice = request.GET.get("gender", '')
-            subject_choice = request.GET.get("subject", '')
-            grade_choice = request.GET.get("grade", '')
-            charge_choice = request.GET.get("charge", '')
-
-            # 条件判断筛选课程
-            # 年级筛选
-            if grade_choice == "9" or grade_choice == '':
-                course_1 = course_0
-            else:
-                course_1 = course_0.filter(grade_course=grade_choice)
-            # 科目筛选
-            if subject_choice == "0" or subject_choice == '':
-                course_2 = course_1
-            else:
-                course_2 = course_1.filter(subject=subject_choice)
-            # 时薪筛选
-            if charge_choice == "1":
-                course_3 = course_2.filter(charge__lte=30)
-            elif charge_choice == "2":
-                course_3 = course_2.filter(charge__range=[30, 50])
-            elif charge_choice == "3":
-                course_3 = course_2.filter(charge__range=[50, 70])
-            elif charge_choice == "4":
-                course_3 = course_2.filter(charge__range=[70, 100])
-            elif charge_choice == "5":
-                course_3 = course_2.filter(charge__gt=100)
-            else:
-                course_3 = course_2
-            # 教师性别筛选
-
-            # 展示课程向前端
-            context = {'course': course_3}
-            return render(request, 'filter.html', context)
-        else:
-            return HttpResponse("请使用GET请求数据")
+        course = CourseDetail.objects.filter(state_match=0)
+        context = {'course': course}
+        return render(request, 'index2.html', context)
     else:
         return render(request, 'index.html')
+
+# 课程筛选函数
+@login_required(login_url='/user/login/')
+def filter(request):
+    # 初步筛选未匹配课程
+    course_0 = CourseDetail.objects.filter(state_match=0)
+    if request.method == 'GET':
+        # 获取前端筛选选项
+        gender_choice = request.GET.get("gender", '')
+        subject_choice = request.GET.get("subject", '')
+        grade_choice = request.GET.get("grade", '')
+        charge_choice = request.GET.get("charge", '')
+
+        # 条件判断筛选课程
+        # 年级筛选
+        if grade_choice == "9" or grade_choice == '':
+            course_1 = course_0
+        else:
+            course_1 = course_0.filter(grade_course=grade_choice)
+        # 科目筛选
+        if subject_choice == "0" or subject_choice == '':
+            course_2 = course_1
+        else:
+            course_2 = course_1.filter(subject=subject_choice)
+        # 时薪筛选
+        if charge_choice == "1":
+            course_3 = course_2.filter(charge__lte=30)
+        elif charge_choice == "2":
+            course_3 = course_2.filter(charge__range=[30, 50])
+        elif charge_choice == "3":
+            course_3 = course_2.filter(charge__range=[50, 70])
+        elif charge_choice == "4":
+            course_3 = course_2.filter(charge__range=[70, 100])
+        elif charge_choice == "5":
+            course_3 = course_2.filter(charge__gt=100)
+        else:
+            course_3 = course_2
+        # 教师性别筛选
+        if gender_choice == "0" or gender_choice == '':
+            course_4 = course_3
+        else:
+            course_4 = []
+            for course in course_3:
+                if course.teacher.gender == gender_choice:
+                    course_4 = course_4 + [course]
+
+        # 展示课程向前端
+        context = {'course': course_4}
+        return render(request, 'filter.html', context)
+    else:
+        return HttpResponse("请使用GET请求数据")
 
 
 # 增加课程
@@ -74,10 +78,11 @@ def increase_course(request):
                 return HttpResponse("你没有权限修改此用户信息。")
 
             course_form = CourseForm(request.POST)
+            this_teacher = Teacher.objects.get(teacher_user_id=request.user.id)
             if course_form.is_valid():
                 new_course = course_form.save(commit=False)
                 # 还要存一些表单给不了的数据
-                new_course.teacher = user
+                new_course.teacher = this_teacher
                 new_course.state_match = False
                 new_course.save()
                 return redirect("Course:increase_course")
@@ -99,7 +104,7 @@ def match(request, coursedetail_id):
     # 虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
     if this_user.is_student == True:
         # 多对多中间表加一个元组
-        #applicant = Student.objects.get(student_user_id=request.user.id)
+        # applicant = Student.objects.get(student_user_id=request.user.id)
         applicant = this_user.student_profile
         course_applying.student_applied.add(applicant)
         course_applying.save()

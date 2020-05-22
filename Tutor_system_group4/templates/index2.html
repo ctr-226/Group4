@@ -11,18 +11,25 @@
     <div class="container-fluid">
         <div class="row">
             <!--中等屏幕占4份,小屏占6份,超小占12份-->
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-3">
                 <img src="../static/image/logo.jpg" alt="上海交大logo" style="width:200px"/>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12 " style="margin-top: 20px;">
-                <a href="">筛选课程</a>
-                <a href="">关于我们</a>
-                <a href="">喜报中心</a>
-                <a href="">热门课程</a>
+            <div class="col-4 text-left" style="margin-top: 20px;">
+                       <p>我是学生：
+                           <a href='{% url "filter" %}'>筛选课程</a>
+                           <a href='{% url "Course:manage_course" %}'>我学习的课程</a>
+                       </p>
+            </div>
+            <div class="col-5 text-left" style="margin-top: 20px;">
+                <p>我是老师：
+                            <a href='{% url "increase_course" %}'>发布课程</a>
+                            <a href='{% url "Course:manage_course" %}'>我教授的课程</a>
+                </p>
+            </div>
+
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
 
             <!--3.轮播图(扣过来)-->
 <div class="container">
@@ -86,19 +93,19 @@
 
 <!--友情链接-->
 <div class="text-center">
-          <p><h5>友情链接</h5></p>
+        <p><h5>友情链接</h5></p>
 			<ul class="list-inline">
 				<li>
-					<a href="https://zsb.sjtu.edu.cn">上海交通大学本科招生网</a>
+					<a href="https://zsb.sjtu.edu.cn" target="_blank">上海交通大学本科招生网</a>
 				</li>
 				<li>
-					<a href="https://jwc.sjtu.edu.cn">上海交通大学本科教学信息网（教务处）</a>
+					<a href="https://jwc.sjtu.edu.cn" target="_blank">上海交通大学本科教学信息网（教务处）</a>
 				</li>
 				<li>
-					<a href="https://lib.sjtu.edu.cn">上海交通大学图书馆</a>
+					<a href="https://lib.sjtu.edu.cn" target="_blank">上海交通大学图书馆</a>
 				</li>
 				<li>
-					<a href="https://oc.sjtu.edu.cn">上海交通大学在线教学平台</a>
+					<a href="https://oc.sjtu.edu.cn" target="_blank">上海交通大学在线教学平台</a>
 				</li>
 			</ul>
 		</div>
