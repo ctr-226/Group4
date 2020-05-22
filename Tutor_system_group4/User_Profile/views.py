@@ -33,7 +33,7 @@ def student_profile_update(request, id):
             student_profile.gender = profile_cd['gender']
             student_profile.grade = profile_cd['grade']
             if 'avatar' in request.FILES:
-                profile.avatar = profile_cd["avatar"]
+                student_profile.avatar = profile_cd['avatar']
             student_profile.save()
             return redirect("User_Profile:student_profile_update", id=id)
         else:
@@ -63,7 +63,7 @@ def teacher_profile_update(request, id):
             teacher_profile.gender = profile_cd['gender']
             teacher_profile.grade = profile_cd['grade']
             if 'avatar' in request.FILES:
-                profile.avatar = profile_cd["avatar"]
+                teacher_profile.avatar = profile_cd['avatar']
             teacher_profile.save()
             return redirect("User_Profile:teacher_profile_update", id=id)
         else:
