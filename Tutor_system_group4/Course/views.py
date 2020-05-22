@@ -1,4 +1,4 @@
-from User_Profile.models import Student, User
+from User_Profile.models import Teacher, Student, User
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -74,10 +74,11 @@ def increase_course(request):
                 return HttpResponse("你没有权限修改此用户信息。")
 
             course_form = CourseForm(request.POST)
+            this_teacher = Teacher.objects.get(teacher_user_id=request.user.id)
             if course_form.is_valid():
                 new_course = course_form.save(commit=False)
                 # 还要存一些表单给不了的数据
-                new_course.teacher = user
+                new_course.teacher = this_teacher
                 new_course.state_match = False
                 new_course.save()
                 return redirect("Course:increase_course")
