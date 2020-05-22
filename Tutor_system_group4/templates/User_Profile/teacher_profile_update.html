@@ -8,17 +8,32 @@
         <div class="row">
             <div class="col-12">
                 <br>
-                <div class="col-md-4">教师姓名：{{ request.user.username }}</div>
+                {% if request.user.teacher_profile.avatar %}
+                    <div class="col-md-4">头像</div>
+                    <img src="{{ request.user.teacher_profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;"
+                         class="col-md-4">
+                {% else %}
+                    <h5 class="col-md-4">暂无头像</h5>
+                {% endif %}
                 <br>
-                <form method="post" action=".">
-                    {% csrf_token %}
-                    <div class="form-group col-md-4">
-                        <label for="age">年龄</label>
-                        <input type="text" class="form-control" id="age" name="age"
-                               value="{{ request.user.teacher_profile.age }}">
+                <br>
+                <form ... enctype="multipart/form-data">{% csrf_token %}
+                    <!-- avatar -->
+                    <div class="form-group">
+                        <label for="avatar">上传头像</label>
+                        <input type="file" class="form-control-file" name="avatar" id="avatar">
                     </div>
+                    <div class="col-md-4">教师姓名：{{ request.user.username }}</div>
+                    <br>
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <div class="form-group col-md-4">
+                            <label for="age">年龄</label>
+                            <input type="text" class="form-control" id="age" name="age"
+                                   value="{{ request.user.teacher_profile.age }}">
+                        </div>
 
-                    <div class="form-group col-md-4">
+                        <div class="form-group col-md-4">
                         <label for="gender">性别</label>
                         <select class="form-control" id="gender" name="gender">
                             {% if request.user.teacher_profile.gender == 'M' %}

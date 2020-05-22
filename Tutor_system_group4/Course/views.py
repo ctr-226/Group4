@@ -8,11 +8,18 @@ from .models import CourseDetail
 
 
 # Create your views here.
-# 首页导航
+# 游客首页
+def index2(request):
+    course = CourseDetail.objects.filter(state_match=0)
+    context = {'course': course}
+    return render(request, 'index2.html', context)
+
+
+# 首页筛选
 def index(request):
     if request.user.is_authenticated:
         # 初步筛选未匹配课程
-        Course = CourseDetail.objects.filter(state_match=0)
+        course_0 = CourseDetail.objects.filter(state_match=0)
         if request.method == 'GET':
             # 获取前端筛选选项
             gender_choice = request.GET.get("gender", '')
@@ -23,9 +30,9 @@ def index(request):
             # 条件判断筛选课程
             # 年级筛选
             if grade_choice == "9" or grade_choice == '':
-                course_1 = Course
+                course_1 = course_0
             else:
-                course_1 = Course.filter(grade_course=grade_choice)
+                course_1 = course_0.filter(grade_course=grade_choice)
             # 科目筛选
             if subject_choice == "0" or subject_choice == '':
                 course_2 = course_1
@@ -86,16 +93,18 @@ def increase_course(request):
 # 课程申请匹配
 def match(request, coursedetail_id):
     course_applying = CourseDetail.objects.get(id=coursedetail_id)
-    applicant = User.objects.get(id=request.user.id)
+    this_user = User.objects.get(id=request.user.id)
     # 虽然这里有判断，但还是尽量在前端控制只有学生浏览课程详情页面时才有“申请”的按钮
-    if applicant.is_student == True:
+    if this_user.is_student == True:
         # 多对多中间表加一个元组
+        # applicant = Student.objects.get(student_user_id=request.user.id)
+        applicant = this_user.student_profile
         course_applying.student_applied.add(applicant)
         course_applying.save()
-        return redirect('Course: detail_course')
+        return redirect("Course:detail_course", coursedetail_id=1)
     else:
         return HttpResponse("只有学生可以申请选课")
-    return redirect('Course: detail_course')
+    return redirect('Course:detail_course', id=coursedetail_id)
 
 
 # 同意申请
@@ -105,7 +114,7 @@ def agree_match(request, coursedetail_id):
     course_applying.student_agreed = selected_student
     course_applying.state_match = True
     course_applying.save()
-    return redirect('Course: manage_course')
+    return redirect('Course:manage_course')
 
 
 # 课程详细内容
@@ -140,6 +149,3 @@ def manage_course(request):
 
         return render(request, 'Course/student_subject_detail.html', context)
 
-
-def index2(request):
-    return render(request, 'index2.html')

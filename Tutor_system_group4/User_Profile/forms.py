@@ -10,12 +10,12 @@ import re
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['age', 'gender', 'grade']
+        fields = ['age', 'gender', 'grade', 'avatar']
 
 class TeacherProfileForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ['age', 'gender', 'grade']
+        fields = ['age', 'gender', 'grade', 'avatar']
 
 def email_check(email):
     pattern = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")
@@ -34,7 +34,7 @@ class UserRegisterForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data.get('username')
 
-        if len(username) < 4:
+        if len(username) < 2:
             raise forms.ValidationError("Your username must be at least 4 characters long.")
         elif len(username) > 50:
             raise forms.ValidationError("Your username is too long.")

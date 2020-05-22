@@ -14,22 +14,25 @@
 			</br>
 			<form method="post" action=".">
 				{% csrf_token %}
-				<!-- nickname -->
-				<label for="nickname">课程名称</label>
-				<input type="text" class="form-control" id="nickname" name="nickname">
-				<!-- grade_course -->
-				<!-- subject -->
-				<!-- charge -->
-				<label for="charge">单次课收费价格</label>
-				<input type="text" class="form-control" id="charge" name="charge">
-				<!-- introduction -->
-				<label for="introduction">课程简介</label>
-				<textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"> </textarea>
-				
-				<!-- 提交按钮 -->
-				<button type="submit" class="btn btn-primary">发布课程</button>
-			</form>
-		</div>
-	</div>
+                <!-- nickname -->
+                <label for="nickname">课程名称</label>
+                <input type="text" class="form-control" id="nickname" name="nickname">
+                <br/>
+                <!-- grade_course -->
+                <!-- subject -->
+                <!-- charge -->
+                <label for="charge">单次课收费价格</label>
+                <input type="text" class="form-control" id="charge" name="charge">
+                <br/>
+                <!-- introduction -->
+                <label for="introduction">课程简介</label>
+                <textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"> </textarea>
+                <br/>
+
+                <!-- 提交按钮 -->
+                <button type="submit" class="btn btn-primary">发布课程</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock content %}

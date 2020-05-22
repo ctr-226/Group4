@@ -21,76 +21,87 @@
                 <a href="">热门课程</a>
             </div>
             <div class="clearfix"></div>
-
-            <!--3.轮播图(扣过来)-->
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- 控制圆点 -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                </ol>
-
-                <!-- 控制图片 -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="../static/image/door.jpg" alt="图片加载中">
-                        <div class="carousel-caption">
-                            图片1
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="../static/image/one.jpg" alt="图片加载中">
-                        <div class="carousel-caption">
-                            图片2
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="../static/image/two.jpg" alt="图片加载中">
-                        <div class="carousel-caption">
-                            图片3
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 控制左右箭头 -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-
         </div>
     </div>
 
-    <script>
-        $(function () {
-            $(window).on('resize', function () {
-                let clickWidth = $(window).width();
-                let isBigImg = clickWidth >= 500;
-                let $allItems = $("#ty-banner .item");
-                $allItems.each(function (index, item) {
-                    let src = isBigImg ? $(item).data("lg-mg") : $(item).data("sm-mg");
-                    let imgUrl = "url('" + src + "')";
+    <!--3.轮播图(扣过来)-->
+    <div class="container">
+        <div class="align-content-xl-center">
+            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../static/image/door.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../static/image/one.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../static/image/two.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
-                    $(item).css({
-                        background: imgUrl
-                    });
+    <!--课程筛选卡片容器-->
+    {% for  cours in course %}
 
-                    if (!isBigImg) {
-                        let $img = "<img src='" + src + "'>";
-                        $(item).empty().append($img);
-                    } else {
-                        $(item).empty();
-                    }
-                });
-            });
-        });
+        <div class="container">
+            <div class="row mt-2">
+                <div class="col-4 mb-4">
+                    <!-- 卡片容器 -->
+                    <div class="card h-100">
+                        <!-- 标题 -->
+                        <h4 class="card-header">{{ cours.nick_name }}
+                            <span class="text-muted"
+                                  style="font-size:0.5em">{{ cours.get_grade_course_display }}—{{ cours.get_subject_display }}</span>
+                        </h4>
+                        <!-- 摘要 -->
+                        <div class="card-body">
+                            <p class="card-text">{{ cours.introduction }}.</p>
+                        </div>
+                        <!-- 注脚 -->
+                        <div class="card-footer">
+                            <span class="pt-2" style="float:right">{{ cours.teacher }}</span>
+                            <a href='{% url "Course:detail_course" cours.id %}' class="btn btn-primary">了解课程</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 
-    </script>
+    <!--友情链接-->
+    <div class="text-center">
+        <p><h5>友情链接</h5></p>
+        <ul class="list-inline">
+            <li>
+                <a href="https://zsb.sjtu.edu.cn">上海交通大学本科招生网</a>
+            </li>
+            <li>
+                <a href="https://jwc.sjtu.edu.cn">上海交通大学本科教学信息网（教务处）</a>
+            </li>
+            <li>
+                <a href="https://lib.sjtu.edu.cn">上海交通大学图书馆</a>
+            </li>
+            <li>
+                <a href="https://oc.sjtu.edu.cn">上海交通大学在线教学平台</a>
+            </li>
+        </ul>
+    </div>
+
 
 {% endblock content %}
