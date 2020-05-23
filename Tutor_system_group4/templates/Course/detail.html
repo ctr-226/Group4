@@ -10,19 +10,20 @@
         <div>
             {% csrf_token %}
             <div class = "col-12">
-                <h1 >{{course.nick_name}}</h1>
-                <p class = "lead">{{course.introduction}}</p>
+                <p class = "lead">课程名：{{ course.nick_name }}</p>
                 
                 <!--使用.get_**_display方法显示**的CHOICE值-->
-                <p>{{course.get_grade_course_display}}  {{course.get_subject_display}}</p>
+                <p>{{course.get_grade_course_display}}   {{course.get_subject_display}}</p>
+                
                 {% if course.state_match %}
-                    <p class="text-danger">上课中</p>
+                    <p class="text-danger">课程状态：上课中</p>
                 {% else %}
-                    <p class="text-success"><a href="#">可申请</a></p>
+                    <p class="text-success">课程状态：可申请</p>
                 {% endif %}
 
                 <p>授课老师：<a href="#">{{ course.teacher.name }}</a></p>
                 <p>课程收费：{{ course.charge }}/小时</p>
+                <p>课程简介：{{course.introduction}}</p>
                 <p>课程评论：{{ course.comment }}</p>
             </div>
 
@@ -56,9 +57,11 @@
 
 
             </br>
-            <a href='{% url "Course:match" coursedetail_id %}'>
-                <button>申请课程</button>
-            </a>
+            {% if request.user.is_student %}
+                <a href='{% url "Course:match" coursedetail_id %}'>
+                    <button class="btn btn-primary">申请课程</button>
+                </a>
+            {% endif %}
 
             <!-- 学生申请课程的按钮，会调用match函数
             <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>

@@ -91,9 +91,9 @@ def user_login(request):
                 # 此处在redirect时应想办法传入id参数
                 id = user.id
                 if user.is_student == True:
-                    return redirect("User_Profile:student_profile_update", id=id)
+                    return redirect('/')
                 elif user.is_teacher == True:
-                    return redirect("User_Profile:teacher_profile_update", id=id)
+                    return redirect('/', id=id)
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:
