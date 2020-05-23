@@ -136,9 +136,10 @@ def detail_course(request, coursedetail_id):
 
 # 课程管理
 def manage_course(request):
-    ID = request.user.id
-    user = User.objects.get(id=ID)
+    user = request.user
+    # user = User.objects.get(id=ID)
     # context = {}
+
     if user.is_teacher:
 
         course_match = user.teacher_profile.coursedetail_set.filter(state_match=True)
@@ -153,9 +154,17 @@ def manage_course(request):
                    'course_list': course_list}
         return render(request, 'Course/teacher_subject_detail.html', context)
     if user.is_student:
+
         course_match = user.student_profile.agreed_Student.filter(state_match=True)
         course_applying = user.student_profile.applied_Student.all()
-        context = {'course_match': course_match, 'course_applying': course_applying}
+        if request.method == "POST":
+            course = CourseDetail.objects.get(id=request.POST['course_id'])
+            course.comment = request.POST['comment']
+            course.save()
+            context = {'course_match': course_match, 'course_applying': course_applying, 'flag': True}
+        else:
+            context = {'course_match': course_match, 'course_applying': course_applying, 'flag': False}
 
         return render(request, 'Course/student_subject_detail.html', context)
+
 
