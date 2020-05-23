@@ -10,7 +10,7 @@
     <div class="container">
 
         <!-- 导航栏商标 -->
-        <a class="navbar-brand" href="#">家教平台</a>
+        <a class="navbar-brand" href="{% url 'index' %}">家教平台</a>
 
         <!-- 导航入口 -->
         <div>
@@ -24,7 +24,7 @@
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="{% url 'index' %}  ">首页</a>
+							<a class="dropdown-item" href="{% url 'index' %} ">首页</a>
                             {% if user.is_student %}
                                 <a class="dropdown-item" href="{% url 'User_Profile:student_profile_update' user.id %}">个人信息</a>
                             {% elif user.is_teacher %}
