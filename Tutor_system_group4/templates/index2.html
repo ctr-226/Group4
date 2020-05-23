@@ -15,25 +15,25 @@
                 <img src="../static/image/logo.jpg" alt="上海交大logo" style="width:200px"/>
             </div>
             <div class="col-4 text-left" style="margin-top: 20px;">
-                       <p>我是学生：
-                           <a href='{% url "filter" %}'>筛选课程</a>
-                           <a href='{% url "Course:manage_course" %}'>我学习的课程</a>
-                       </p>
+                <p>我是学生：
+                    <a href='{% url "filter" %}'>筛选课程</a>
+                    <a href='{% url "Course:manage_course" %}'>我学习的课程</a>
+                </p>
             </div>
             <div class="col-5 text-left" style="margin-top: 20px;">
                 <p>我是老师：
-                            <a href='{% url "Course:increase_course" %}'>发布课程</a>
-                            <a href='{% url "Course:manage_course" %}'>我教授的课程</a>
+                    <a href='{% url "Course:increase_course" %}'>发布课程</a>
+                    <a href='{% url "Course:manage_course" %}'>我教授的课程</a>
                 </p>
             </div>
 
-            </div>
-            <div class="clearfix"></div>
         </div>
+        <div class="clearfix"></div>
+    </div>
 
-            <!--3.轮播图(扣过来)-->
-<div class="container">
-<div class="align-content-xl-center">
+    <!--3.轮播图(扣过来)-->
+    <div class="container">
+        <div class="align-content-xl-center">
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
                  <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -64,10 +64,10 @@
 </div>
 
             <!--课程筛选卡片容器-->
-    {% for  cours in course %}
 
         <div class="container">
             <div class="row mt-2">
+                {% for  cours in course %}
                 <div class="col-4 mb-4">
                     <!-- 卡片容器 -->
                     <div class="card h-100">
@@ -87,11 +87,12 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-    {% endfor %}
 
-<!--友情链接-->
+
+    <!--友情链接-->
 <div class="text-center">
         <p><h5>友情链接</h5></p>
 			<ul class="list-inline">

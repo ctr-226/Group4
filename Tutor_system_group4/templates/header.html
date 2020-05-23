@@ -24,6 +24,7 @@
                             {{ user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{% url 'index' %}  ">首页</a>
                             {% if user.is_student %}
                                 <a class="dropdown-item" href="{% url 'User_Profile:student_profile_update' user.id %}">个人信息</a>
                             {% elif user.is_teacher %}
