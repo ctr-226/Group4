@@ -9,37 +9,31 @@
 {% block content %}
 	<div class="container">
 		<div class="row">
-			<div class="col-12">
-				<br/>
-				<div class="col-md-4">请填写课程信息：</div>
-				<br/>
-				<form method="post" action=".">
-					{% csrf_token %}
+			<div class="col-md-12">请填写课程信息：</div>
+			<br/><br/>
+		</div>
+		
+
+		<div class="col-md-12">
+			<form method="post" action=".">
+				{% csrf_token %}
+				<div class="row">
 					<!-- nickname -->
 					<div class="form-group col-md-4">
 						<label for="nickname">课程名称</label>
 						<input type="text" class="form-control" id="nickname" name="nickname">
 					</div>
 					<br>
-
-					
-					<!-- grade_course -->
+				
+					<!-- charge -->
 					<div class="form-group col-md-4">
-						<label for="grade_course">课程适合年级</label>
-						<select class="form-control" id="grade_course" name="grade_course">
-							<option value="0">小学一年级至三年级</option>
-							<option value="1">小学四年级至六年级</option>
-							<option value="2">初一</option>
-							<option value="3">初二</option>
-							<option value="4">初三</option>
-							<option value="5">高一</option>
-							<option value="6">高二</option>
-							<option value="7">高三</option>
-							<option value="8" selected>其他<option>
-						</select>
+						<label for="charge">单次课收费价格/元</label>
+						<input type="text" class="form-control" id="charge" name="charge">
 					</div>
 					<br>
+				</div>
 				
+				<div class="row">
 					<!-- subject -->
 					<div class="form-group col-md-4">
 						<label for="subject">课程科目</label>
@@ -57,24 +51,37 @@
 					</div>
 					<br>
 				
-					<!-- charge -->
+					<!-- grade_course -->
 					<div class="form-group col-md-4">
-						<label for="charge">单次课收费价格/元</label>
-						<input type="text" class="form-control" id="charge" name="charge">
+						<label for="grade_course">课程适合年级</label>
+						<select class="form-control" id="grade_course" name="grade_course">
+							<option value="0">小学一年级至三年级</option>
+							<option value="1">小学四年级至六年级</option>
+							<option value="2">初一</option>
+							<option value="3">初二</option>
+							<option value="4">初三</option>
+							<option value="5">高一</option>
+							<option value="6">高二</option>
+							<option value="7">高三</option>
+							<option value="8" selected>其他</option>
+						</select>
 					</div>
 					<br>
+				</div>
 				
+				<div class="row">
 					<!-- introduction -->
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-8">
 						<label for="introduction">课程简介</label>
 						<textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"> </textarea>
 					</div>
 					<br>
+				</div>
 				
-					<!-- 提交按钮 -->
-					<button type="submit" class="btn btn-primary">发布课程</button>
-				</form>
-			</div>
+				<!-- 提交按钮 -->
+				<button type="submit" class="btn btn-primary">发布课程</button>
+				
+			</form>
 		</div>
 	</div>
 {% endblock content %}
