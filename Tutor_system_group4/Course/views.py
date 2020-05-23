@@ -16,6 +16,7 @@ def index(request):
     else:
         return render(request, 'index.html')
 
+
 # 课程筛选函数
 @login_required(login_url='/user/login/')
 def filter(request):
