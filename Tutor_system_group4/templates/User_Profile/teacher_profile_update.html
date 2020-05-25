@@ -8,9 +8,10 @@
 {% block content %}
 {% if request.user.id == teacher_profile.teacher_user.id %}
 <div class="container mt-3">
-    <div class="row">
-        
-            <div class="col-md-6 container " >
+    
+    <form method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-5 container " >
                 <div class="d-md-flex justify-content-center  bg-light p-md-3 mb-3 " >
                     <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
 
@@ -19,22 +20,22 @@
                         {% endif %}
                         <br>
                         <br>
-                        <form method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+                        
                             <!-- avatar -->
                             <div class="form-group">
                                 <label for="avatar">上传头像</label>
                                 <input type="file" class="form-control-file" name="avatar" id="avatar">
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
 
 
-            <div class="container col-md-6">
+            <div class="container col-md-7">
 
                 <br>
-                <form method="post" action="." enctype="multipart/form-data">
+                
                     {% csrf_token %}
                     <div class="form-group col-md-4">
                         <label for="name">姓名</label>
@@ -97,9 +98,11 @@
                                 value="{{ request.user.teacher_profile.mailbox}}">
                     </div>
                     <div><button type="submit" class="btn btn-primary">提交</button></div>
-                </form>
-            </div>  
-     </div>
+                
+            </div>
+          
+        </div>
+    </form>
 </div>
 
 {% else %}
@@ -108,7 +111,7 @@
 <div class="container mt-3">
     <div class="row">
         <!-- 需要补充的页面内容  值得注意的是 m-auto是使居中的标签 p-md 是flex浮动的外边距 mb-3是跟下一个的距离 justify-是子元素的排布-->
-        <div class="col-md-7 container m-auto" >
+        <div class="col-md-5 container m-auto" >
             <div class="d-md-flex justify-content-center  bg-light p-md-3 mb-3 " >
                 <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
                     {% if teacher_profile.avatar %}
@@ -118,7 +121,7 @@
             </div>
         </div>
 
-        <div class="container col-md-5">
+        <div class="container col-md-7">
             <p>教师姓名：   {{teacher_profile.name}}</p>
             <p>教师简介：   {{teacher_profile.briefintroduction}}</p>
             <p>性别：       {{teacher_profile.get_gender_display}}</p>
