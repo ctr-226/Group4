@@ -42,7 +42,7 @@
                         <div class="card col-md-4 mb-3 bg-light">
                             <div class="card-body">
 
-                                <h4 class="card-title">课程名称：{{ course.nick_name }}</h4>
+                                <h4 class="card-title">课程名称:{{ course.nick_name }} </h4>
                                 <p class="card-text">
                                     课程年级：{{ course.get_grade_course_display }}<br>课程科目：{{ course.get_subject_display }}
                                 </p>
@@ -52,28 +52,32 @@
 
                                 <form action="{% url 'Course:agree_match' course.id %}" method="post">
                                     {% csrf_token %}
-                                    <div class="btn-group-vertical" data-toggle="buttons">
+
 
                                         {% for student in course.student_applied.all %}
+                                            <div class="d-flex">
+                                            <div class="m-auto">
                                             <label class="btn btn-light">
-                                                <input type="radio" name="choice" autocomplete="off"
-                                                       value="{{ student.id }}">{{ student.name }}<a>--</a>
-                                                <a class="bg-light text-dark" style="text-decoration: none"
-                                                   href="{% url 'User_Profile:student_profile_update' student.student_user_id %}">学生信息</a>
-                                            </label>
+                                                <input type="radio" name="choice"
+                                                       value="{{ student.id }}">   {{ student.name }}
+                                            </label></div>
+                                                <div class="m-auto">---</div>
+                                            <div class="m-auto"><a class="bg-light btn" style="text-decoration: none"
+                                                   href="{% url 'User_Profile:student_profile_update' student.student_user_id %}">学生信息</a></div>
+                                            </div>
                                             <!--      <input type="radio" name="choice" class="custom-control-input" id="{{ student.id }}" value="{{ student.id }}">
                                             <label class="custom-control-label" for="{{ student.id }}">{{ student.name }}</label>
                                 <div class="custom-radio custom-control"></div>                    <a  href="{% url "User_Profile:student_profile_update" student.id %}">学生信息</a>
                     -->
                                         {% endfor %}
-                                    </div>
-                                    <button class="btn btn-block btn-lg btn-primary" type="submit">select</button>
+
+                                        <button class="btn btn-block btn-lg btn-primary" type="submit">select</button>
                                 </form>
                                 {% else %}
                                 <p class="card-text text-danger">没有正在申请的学生</p>
                                 {% endif %}
                             </div>
-                        <a class="card-link" href="{% url 'Course:detail_course' course.id %}">详细信息</a>
+                        <a class="card-link" href="{% url 'Course:detail_course' course.id %}">课程详细信息</a>
                         </div>
                         <div class="col-md-1"></div>
 
