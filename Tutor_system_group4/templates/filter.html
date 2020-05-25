@@ -210,7 +210,8 @@
 
             $("#select4 button").click(function () {
                 $(this).addClass("btn-primary").removeClass("btn-info");
-                $(this).addClass("selected").siblings().removeClass("selected btn-primary").addClass("btn-info");
+                $(this).addClass("selected").siblings().remove
+                Class("selected btn-primary").addClass("btn-info");
                 $(this).addClass("selected").siblings().removeClass("selected");
                 $(this).children("input").attr("name", "gender");
                 $(this).siblings().children("input").removeAttr("name");
