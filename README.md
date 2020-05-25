@@ -5,8 +5,7 @@
 注册：http://127.0.0.1:8000/user/register/
 登陆：http://127.0.0.1:8000/user/login/
 
-网站首页：http://127.0.0.1:8000/index/
-                http://127.0.0.1:8000/index2/
+网站首页：http://127.0.0.1:8000/
 
 教师新增课程：http://127.0.0.1:8000/course/increase_course/
 

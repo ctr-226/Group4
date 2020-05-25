@@ -10,12 +10,14 @@ import re
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['age', 'gender', 'grade', 'avatar']
+        fields = ['age', 'gender', 'grade' , 'avatar' , 'name' , 
+                    'briefintroduction' , 'phone' , 'mailbox']
 
 class TeacherProfileForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ['age', 'gender', 'grade', 'avatar']
+        fields = ['age', 'gender', 'grade' , 'avatar' , 'name' , 
+                    'briefintroduction' , 'phone' , 'mailbox' ]
 
 def email_check(email):
     pattern = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")

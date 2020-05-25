@@ -8,7 +8,7 @@
 
 
 {% block content %}
-    <div class="container col-md-9 m-auto">
+    <div class="container col-md-8 m-auto">
         <div class="card">
             <div class="card-header">
                 Tips
@@ -28,24 +28,27 @@
             </div>
         </div>
     </div>
-    <div class="container">
+<div class="container col-md-8">
+    <div class="container col-md-6">
         <div class="nav col-md nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-               aria-controls="v-pills-home" aria-selected="true">正在申请课程</a>
-            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-               aria-controls="v-pills-profile" aria-selected="false">已匹配课程</a>
-            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-               aria-controls="v-pills-messages" aria-selected="false">课程评论</a>
+            <a class="nav-link col active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+               aria-controls="v-pills-home" aria-selected="true" style="text-align: center">正在申请课程</a>
+            <a class="nav-link col " id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+               aria-controls="v-pills-profile" aria-selected="false" style="text-align: center">已匹配课程</a>
+            <a class="nav-link col" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+               aria-controls="v-pills-messages" aria-selected="false" style="text-align: center">课程评论</a>
         </div>
     </div>
+
     <div style="height: 20px"></div>
     <div class="container">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <div class="row">
+                <div class="row mt-3">
                     {% if course_applying %}
                         {% for course in course_applying %}
-                            <div class="card col-md-4 ">
+                            <div class="col-md-1"></div>
+                            <div class="card  col-md-4 mb-2 bg-light ">
                                 <div class="card-body">
                                     <h5 class="card-title">课程名称：{{ course.nick_name }}</h5>
                                     <p class="card-text">
@@ -54,6 +57,7 @@
                                     <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
                                 </div>
                             </div>
+                            <div class="col-md-1"></div>
                         {% endfor %}
                     {% else %}
                         <div class="container">
@@ -68,15 +72,19 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <div class="row">
+            <div class="tab-pane fade " id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <div class="row mt-3">
                     {% if course_match %}
                         {% for course in course_match %}
-                            <div class="card col-md-4">
-                                <h4 class="card-title">课程名称{{ course.nick_name }}</h4>
-                                <div class="card-text"><p>课程简介：{{ course.introduction }}</p></div>
+                            <div class="col-md-1 "></div>
+                            <div class="card bg-light col-md-4 mb-2 m-2">
+                            <div class="card-body">
+                                <h4 class="card-title">课程名称：{{ course.nick_name }}</h4>
+                                <div class="card-text"><p>课程介绍：{{ course.introduction }}</p></div>
                                 <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
                             </div>
+                            </div>
+                            <div class="col-md-1 "></div>
                         {% endfor %}
                     {% else %}
                         <div class="container">
@@ -92,22 +100,23 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                <div class="row ">
+                <div class="row mt-3">
                     {% if course_match %}
                         {% for course in course_match %}
-
-
-                            <div class="card col-md-12 mb-2">
-                                <div class="card-header">
-                                    对{{ course.teacher }}的课程：{{ course.nick_name }}评论
-                                </div>
+                            <div class="container col-md-10 mb-2 m-1">
+                            <div class="card  mb-2">
                                 <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>{{ course.comment }}</p>
-                                        <footer class="blockquote-footer">
-                                            {{ course.student_agreed }}<!--<cite title="Source Title">Source Title</cite>--></footer>
-                                    </blockquote>
+                                        <form action="." method="post">
+                                        {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="Textarea1"  class="card-title">对{{ course.teacher }}所讲课程{{ course.nick_name }}的感受</label>
+                                                <textarea class="form-control" name="comment" rows="2">{{ course.comment }}</textarea>
+                                                <input name="course_id" value="{{ course.id }}" type="hidden">
+                                            </div>
+                                            <span><button class="btn-primary btn card-link" type="submit">评论</button></span>
+                                        </form>
                                 </div>
+                            </div>
                             </div>
 
 
@@ -119,6 +128,7 @@
                                 <div class="d-md-flex m-auto">
                                     <h4>
                                         暂时没有评论
+
                                     </h4>
                                 </div>
                             </div>
@@ -128,4 +138,16 @@
             </div>
         </div>
     </div>
+
+    </div>
+{% if flag %}
+    <script>
+    //$('#v-pills-tab a[href="#v-pills-messages"]').tab('show')
+        //document.getElementById('v-pills-messages-tab').click();
+        $('#v-pills-messages-tab').trigger("click");
+    $('#v-pills-messages').addClass("active show")
+    $('#v-pills-home').removeClass("active show")
+    </script>
+{% endif %}
+
 {% endblock content %}

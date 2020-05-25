@@ -44,7 +44,7 @@ class CourseDetail(models.Model):
     charge = models.IntegerField(verbose_name='课程收费', default=0)
 
     # 评论
-    comment = models.CharField(max_length=100, blank=True, null=True, verbose_name='评论')
+    comment = models.CharField(max_length=100, default='暂无', blank=True, null=True, verbose_name='评论')
 
     # 课程设立的时间
     time_set = models.TimeField(auto_now_add=True)
