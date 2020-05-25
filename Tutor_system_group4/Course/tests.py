@@ -11,4 +11,6 @@ from .models import CourseDetail
 
 class QuestionModelTests(TestCase):
 
+
+
 # Create your tests here.

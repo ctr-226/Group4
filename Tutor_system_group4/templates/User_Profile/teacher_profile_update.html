@@ -20,13 +20,11 @@
                         {% endif %}
                         <br>
                         <br>
-                        
-                            <!-- avatar -->
+                            <!-- avatar头像上传 -->
                             <div class="form-group">
                                 <label for="avatar">上传头像</label>
                                 <input type="file" class="form-control-file" name="avatar" id="avatar">
                             </div>
-                        
                     </div>
                 </div>
             </div>
@@ -35,26 +33,26 @@
             <div class="container col-md-7">
 
                 <br>
-                
+                    <!--姓名修改和显示-->
                     {% csrf_token %}
                     <div class="form-group col-md-4">
                         <label for="name">姓名</label>
                         <input type="text" class="form-control" id="name" name="name"
                                 value="{{ request.user.teacher_profile.name}}">
                     </div>
-
+                    <!--个人简介显示和修改-->
                     <div class="form-group col-md-8">
                         <label for="briefintroduction">个人简介</label>
                         <textarea type="text" class="form-control" id="briefintroduction" name="briefintroduction"
                                 rows="3">{{ request.user.teacher_profile.briefintroduction }}</textarea>
                     </div>
-
+                    <!--年龄显示和修改-->
                     <div class="form-group col-md-4">
                         <label for="age">年龄</label>
                         <input type="text" class="form-control" id="age" name="age"
                                value="{{ request.user.teacher_profile.age }}">
                     </div>
-
+                    <!--性别显示和修改-->
                     <div class="form-group col-md-4">
                         <label for="gender">性别</label>
                         <select class="form-control" id="gender" name="gender">
@@ -67,7 +65,7 @@
                             {% endif %}
                         </select>
                     </div>
-
+                    <!--年级显示和修改-->
                     <div class="form-group col-md-4">
                         <label for="grade">年级</label>
                         <select class="form-control" id="grade" name="grade">
@@ -85,13 +83,13 @@
                             </script>
                         </select>
                     </div>
-
+                    <!--联系电话显示和修改-->
                     <div class="form-group col-md-8">
                         <label for="phone">联系电话</label>
                         <input type="text" class="form-control" id="phone" name="phone"
                                 value="{{ request.user.teacher_profile.phone}}">
                     </div>
-
+                    <!--个人邮箱显示和修改-->
                     <div class="form-group col-md-8">
                         <label for="mailbox">个人邮箱</label>
                         <input type="text" class="form-control" id="mailbox" name="mailbox"
