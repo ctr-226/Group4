@@ -56,7 +56,8 @@ class Student(models.Model):
     phone = models.CharField(max_length=12,verbose_name='联系电话')
 
     # 个人简介
-    briefintroduction = models.CharField(verbose_name="教师信息",blank=True,null=True,max_length=100,help_text="个人简介，所在学校/学习情况等")
+    briefintroduction = models.CharField(verbose_name="教师信息", blank=True, null=True, max_length=100,
+                                         default="暂无", help_text="个人简介，所在学校/学习情况等")
 
     # 头像
     avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/',default='default.jpg', verbose_name='头像',blank=True,null=True)
@@ -107,7 +108,8 @@ class Teacher(models.Model):
     phone = models.CharField(verbose_name="联系电话",max_length=12)
 
     # 个人简介
-    briefintroduction = models.CharField(verbose_name="教师信息",blank=True,null=True,max_length=100,help_text="个人简介，所在学院/专业/履历等")
+    briefintroduction = models.CharField(verbose_name="教师信息", blank=True, null=True, max_length=100,
+                                          default="暂无", help_text="个人简介，所在学院/专业/履历等")
 
     # 头像
     avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/',default='default.jpg', verbose_name='头像',blank=True,null=True)

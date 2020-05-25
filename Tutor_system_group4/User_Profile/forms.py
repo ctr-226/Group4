@@ -16,7 +16,7 @@ class StudentProfileForm(forms.ModelForm):
 class TeacherProfileForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ['age', 'gender', 'grade'  , 'avatar' , 'name' , 
+        fields = ['age', 'gender', 'grade' , 'avatar' , 'name' , 
                     'briefintroduction' , 'phone' , 'mailbox' ]
 
 def email_check(email):

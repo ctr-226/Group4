@@ -18,15 +18,15 @@
                 {% if course.state_match %}
                     <p class="text-danger">课程状态：上课中</p>
                 {% else %}
-                <!-- 学生申请课程的按钮，会调用match函数
-                    <a href='{% url "Course:match" coursedetail_id %}'> <button>申请课程</button> </a>
-                -->
+                    <p class="text-success">课程状态：可申请</p>
+                {% endif %}
+                <!-- 
                     {% if request.user.is_student and course.state_match == 0 %}
-                        <a class = "btn btn-success" href='{% url "Course:match" coursedetail_id %}'>申请</a>
+                        <a class = "text-success" href='{% url "Course:match" coursedetail_id %}'>申请</a>
                     {% else %}
                         <a><p class = "text-success">可申请</p></a>
                     {% endif %}
-                {% endif %}
+                -->
 
                 <p>授课老师：<a href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id%}">{{ course.teacher.name }}</a></p>
                 <p>课程收费：{{ course.charge }}/小时</p>
@@ -62,8 +62,12 @@
                 </table>
             {% endif %}
 
-            
-
+            <br>
+            <div class = "col-6">
+                {% if request.user.is_student and course.state_match == 0 %}
+                <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
+                {% endif %}
+            </div>
 
         </div>
     </div>
