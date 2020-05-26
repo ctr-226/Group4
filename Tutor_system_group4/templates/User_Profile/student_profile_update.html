@@ -5,65 +5,57 @@
 
 {% block content %}
 {% if request.user.id == student_profile.student_user.id %}
-<div class="container mt-3">
-    <form method="post" action="." enctype="multipart/form-data">{% csrf_token %}
-        <div class="row">   
-            <div class="col-md-5 container " >
-                <div class="d-md-flex justify-content-center  bg-light p-md-3 mb-3 " >
-                    <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
-                        {% if request.user.student_profile.avatar %}
+    <div class="container mt-3">
+        <form method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-5 container " >
+                    <div class="d-md-flex justify-content-center  bg-light p-md-3 mb-3 " >
+                        <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
+                            {% if request.user.student_profile.avatar %}
                             <img src="{{ request.user.student_profile.avatar.url }}" style="max-width: 100%; border-radius: 15%;" class="col-md-4">
-                        {% endif %}
-                        <br>
-                        <br>
-                        
+                            {% endif %}
+                            <br>
+                            <br>
                             <!-- avatar -->
                             <div class="form-group">
                                 <label for="avatar">上传头像</label>
                                 <input type="file" class="form-control-file" name="avatar" id="avatar">
                             </div>
-                        
+                        </div>
                     </div>
                 </div>
-            </div>
-                
-
-            <div class="container col-md-7">
-                <br>
-                
+                <div class="container col-md-7">
+                    <br>
                     {% csrf_token %}
                     <div class="form-group col-md-4">
                         <label for="name">姓名</label>
                         <input type="text" class="form-control" id="name" name="name"
-                                value="{{ request.user.student_profile.name}}">
+                               value="{{ request.user.student_profile.name}}">
                     </div>
-
                     <div class="form-group col-md-8">
                         <label for="briefintroduction">个人简介</label>
                         <textarea type="text" class="form-control" id="briefintroduction" name="briefintroduction"
-                                rows="3">{{ request.user.student_profile.briefintroduction}}</textarea>
+                                  rows="3">{{ request.user.student_profile.briefintroduction}}</textarea>
                     </div>
-
                     <div class="form-group col-md-4">
                         <label for="age">年龄</label>
                         <input type="text" class="form-control" id="age" name="age"
                                value="{{ request.user.student_profile.age }}">
                     </div>
-
                     <div class="form-group col-md-4">
                         <label for="gender">性别</label>
                         <select class="form-control" id="gender" name="gender">
                             <!-- 使用模板语言来根据性别的不同显示不同预设值的下拉菜单 -->
                             {% if request.user.student_profile.gender == 'M' %}
-                                <option value="M" selected>男</option>
-                                <option value="F">女</option>
+                            <option value="M" selected>男</option>
+                            <option value="F">女</option>
                             {% else %}
-                                <option value="M">男</option>
-                                <option value="F" selected>女</option>
+                            <option value="M">男</option>
+                            <option value="F" selected>女</option>
                             {% endif %}
                         </select>
                     </div>
-
                     <div class="form-group col-md-8">
                         <label for="grade">年级</label>
                         <select class="form-control" id="grade" name="grade">
@@ -82,58 +74,49 @@
                             </script>
                         </select>
                     </div>
-                    
                     <!-- avatar -->
                     <div class="form-group">
                         <label for="avatar">上传头像</label>
                         <input type="file" class="form-control-file" name="avatar" id="avatar">
                     </div>
-
                     <div class="form-group col-md-8">
                         <label for="phone">联系电话</label>
                         <input type="text" class="form-control" id="phone" name="phone"
-                                value="{{ request.user.student_profile.phone}}">
+                               value="{{ request.user.student_profile.phone}}">
                     </div>
-
                     <div class="form-group col-md-8">
                         <label for="mailbox">个人邮箱</label>
                         <input type="text" class="form-control" id="mailbox" name="mailbox"
-                                value="{{ request.user.student_profile.mailbox}}">
+                               value="{{ request.user.student_profile.mailbox}}">
                     </div>
-
                     <button type="submit" method="post" class="btn btn-primary">提交</button>
-                
-            </div>
-        </div>
-    </form>
-</div>
-
-{% else %}
-<div class="container mt-3">
-    <div class="row">
-        <!-- 需要补充的页面内容  值得注意的是 m-auto是使居中的标签 p-md 是flex浮动的外边距 mb-3是跟下一个的距离 justify-是子元素的排布-->
-        <div class="col-md-5 container m-auto" >
-            <div class="d-md-flex justify-content-center  bg-light p-md-3 mb-3 " >
-                <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
-                    {% if student_profile.avatar %}
-                    <img src="{{ student_profile.avatar.url }}" style="max-width: 100%; border-radius: 15%;" class="col-md-4">
-                    {% endif %}
                 </div>
             </div>
-        </div>
-
-        <div class="container col-md-7">
-            <p>学生姓名：   {{student_profile.name}}</p>
-            <p>学生简介：   {{student_profile.briefintroduction}}</p>
-            <p>性别：       {{student_profile.get_gender_display}}</p>
-            <p>年级：       {{student_profile.get_grade_display}}</p>
-            <p>年龄：       {{student_profile.age}}</p>
-            <p>联系电话：   {{student_profile.phone}}</p>
-            <p>电子邮箱：   {{student_profile.mailbox}}</p>
-
+        </form>
+    </div>
+{% else %}
+    <div class="container mt-3">
+        <div class="row">
+            <!-- 需要补充的页面内容  值得注意的是 m-auto是使居中的标签 p-md 是flex浮动的外边距 mb-3是跟下一个的距离 justify-是子元素的排布-->
+            <div class="col-md-5 container m-auto" >
+                <div class="d-md-flex justify-content-center  bg-light p-md-3 mb-3 " >
+                    <div class="p-2"><!-- p-* 是这个元素的边框大小 -->
+                    {% if student_profile.avatar %}
+                        <img src="{{ student_profile.avatar.url }}" style="max-width: 100%; border-radius: 15%;" class="col-md-4">
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="container col-md-7">
+                <p>学生姓名：   {{student_profile.name}}</p>
+                <p>学生简介：   {{student_profile.briefintroduction}}</p>
+                <p>性别：       {{student_profile.get_gender_display}}</p>
+                <p>年级：       {{student_profile.get_grade_display}}</p>
+                <p>年龄：       {{student_profile.age}}</p>
+                <p>联系电话：   {{student_profile.phone}}</p>
+                <p>电子邮箱：   {{student_profile.mailbox}}</p>
+            </div>
         </div>
     </div>
-</div>
 {% endif %}
-
 {% endblock content %}
