@@ -11,10 +11,8 @@
             {% csrf_token %}
             <div class = "col-12">
                 <p class = "lead">课程名：{{ course.nick_name }}</p>
-                
                 <!--使用.get_**_display方法显示**的CHOICE值-->
                 <p>{{course.get_grade_course_display}}   {{course.get_subject_display}}</p>
-                
                 {% if course.state_match %}
                     <p class="text-danger">课程状态：上课中</p>
                 {% else %}
@@ -27,13 +25,11 @@
                         <a><p class = "text-success">可申请</p></a>
                     {% endif %}
                 -->
-
                 <p>授课老师：<a href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id%}">{{ course.teacher.name }}</a></p>
                 <p>课程收费：{{ course.charge }}/小时</p>
                 <p>课程简介：{{course.introduction}}</p>
                 <p>课程评论：{{ course.comment }}</p>
             </div>
-
             <br>
             <div class = "col-6">
                 {% if request.user.is_student and course.state_match == 0 %}
@@ -43,5 +39,4 @@
 
         </div>
     </div>
-
 {% endblock content %}
