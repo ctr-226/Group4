@@ -24,10 +24,10 @@ class Student(models.Model):
     student_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                                         related_name='student_profile')
     # 学生姓名 最长100字符
-    name = models.CharField(max_length=100, default=' ',verbose_name='姓名')
+    name = models.CharField(max_length=100, default=' ', verbose_name='姓名')
 
     # 学生年龄 限定正整数
-    age = models.PositiveIntegerField(verbose_name='年龄',blank=True,null=True)
+    age = models.PositiveIntegerField(verbose_name='年龄', blank=True, null=True)
 
     # 学生性别 choice (u'内部存储名，u'外部显示名')
     GENDER_CHOICE = ((u'M', u'男'), (u'F', u'女'))
@@ -47,24 +47,25 @@ class Student(models.Model):
         (u'8', u'其他')
     )
 
-    grade = models.CharField(max_length=2, choices=GRADE_CHOICE_STUDENT, default=u'5',verbose_name='年级')
+    grade = models.CharField(max_length=2, choices=GRADE_CHOICE_STUDENT, default=u'5', verbose_name='年级')
 
     # 邮箱
     mailbox = models.EmailField(verbose_name='个人邮箱')
 
     # 联系电话
-    phone = models.CharField(max_length=12,verbose_name='联系电话')
+    phone = models.CharField(max_length=12, verbose_name='联系电话')
 
     # 个人简介
     briefintroduction = models.CharField(verbose_name="教师信息", blank=True, null=True, max_length=100,
                                          default="暂无", help_text="个人简介，所在学校/学习情况等")
 
     # 头像
-    avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/',default='default.jpg', verbose_name='头像',blank=True,null=True)
+    avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/', default='default.jpg', verbose_name='头像', blank=True,
+                               null=True)
 
     class Meta:
         verbose_name = "学生"
-    
+
     def __str__(self):
         #  self.id 将文章标题返回
         return self.name
@@ -75,9 +76,9 @@ class Teacher(models.Model):
     teacher_user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                                         related_name='teacher_profile')
     # 教师姓名 最长100字符
-    name = models.CharField(max_length=100, blank=True,verbose_name="姓名")
+    name = models.CharField(max_length=100, blank=True, verbose_name="姓名")
     # 教师年龄 限定正整数
-    age = models.PositiveIntegerField(blank=True,default=20,verbose_name="年龄")
+    age = models.PositiveIntegerField(blank=True, default=20, verbose_name="年龄")
 
     # 教师性别 choice (u'内部存储名，u'外部显示名')
     GENDER_CHOICE = (
@@ -99,20 +100,21 @@ class Teacher(models.Model):
         (u'7', u'其他')
     )
 
-    grade = models.CharField(verbose_name="教师年级",max_length=2, choices=GRADE_CHOICE_TEACHER, default=u'1')
+    grade = models.CharField(verbose_name="教师年级", max_length=2, choices=GRADE_CHOICE_TEACHER, default=u'1')
 
     # 邮箱
     mailbox = models.EmailField(verbose_name="电子邮箱")
 
     # 联系电话
-    phone = models.CharField(verbose_name="联系电话",max_length=12)
+    phone = models.CharField(verbose_name="联系电话", max_length=12)
 
     # 个人简介
     briefintroduction = models.CharField(verbose_name="教师信息", blank=True, null=True, max_length=100,
-                                          default="暂无", help_text="个人简介，所在学院/专业/履历等")
+                                         default="暂无", help_text="个人简介，所在学院/专业/履历等")
 
     # 头像
-    avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/',default='default.jpg', verbose_name='头像',blank=True,null=True)
+    avatar = models.ImageField(upload_to='avatar/%Y/%m/%d/', default='default.jpg', verbose_name='头像', blank=True,
+                               null=True)
 
     class Meta:
         verbose_name = "家教"

@@ -130,10 +130,10 @@ def agree_match(request, coursedetail_id):
 # 课程详细内容
 @login_required(login_url='/user/login/')
 def detail_course(request, coursedetail_id):
-    
     course = CourseDetail.objects.get(id=coursedetail_id)
     context = {'course': course, 'coursedetail_id': coursedetail_id}
     return render(request, 'Course/detail.html', context)
+
 
 # 课程的删除
 # 根据博客的教程，该功能还可以在安全性上进行一些改进
@@ -146,29 +146,39 @@ def delete_course(request, coursedetail_id):
     else:
         return HttpResponse("该课程已匹配完成，不可删除")
 
+
+# 课程的删除
+# 根据博客的教程，该功能还可以在安全性上进行一些改进
+@login_required(login_url='/user/login/')
+def delete_course(request, coursedetail_id):
+    course = CourseDetail.objects.get(id=coursedetail_id)
+    if course.state_match == 0:
+        course.delete()
+        return redirect('Course:manage_course')
+    else:
+        return HttpResponse("该课程已匹配完成，不可删除")
+
+
 # 课程管理
+# 学生和老师共同使用这个视图函数
 def manage_course(request):
+    # 通过request获得user对象
     user = request.user
-    # user = User.objects.get(id=ID)
-    # context = {}
 
     if user.is_teacher:
-
+        # 查询匹配的课程
         course_match = user.teacher_profile.coursedetail_set.filter(state_match=True)
-        # course_match = CourseDetail.objects.filter(teacher_id=id, state_match=True)
-        # course_unmatched = CourseDetail.objects.filter(teacher__id=id, state_match=False)
+        # 反查询未匹配的课程
         course_unmatched = user.teacher_profile.coursedetail_set.filter(state_match=False)
-        course_list = {}
-        for course in course_unmatched:
-            if course.student_applied.all():
-                course_list[course] = course.student_applied.all()
-        context = {'course_match': course_match, 'course_unmatched': course_unmatched,
-                   'course_list': course_list}
+
+        context = {'course_match': course_match, 'course_unmatched': course_unmatched}
         return render(request, 'Course/teacher_subject_detail.html', context)
     if user.is_student:
 
         course_match = user.student_profile.agreed_Student.filter(state_match=True)
-        course_applying = user.student_profile.applied_Student.all()
+        # 同时反查询和对课程进行过滤
+        course_applying = user.student_profile.applied_Student.filter(state_match=False)
+        # 这里做这个判断是为了解决 在评论过后直接定位到原来的tab窗口下
         if request.method == "POST":
             course = CourseDetail.objects.get(id=request.POST['course_id'])
             course.comment = request.POST['comment']
@@ -178,5 +188,3 @@ def manage_course(request):
             context = {'course_match': course_match, 'course_applying': course_applying, 'flag': False}
 
         return render(request, 'Course/student_subject_detail.html', context)
-
-
