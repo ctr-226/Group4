@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .models import Teacher, Student, User
+from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
 
 # Create your tests here.
 
