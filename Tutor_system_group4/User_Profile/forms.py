@@ -67,5 +67,6 @@ class UserRegisterForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
+    """登录用表单，用于以POST提交数据，仅供与数据库验证，故表单类和模型无直接关系"""
     username = forms.CharField()
     password = forms.CharField()

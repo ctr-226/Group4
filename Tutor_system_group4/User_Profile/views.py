@@ -87,17 +87,22 @@ def teacher_profile_update(request, id):
 
 # 登入
 def user_login(request):
+    """登录函数，将空表单返回给前端，并接受提交的表单信息进行登录验证"""
     if request.method == 'POST':
+        # 新建表单接受POST提交的数据
         user_login_form = UserLoginForm(request.POST)
         if user_login_form.is_valid():
             # 清洗出合法数据
             username = user_login_form.cleaned_data['username']
             password = user_login_form.cleaned_data['password']
+            # 验证账号密码是否正确，正确则返回一个用户对象
             user = authenticate(username=username, password=password)
             if user:
+                # 将此用户登录
                 login(request, user)
                 # 此处在redirect时应想办法传入id参数
                 id = user.id
+                # 登录成功后返回首页
                 if user.is_student == True:
                     return redirect('/')
                 elif user.is_teacher == True:
@@ -107,10 +112,12 @@ def user_login(request):
         else:
             return HttpResponse("账号或密码输入不合法")
     elif request.method == 'GET':
+        # GET获取数据，则将空表单render返回给前端
         user_login_form = UserLoginForm()
         context = {'form': user_login_form}
         return render(request, 'User_Profile/login.html', context)
     else:
+        # 获取数据方式有误
         return HttpResponse("请使用GET或POST请求数据")
 
 
