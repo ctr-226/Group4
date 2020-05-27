@@ -11,9 +11,7 @@
     <div class="container">
         <div class="justify-content-center d-md-flex m-auto" style="height: 200px">
             <div class="justify-content-center d-md-flex m-auto">
-                <h4>
-                    我的课程
-                </h4>
+                <h4>我的课程</h4>
             </div>
         </div>
     </div>
@@ -29,131 +27,112 @@
                role="tab" aria-selected="false" style="text-align: center">添加课程</a>
         </div>
     </div>
-
-
     <div style="height: 20px"></div>
     <div class="container">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <div class="row mt-3">
                     {% if course_unmatched %}
-                    {% for course in course_unmatched %}
-                        <div class="col-md-1"></div>
-                        <div class="card col-md-4 mb-3 bg-light">
-                            <div class="card-body">
-
-                                <h4 class="card-title">课程名称：{{ course.nick_name }}</h4>
-                                <p class="card-text">
-                                    课程年级：{{ course.get_grade_course_display }}<br>课程科目：{{ course.get_subject_display }}
-                                </p>
-                                <p class="card-text">课程简介：{{ course.introduction }}</p>
-                                {% if course.student_applied.all %}
-                                <p class="card-text text-primary">正在申请的学生：</p>
-
-                                <form action="{% url 'Course:agree_match' course.id %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="btn-group-vertical" data-toggle="buttons">
-                                        {% for student in course.student_applied.all %}
-                                            <label class="btn btn-light">
-                                                <input type="radio" name="choice" autocomplete="off"
-                                                       value="{{ student.id }}">{{ student.name }}<a>--</a>
-                                                <a class="bg-light text-dark" style="text-decoration: none"
-                                                   href="{% url 'User_Profile:student_profile_update' student.student_user_id %}">学生信息</a>
-                                            </label>
-                                            <!--      <input type="radio" name="choice" class="custom-control-input" id="{{ student.id }}" value="{{ student.id }}">
-                                            <label class="custom-control-label" for="{{ student.id }}">{{ student.name }}</label>
-                                <div class="custom-radio custom-control"></div>                    <a  href="{% url "User_Profile:student_profile_update" student.id %}">学生信息</a>
-                    -->
-                                        {% endfor %}
+                        {% for course in course_unmatched %}
+                    <div class="col-md-1"></div>
+                    <div class="card col-md-4 mb-3 bg-light">
+                        <div class="card-body">
+                            <h4 class="card-title">课程名称:{{ course.nick_name }} </h4>
+                            <p class="card-text">
+                                课程年级：{{ course.get_grade_course_display }}<br>课程科目：{{ course.get_subject_display }}</p>
+                            <p class="card-text">课程简介：{{ course.introduction }}</p>
+                            {% if course.student_applied.all %}
+                            <p class="card-text text-primary">正在申请的学生：</p>
+                            <form action="{% url 'Course:agree_match' course.id %}" method="post">
+                                {% csrf_token %}
+                                {% for student in course.student_applied.all %}
+                                <div class="d-flex">
+                                    <div class="m-auto">
+                                        <label class="btn btn-light">
+                                            <input type="radio" name="choice" value="{{ student.id }}">{{ student.name }}
+                                        </label>
                                     </div>
-                                    <button class="btn btn-block btn-lg btn-primary" type="submit">select</button>
-                                </form>
-                                {% else %}
-                                <p class="card-text text-danger">没有正在申请的学生</p>
-                                {% endif %}
-                            </div>
-                        <a class="card-link" href="{% url 'Course:detail_course' course.id %}">详细信息</a>
-                        </div>
-                        <div class="col-md-1"></div>
-
-                    {% endfor %}
-                    {% else %}
-                        <div class="container">
-                            <div class=" d-md-flex m-auto" style="height: 200px">
-                                <div class="justify-content-center d-md-flex m-auto">
-                                    <h4>
-                                        没有待同意的课程
-                                    </h4>
+                                    <div class="m-auto">---</div>
+                                    <div class="m-auto">
+                                        <a class="bg-light btn" style="text-decoration: none"
+                                           href="{% url 'User_Profile:student_profile_update' student.student_user_id %}">学生信息</a>
+                                    </div>
                                 </div>
+                                {% endfor %}
+                                <button class="btn btn-block btn-lg btn-primary" type="submit">select</button>
+                            </form>
+                            {% else %}
+                            <p class="card-text text-danger">没有正在申请的学生</p>
+                            {% endif %}
+                        </div>
+                        <a class="card-link" href="{% url 'Course:detail_course' course.id %}">课程详细信息</a>
+                    </div>
+                    <div class="col-md-1"></div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="container">
+                        <div class=" d-md-flex m-auto" style="height: 200px">
+                            <div class="justify-content-center d-md-flex m-auto">
+                                <h4>没有待同意的课程</h4>
                             </div>
                         </div>
+                    </div>
                     {% endif %}
-
                 </div>
             </div>
-
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <div class="row mt-3">
                     {% if course_match %}
                         {% for course in course_match %}
-                            <div class="col-md-1"></div>
-                            <div class="card col-md-4 mb-2 bg-light">
-                            <div class="card-body">
-                                <h4 class="card-title">课程名称：{{ course.nick_name }}</h4>
-                                <div class="card-text"><p>课程介绍：{{ course.introduction }}</p></div>
-                                <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
-                            </div>
-                            </div>
-                            <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                    <div class="card col-md-4 mb-2 bg-light">
+                        <div class="card-body">
+                            <h4 class="card-title">课程名称：{{ course.nick_name }}</h4>
+                            <div class="card-text"><p>课程介绍：{{ course.introduction }}</p></div>
+                            <a class="card-link" href="{% url "Course:detail_course" course.id %}">课程详细信息</a>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
                         {% endfor %}
                     {% else %}
-                        <div class="container">
-                            <div class="justify-content-center d-md-flex m-auto" style="height: 200px">
-                                <div class="justify-content-center d-md-flex m-auto">
-                                    <h4>
-                                        暂时没有课程匹配
-                                    </h4>
-                                </div>
+                    <div class="container">
+                        <div class="justify-content-center d-md-flex m-auto" style="height: 200px">
+                            <div class="justify-content-center d-md-flex m-auto">
+                                <h4>暂时没有课程匹配</h4>
                             </div>
                         </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
-
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <div class="row ">
                     {% if course_match %}
                         {% for course in course_match %}
-                            <div class="container col-md-10 mb-2">
-                            <div class="card  ">
-                                <div class="card-header">
-                                    对{{ course.nick_name }}教员的评论
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>{{ course.comment }}</p>
-                                        <footer class="blockquote-footer">
-                                            {{ course.student_agreed }}<!--<cite title="Source Title">Source Title</cite>--></footer>
-                                    </blockquote>
-                                </div>
-                            </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="container">
-                            <div class="justify-content-center d-md-flex m-auto" style="height: 200px">
-                                <div class="justify-content-center d-md-flex m-auto">
-                                    <h4>
-                                        暂时没有评论
-                                    </h4>
-                                </div>
+                    <div class="container col-md-10 mb-2">
+                        <div class="card  ">
+                            <div class="card-header">对{{ course.nick_name }}教员的评论</div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>{{ course.comment }}</p>
+                                    <footer class="blockquote-footer">
+                                        {{ course.student_agreed }}<!--<cite title="Source Title">Source Title</cite>--></footer>
+                                </blockquote>
                             </div>
                         </div>
+                    </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class="container">
+                        <div class="justify-content-center d-md-flex m-auto" style="height: 200px">
+                            <div class="justify-content-center d-md-flex m-auto">
+                                <h4>暂时没有评论</h4>
+                            </div>
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
         </div>
-
     </div>
-
 {% endblock content %}
