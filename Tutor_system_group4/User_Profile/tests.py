@@ -16,7 +16,7 @@ class StudentProfileViewTests(TestCase):
         response = self.client.get(url)
         self.assertContains(response, 'csrfmiddlewaretoken')
 
-    def test_contains_form(self):
+    #def test_contains_form(self):
 
 
 #class TeacherProfileViewTests(TestCase):

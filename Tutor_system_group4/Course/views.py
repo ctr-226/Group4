@@ -86,7 +86,7 @@ def increase_course(request):
                 new_course.teacher = this_teacher
                 new_course.state_match = False
                 new_course.save()
-                return redirect("Course:increase_course")
+                return redirect("Course:detail_course", coursedetail_id=new_course.id)
             else:
                 return HttpResponse("有字段输入不合要求")
 
@@ -100,7 +100,7 @@ def increase_course(request):
         return HttpResponse("只有老师才能开设新课程哦")
 
 
-# 课程申请匹配
+# 学生进行课程申请
 def match(request, coursedetail_id):
     course_applying = CourseDetail.objects.get(id=coursedetail_id)
     this_user = User.objects.get(id=request.user.id)
@@ -135,6 +135,16 @@ def detail_course(request, coursedetail_id):
     context = {'course': course, 'coursedetail_id': coursedetail_id}
     return render(request, 'Course/detail.html', context)
 
+# 课程的删除
+# 根据博客的教程，该功能还可以在安全性上进行一些改进
+@login_required(login_url='/user/login/')
+def delete_course(request, coursedetail_id):
+    course = CourseDetail.objects.get(id=coursedetail_id)
+    if course.state_match == 0:
+        course.delete()
+        return redirect('Course:manage_course')
+    else:
+        return HttpResponse("该课程已匹配完成，不可删除")
 
 # 课程管理
 def manage_course(request):
