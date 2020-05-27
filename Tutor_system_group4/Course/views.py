@@ -161,6 +161,7 @@ def delete_course(request, coursedetail_id):
 
 # 课程管理
 # 学生和老师共同使用这个视图函数
+@login_required(login_url='/user/login/')
 def manage_course(request):
     # 通过request获得user对象
     user = request.user

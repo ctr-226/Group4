@@ -4,18 +4,12 @@ from Course.models import CourseDetail
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
-from .forms import TeacherProfileForm, StudentProfileForm, UserRegisterForm, UserLoginForm
-from .models import Student, User, Teacher
+from django.urls import reverse
+from User_Profile.forms import UserLoginForm, UserRegisterForm, StudentProfileForm, TeacherProfileForm
+from User_Profile.models import Teacher, Student, User
 
 from django.urls import reverse
 
-from .models import Teacher, Student, User
-
-from django.urls import reverse
-
-from .models import Teacher, Student, User
-from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
 
 class StudentProfileViewTests(TestCase):
     def setUp(self):
@@ -59,13 +53,4 @@ class UserRegisterFormTest(TestCase):
         self.assertEqual(max_length, 12)
 
 
-class RegisterView(TestCase):
-    def setUp(self):
-        url = reverse('User_Profile:register')
-        self.response = self.client.get(url)
 
-    def test_register_status(self):
-        self.assertEqual(self.response.status_code, 200)
-
-    def test_csrf(self):
-        self.assertContains(self.response, 'csrfmiddlewaretoken')
