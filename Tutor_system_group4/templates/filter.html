@@ -9,35 +9,33 @@
 {% block content %}
     <div class="container">
         <form action="{% url "filter" %}" method="get">
-
             <div class="row mt-3">
                 <ul class="select">
                     <li class="select-list">
                         <label id="select1">
                             <label for="id_grade">年级：</label>
                             <div class="btn-group">
-                                <button type="button" class="select-all selected btn btn-primary"><input type="hidden"
-                                                                                                         value="9"
-                                                                                                         name="grade"><a>全部</a>
+                                <button type="button" class="select-all selected btn btn-primary">
+                                    <input type="hidden" value="9" name="grade"><a>全部</a>
                                 </button>
-                                <button type="button" class="btn btn-info"><input type="hidden"
-                                                                                  value="0"><a>小学一年级至三年级</a></button>
-                                <button type="button" class="btn btn-info"><input type="hidden"
-                                                                                  value="1"><a>小学四年级至六年级</a></button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="2"><a>初一</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="3"><a>初二</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="4"><a>初三</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="5"><a>高一</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="6"><a>高二</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="7"><a>高三</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="8"><a>其他</a>
-                                </button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="0"><a>小学一年级至三年级</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="1"><a>小学四年级至六年级</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="2"><a>初一</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="3"><a>初二</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="4"><a>初三</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="5"><a>高一</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="6"><a>高二</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="7"><a>高三</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="8"><a>其他</a></button>
                             </div>
                         </label>
                     </li>
@@ -45,28 +43,26 @@
                         <label id="select2">
                             <label for="id_subject">科目：</label>
                             <div class="btn-group">
-                                <button type="button" class="select-all selected btn btn-primary"><input type="hidden"
-                                                                                                         value="0"
-                                                                                                         name="subject"><a>全部</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="zh"><a>语文</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="math"><a>数学</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="en"><a>英语</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="phy"><a>物理</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="che"><a>化学</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="bio"><a>生物</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="pol"><a>政治</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="his"><a>历史</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="geo"><a>地理</a>
-                                </button>
+                                <button type="button" class="select-all selected btn btn-primary">
+                                    <input type="hidden" value="0" name="subject"><a>全部</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="zh"><a>语文</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="math"><a>数学</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="en"><a>英语</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="phy"><a>物理</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="che"><a>化学</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="bio"><a>生物</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="pol"><a>政治</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="his"><a>历史</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="geo"><a>地理</a></button>
                             </div>
                         </label>
                     </li>
@@ -74,20 +70,18 @@
                         <label id="select3">
                             <label for="id_charge">时薪：</label>
                             <div class="btn-group">
-                                <button type="button" class="select-all selected btn btn-primary"><input type="hidden"
-                                                                                                         value="0"
-                                                                                                         name="charge"><a>全部</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="1"><a>30元以下</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="2"><a>30~50元</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="3"><a>50~70元</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="4"><a>70~100元</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="5"><a>100元以上</a>
-                                </button>
+                                <button type="button" class="select-all selected btn btn-primary">
+                                    <input type="hidden" value="0" name="charge"><a>全部</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="1"><a>30元以下</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="2"><a>30~50元</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="3"><a>50~70元</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="4"><a>70~100元</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="5"><a>100元以上</a></button>
                             </div>
                         </label>
                     </li>
@@ -95,14 +89,12 @@
                         <label id="select4">
                             <label for="id_gender">性别：</label>
                             <div class="btn-group">
-                                <button type="button" class="select-all selected btn btn-primary"><input type="hidden"
-                                                                                                         value="0"
-                                                                                                         name="gender"><a>全部</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="M"><a>男</a>
-                                </button>
-                                <button type="button" class="btn btn-info"><input type="hidden" value="F"><a>女</a>
-                                </button>
+                                <button type="button" class="select-all selected btn btn-primary">
+                                    <input type="hidden" value="0" name="gender"><a>全部</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="M"><a>男</a></button>
+                                <button type="button" class="btn btn-info">
+                                    <input type="hidden" value="F"><a>女</a></button>
                             </div>
                         </label>
                     </li>
@@ -121,30 +113,28 @@
     </div>
     <br>
     <!--课程信息的卡片容器 -->
-
-
     <div class="container">
         <div class="row mt-2">
             {% for  cours in course %}
-                <div class="col-4 mb-4">
-                    <!-- 卡片容器 -->
-                    <div class="card h-100">
-                        <!-- 标题 -->
-                        <h4 class="card-header">{{ cours.nick_name }}
-                            <span class="text-muted"
-                                  style="font-size:0.5em">{{ cours.get_grade_course_display }}—{{ cours.get_subject_display }}</span>
-                        </h4>
-                        <!-- 摘要 -->
-                        <div class="card-body">
-                            <p class="card-text">{{ cours.introduction }}.</p>
-                        </div>
-                        <!-- 注脚 -->
-                        <div class="card-footer">
-                            <span class="pt-2" style="float:right">{{ cours.teacher }}</span>
-                            <a href='{% url "Course:detail_course" cours.id %}' class="btn btn-primary">了解课程</a>
-                        </div>
+            <div class="col-4 mb-4">
+                <!-- 卡片容器 -->
+                <div class="card h-100">
+                    <!-- 标题 -->
+                    <h4 class="card-header">{{ cours.nick_name }}
+                        <span class="text-muted"
+                              style="font-size:0.5em">{{ cours.get_grade_course_display }}—{{ cours.get_subject_display }}</span>
+                    </h4>
+                    <!-- 摘要 -->
+                    <div class="card-body">
+                        <p class="card-text">{{ cours.introduction }}.</p>
+                    </div>
+                    <!-- 注脚 -->
+                    <div class="card-footer">
+                        <span class="pt-2" style="float:right">{{ cours.teacher }}</span>
+                        <a href='{% url "Course:detail_course" cours.id %}' class="btn btn-primary">了解课程</a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
