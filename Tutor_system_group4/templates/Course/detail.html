@@ -32,53 +32,6 @@
                     <p class="text-success">课程状态：可申请</p>
                 {% endif %}
             </div>
-<<<<<<< HEAD
-            <br>
-            <div class = "col-6">
-                {% if request.user.is_student and course.state_match == 0 %}
-                <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
-                {% endif %}
-            </div>
-||||||| merged common ancestors
-
-            {% if request.user.id == course.teacher.teacher_user.id %}
-            <h3 class="text-center">申请学生名单</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>姓名</th>
-                        <th>联系电话</th>
-                        <th>邮箱</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <form action="{% url 'Course:agree_match' course.id %}" method="post">
-                        {% csrf_token %}
-                        {% for student in course.student_applied.all %}
-                            <tr>
-                                <td><a href = "{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{student.name}}</a></td>
-                                <td>{{student.phone}}</td>
-                                <td>{{student.mailbox}}</td>
-                                {% if course.state_match %}
-                                    <td><a type="button" class="btn btn-disabled">接受申请</a></td>
-                                {% else %}
-                                    <td><a type="button" class="btn btn-success" type="submit">接受申请</a></td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-                    </form>
-                </tbody>
-            </table>
-            {% endif %}
-
-            <br>
-            <div class = "col-6">
-                {% if request.user.is_student and course.state_match == 0 %}
-                <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
-                {% endif %}
-            </div>
-=======
                 
             <div class="row">课程简介：{{course.introduction}}</div>
             <br>
@@ -122,7 +75,6 @@
             <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
             {% endif %}
         </div>
->>>>>>> a664c6c8f5a8c80086900fd9ddc912c222df9ce6
 
         <br>
         <div class = "col-6">
