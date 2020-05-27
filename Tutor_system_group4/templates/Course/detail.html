@@ -26,16 +26,26 @@
             <br>
             
             <div class="row">
+                <div class="col-md-6">
                 {% if course.state_match %}
                     <p class="text-danger">课程状态：上课中</p>
                 {% else %}
                     <p class="text-success">课程状态：可申请</p>
                 {% endif %}
+                </div>
             </div>
                 
-            <div class="row">课程简介：{{course.introduction}}</div>
+            <div class="row">
+                <div class="col-md-6">
+                课程简介：{{course.introduction}}
+                </div>
+            </div>
             <br>
-            <div class="row">课程评论：{{ course.comment }}</div>
+            <div class="row">
+                <div class="col-md-6">
+                课程评论：{{ course.comment }}
+                </div>
+            </div>
             <br>
         </div>
 

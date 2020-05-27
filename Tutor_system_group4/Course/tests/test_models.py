@@ -12,4 +12,3 @@ from .models import CourseDetail
 
 
 # Create your tests here.
-
