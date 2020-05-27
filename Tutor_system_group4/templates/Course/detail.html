@@ -7,68 +7,100 @@
 
 {% block content %}
     <div class="container mt-3">
-        <div>
-            {% csrf_token %}
-            <div class = "col-12">
-                <p class = "lead">课程名：{{ course.nick_name }}</p>
+            
+        <div class = "col-md-12">
+            <p class = "lead">课程名：{{ course.nick_name }}</p>
+            <div class="row">
+                <div class="col-md-3">
+                    授课老师：<a href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id%}">{{ course.teacher.name }}</a>
+                </div>
+                <div class="col-md-3">课程收费：{{ course.charge }}/小时</div>
+            </div>
+            <br>
+            
+            <div class="row">
                 <!--使用.get_**_display方法显示**的CHOICE值-->
-                <p>{{course.get_grade_course_display}}   {{course.get_subject_display}}</p>
+                <div class="col-md-3">年级：{{course.get_grade_course_display}}</div>
+                <div class="col-md-3">科目：{{course.get_subject_display}}</div>
+            </div>
+            <br>
+            
+            <div class="row">
                 {% if course.state_match %}
                     <p class="text-danger">课程状态：上课中</p>
                 {% else %}
                     <p class="text-success">课程状态：可申请</p>
                 {% endif %}
-                <!--
-                    {% if request.user.is_student and course.state_match == 0 %}
-                        <a class = "text-success" href='{% url "Course:match" coursedetail_id %}'>申请</a>
-                    {% else %}
-                        <a><p class = "text-success">可申请</p></a>
-                    {% endif %}
-                -->
-                <p>授课老师：<a href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id%}">{{ course.teacher.name }}</a></p>
-                <p>课程收费：{{ course.charge }}/小时</p>
-                <p>课程简介：{{course.introduction}}</p>
-                <p>课程评论：{{ course.comment }}</p>
             </div>
+                
+            <div class="row">课程简介：{{course.introduction}}</div>
+            <br>
+            <div class="row">课程评论：{{ course.comment }}</div>
+            <br>
+        </div>
 
+        <div class="col-md-12">
             {% if request.user.id == course.teacher.teacher_user.id %}
             <h3 class="text-center">申请学生名单</h3>
             <table class="table">
                 <thead>
                     <tr>
                         <th>姓名</th>
+                        <th>年级</th>
+                        <th>性别</th>
                         <th>联系电话</th>
                         <th>邮箱</th>
-                        <th></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <form action="{% url 'Course:agree_match' course.id %}" method="post">
-                        {% csrf_token %}
-                        {% for student in course.student_applied.all %}
-                            <tr>
-                                <td><a href = "{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{student.name}}</a></td>
-                                <td>{{student.phone}}</td>
-                                <td>{{student.mailbox}}</td>
-                                {% if course.state_match %}
-                                    <td><a type="button" class="btn btn-disabled">接受申请</a></td>
-                                {% else %}
-                                    <td><a type="button" class="btn btn-success" type="submit">接受申请</a></td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-                    </form>
+                    {% for student in course.student_applied.all %}
+                        <tr>
+                            <td><a href = "{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{student.name}}</a></td>
+                            <td>{{student.get_grade_display}}</td>
+                            <td>{{student.get_gender_display}}</td>
+                            <td>{{student.phone}}</td>
+                            <td>{{student.mailbox}}</td>
+                            
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             {% endif %}
-
-            <br>
-            <div class = "col-6">
-                {% if request.user.is_student and course.state_match == 0 %}
-                <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
-                {% endif %}
-            </div>
-
         </div>
+
+        <br>
+        <div class = "col-6">
+            {% if request.user.is_student and course.state_match == 0 %}
+            <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
+            {% endif %}
+        </div>
+
+        <br>
+        <div class = "col-6">
+            {% if request.user.id == course.teacher.teacher_user.id %}
+            <a href='#' onclick="confirm_delete()">
+                <button class="btn btn-primary">删除课程</button> 
+            </a>
+            {% endif %}
+        </div>
+
+<script>
+    // 删除课程的函数
+    function confirm_delete() {
+        // 调用layer弹窗组件
+        layer.open({
+            title: "确认删除",
+            content: "确认删除这个课程吗？",
+            // 点击确定按钮后调用的回调函数
+            yes: function(index, layero) {
+                // 指定应当前往的 url
+                location.href='{% url "Course:delete_course" coursedetail_id %}'
+            },
+        })
+    }
+</script>
+
+        
     </div>
 {% endblock content %}

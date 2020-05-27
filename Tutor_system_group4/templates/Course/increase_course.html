@@ -16,20 +16,22 @@
 		<div class="col-md-12">
 			<form method="post" action=".">
 				{% csrf_token %}
-                <div class="row">
-                    <!-- nickname -->
-                    <div class="form-group col-md-4">
-                        <label for="nick_name">课程名称</label>
-                        <input type="text" class="form-control" id="nick_name" name="nick_name">
-                    </div>
-                    <br>
-                    <!-- charge -->
-                    <div class="form-group col-md-4">
-                        <label for="charge">单次课每小时收费价格/元</label>
-                        <input type="text" class="form-control" id="charge" name="charge">
-                    </div>
-                    <br>
-                </div>
+				<div class="row">
+					<!-- nickname -->
+					<div class="form-group col-md-4">
+						<label for="nick_name">课程名称</label>
+						<input type="text" class="form-control" id="nick_name" name="nick_name">
+					</div>
+					<br>
+				
+					<!-- charge -->
+					<div class="form-group col-md-4">
+						<label for="charge">单次课每小时收费价格/元</label>
+						<input type="text" class="form-control" id="charge" name="charge">
+					</div>
+					<br>
+				</div>
+				
 				<div class="row">
 					<!-- subject -->
 					<div class="form-group col-md-4">
