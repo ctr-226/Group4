@@ -14,6 +14,7 @@ from django.urls import reverse
 # Create your tests here.
 
 class UserModelTest(TestCase):
+    # 测试基本的模型属性
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods

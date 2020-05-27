@@ -11,6 +11,7 @@ from User_Profile.views import register
 
 
 class RegisterView(TestCase):
+    # 测试 表单的基本属性
     def setUp(self):
         url = reverse('User_Profile:register')
         self.response = self.client.get(url)
@@ -37,7 +38,9 @@ class RegisterView(TestCase):
 
 
 class SuccessStudentRegisterTests(TestCase):
+    # 测试成功注册学员的操作
     def setUp(self):
+        # 创建数据
         url = reverse('User_Profile:register')
         data = {
             'username': 'john',
@@ -62,6 +65,7 @@ class SuccessStudentRegisterTests(TestCase):
 
 
 class SuccessTeacherRegisterTests(TestCase):
+    # 测试成功注册教员的情况
     def setUp(self):
         url = reverse('User_Profile:register')
         data = {
@@ -87,6 +91,7 @@ class SuccessTeacherRegisterTests(TestCase):
 
 
 class InvalidRegisterTests(TestCase):
+    # 测试没有成功注册的操作
     def setUp(self):
         url = reverse('User_Profile:register')
         self.response = self.client.post(url, {})

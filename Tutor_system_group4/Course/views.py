@@ -118,6 +118,7 @@ def match(request, coursedetail_id):
 
 
 # 同意申请
+@login_required(login_url='/user/login/')
 def agree_match(request, coursedetail_id):
     course_applying = CourseDetail.objects.get(id=coursedetail_id)
     selected_student = Student.objects.get(id=request.POST['choice'])
