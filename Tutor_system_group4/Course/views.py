@@ -134,6 +134,16 @@ def detail_course(request, coursedetail_id):
     context = {'course': course, 'coursedetail_id': coursedetail_id}
     return render(request, 'Course/detail.html', context)
 
+# 课程的删除
+# 根据博客的教程，该功能还可以在安全性上进行一些改进
+@login_required(login_url='/user/login/')
+def delete_course(request, coursedetail_id):
+    course = CourseDetail.objects.get(id=coursedetail_id)
+    if course.state_match == 0:
+        course.delete()
+        return redirect('Course:manage_course')
+    else:
+        return HttpResponse("该课程已匹配完成，不可删除")
 
 # 课程的删除
 # 根据博客的教程，该功能还可以在安全性上进行一些改进
