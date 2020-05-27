@@ -111,7 +111,7 @@ def match(request, coursedetail_id):
         applicant = this_user.student_profile
         course_applying.student_applied.add(applicant)
         course_applying.save()
-        return redirect("Course:detail_course", coursedetail_id=coursedetail_id)
+        return redirect('Course:manage_course')
     else:
         return HttpResponse("只有学生可以申请选课")
     return redirect('Course:detail_course', coursedetail_id=coursedetail_id)
