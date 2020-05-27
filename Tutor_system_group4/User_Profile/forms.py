@@ -53,7 +53,7 @@ class UserRegisterForm(forms.Form):
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
 
-        if len(password1) < 5:
+        if len(password1) < 4:
             raise forms.ValidationError("Your password is too short.")
         elif len(password1) > 20:
             raise forms.ValidationError("Your password is too long.")

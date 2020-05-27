@@ -97,3 +97,15 @@ class UserRegisterFormTest(TestCase):
         max_length = form.fields['phone'].max_length
         self.assertEqual(label, '电话')
         self.assertEqual(max_length, 12)
+
+
+class RegisterView(TestCase):
+    def setUp(self):
+        url = reverse('User_Profile:register')
+        self.response = self.client.get(url)
+
+    def test_register_status(self):
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_csrf(self):
+        self.assertContains(self.response, 'csrfmiddlewaretoken')
