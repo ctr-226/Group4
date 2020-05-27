@@ -53,7 +53,6 @@
                                 <form action="{% url 'Course:agree_match' course.id %}" method="post">
                                     {% csrf_token %}
                                     <div class="btn-group-vertical" data-toggle="buttons">
-
                                         {% for student in course.student_applied.all %}
                                             <label class="btn btn-light">
                                                 <input type="radio" name="choice" autocomplete="off"

@@ -40,22 +40,22 @@
                     <thead>
                     <tr>
                         <th>姓名</th>
+                        <th>年级</th>
+                        <th>性别</th>
                         <th>联系电话</th>
                         <th>邮箱</th>
-                        <th></th>
+                        
                     </tr>
                     </thead>
                     <tbody>
                     {% for student in course.student_applied.all %}
                         <tr>
                             <td><a href = "{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{student.name}}</a></td>
+                            <td>{{student.get_grade_display}}</td>
+                            <td>{{student.get_gender_display}}</td>
                             <td>{{student.phone}}</td>
                             <td>{{student.mailbox}}</td>
-                            {% if course.state_match %}
-                                <td><a type="button" class="btn btn-disabled">接受申请</a></td>
-                            {% else %}
-                                <td><a type="button" class="btn btn-success" href='#'>接受申请</a></td>
-                            {% endif %}
+                            
                         </tr>
                     {% endfor %}
                     </tbody>
