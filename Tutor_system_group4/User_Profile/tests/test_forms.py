@@ -1,39 +1,65 @@
 from django.test import TestCase
 import datetime
-from Course.models import CourseDetail
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import TeacherProfileForm, StudentProfileForm, UserRegisterForm, UserLoginForm
-from .models import Student, User, Teacher
+from User_Profile.forms import TeacherProfileForm, StudentProfileForm, UserRegisterForm, UserLoginForm
+from User_Profile.models import Student, User, Teacher
 
 from django.urls import reverse
 
-from .models import Teacher, Student, User
+class StudentProfileFormTests(TestCase):
 
-from django.urls import reverse
+    #对于模型表单，表单字段的label属性根据模型字段的verbose_name属性设置，并将第一个字母大写。
+    def test_name_field(self):
+        form = StudentProfileForm()
+        label = form.fields['name'].label
+        max_length = form.fields['name'].max_length
+        self.assertTrue(label == None or label == '姓名')
+        self.assertEqual(max_length, 100)
 
-from .models import Teacher, Student, User
-from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
+    def test_age_field_label(self):
+        form = StudentProfileForm()
+        label = form.fields['age'].label
+        self.assertTrue(label == None or label == '年龄')
 
-class StudentProfileViewTests(TestCase):
-    def setUp(self):
-        # 这里新建user元组对应的id应该是默认的1
-        self.user = User.objects.create_user(username='lhy', password='123456', is_student=True)
-        self.student = Student.objects.create(student_user=self.user, name='lhy', mailbox='1971905576@qq.com',
-                                              phone='13697112122')
+    def test_gender_field_label(self):
+        form = StudentProfileForm()
+        label = form.fields['gender'].label
+        self.assertTrue(label == None or label == '性别')
 
-    def test_csrf(self):
-        url = reverse('student_profile_update', kwargs={'id': 1})
-        response = self.client.get(url)
-        self.assertContains(response, 'csrfmiddlewaretoken')
+    def test_grade_field_label(self):
+        form = StudentProfileForm()
+        label = form.fields['grade'].label
+        self.assertTrue(label == None or label == '年级')
 
-    # def test_contains_form(self):
+    def test_phone_field(self):
+        form = StudentProfileForm()
+        label = form.fields['phone'].label
+        max_length = form.fields['phone'].max_length
+        self.assertTrue(label == None or label == '联系电话')
+        self.assertEqual(max_length, 12)
 
+    def test_mailbox_field_label(self):
+        form = StudentProfileForm()
+        label = form.fields['mailbox'].label
+        self.assertTrue(label == None or label == '个人邮箱')
 
-# class TeacherProfileViewTests(TestCase):
-# def
+    def test_avatar_field_label(self):
+        form = StudentProfileForm()
+        label = form.fields['avatar'].label
+        self.assertTrue(label == None or label == '头像')
+
+    def test_briefintroduction_field_label(self):
+        form = StudentProfileForm()
+        label = form.fields['briefintroduction'].label
+        max_length = form.fields['briefintroduction'].max_length
+        self.assertTrue(label == None or label == '学生信息')
+        self.assertEqual(max_length, 100)
+
+# class TeacherProfileFormTests(TestCase):
+# 由于学生和老师两个表单基本一致，此处老师个人信息表单的测试就可以略去
+
 
 class UserRegisterFormTest(TestCase):
     def test_username_field_label(self):
@@ -44,7 +70,7 @@ class UserRegisterFormTest(TestCase):
     def test_email_field_label(self):
         form = UserRegisterForm()
         label = form.fields['email'].label
-        self.assertEqual(label, 'email')
+        self.assertEqual(label, 'Email')
 
     def test_user_attribute_required(self):
         form = UserRegisterForm()

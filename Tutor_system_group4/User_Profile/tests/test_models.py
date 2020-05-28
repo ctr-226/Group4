@@ -5,18 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import TeacherProfileForm, StudentProfileForm, UserRegisterForm, UserLoginForm
-from .models import Student, User, Teacher
+from User_Profile.forms import TeacherProfileForm, StudentProfileForm, UserRegisterForm, UserLoginForm
+from User_Profile.models import Student, User, Teacher
 
 from django.urls import reverse
-
-from .models import Teacher, Student, User
-
-from django.urls import reverse
-
-from .models import Teacher, Student, User
-from .forms import UserRegisterForm, UserLoginForm, StudentProfileForm, TeacherProfileForm
-
 
 # Create your tests here.
 
