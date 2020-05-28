@@ -4,12 +4,11 @@ from Course.models import CourseDetail
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
-from User_Profile.forms import UserLoginForm, UserRegisterForm, StudentProfileForm, TeacherProfileForm
-from User_Profile.models import Teacher, Student, User
+
+from User_Profile.forms import TeacherProfileForm, StudentProfileForm, UserRegisterForm, UserLoginForm
+from User_Profile.models import Student, User, Teacher
 
 from django.urls import reverse
-
 
 # Create your tests here.
 
@@ -62,7 +61,7 @@ class UserModelTest(TestCase):
     def test_introduction_lable(self):
         student = Student.objects.get(id=1)
         label = student._meta.get_field('briefintroduction').verbose_name
-        self.assertEquals(label, '教师信息')
+        self.assertEquals(label, '学生信息')
 
     def test_introduction_text(self):
         student = Student.objects.get(id=1)

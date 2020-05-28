@@ -32,7 +32,7 @@ class Student(models.Model):
     # 学生性别 choice (u'内部存储名，u'外部显示名')
     GENDER_CHOICE = ((u'M', u'男'), (u'F', u'女'))
 
-    gender = models.CharField(max_length=2, choices=GENDER_CHOICE, default=u'M')
+    gender = models.CharField(max_length=2, choices=GENDER_CHOICE, default=u'M', verbose_name='性别')
 
     # 学生年级 choice (u'内部存储名，u'外部显示名')
     GRADE_CHOICE_STUDENT = (
@@ -56,7 +56,7 @@ class Student(models.Model):
     phone = models.CharField(max_length=12, verbose_name='联系电话')
 
     # 个人简介
-    briefintroduction = models.CharField(verbose_name="教师信息", blank=True, null=True, max_length=100,
+    briefintroduction = models.CharField(verbose_name="学生信息", blank=True, null=True, max_length=100,
                                          default="暂无", help_text="个人简介，所在学校/学习情况等")
 
     # 头像
@@ -86,7 +86,7 @@ class Teacher(models.Model):
         (u'F', u'女')
     )
 
-    gender = models.CharField(max_length=2, choices=GENDER_CHOICE, default=u'M')
+    gender = models.CharField(max_length=2, choices=GENDER_CHOICE, default=u'M', verbose_name='性别')
 
     # 教师年级
     GRADE_CHOICE_TEACHER = (
