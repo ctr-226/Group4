@@ -32,12 +32,13 @@
                     <div class="form-group col-md-4">
                         <label for="name">姓名</label>
                         <input type="text" class="form-control" id="name" name="name"
-                               value="{{ request.user.student_profile.name}}">
+                               value="{{ request.user.student_profile.name }}">
                     </div>
                     <div class="form-group col-md-8">
                         <label for="briefintroduction">个人简介</label>
                         <textarea type="text" class="form-control" id="briefintroduction" name="briefintroduction"
-                                  rows="3">{{ request.user.student_profile.briefintroduction}}</textarea>
+                                  rows="3"
+                                  placeholder="说点什么，让别人更加了解你">{{ request.user.student_profile.briefintroduction }}</textarea>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="age">年龄</label>

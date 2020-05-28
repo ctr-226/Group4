@@ -20,14 +20,15 @@
                     <!-- nickname -->
                     <div class="form-group col-md-4">
                         <label for="nick_name">课程名称</label>
-                        <input type="text" class="form-control" id="nick_name" name="nick_name">
+                        <input type="text" class="form-control" id="nick_name" name="nick_name"
+                               placeholder="为你的课程起个名字吧！">
                     </div>
                     <br>
 
                     <!-- charge -->
                     <div class="form-group col-md-4">
                         <label for="charge">单次课每小时收费价格/元</label>
-                        <input type="text" class="form-control" id="charge" name="charge">
+                        <input type="text" class="form-control" id="charge" name="charge" placeholder="设置你期望的时薪">
                     </div>
                     <br>
                 </div>
@@ -60,23 +61,24 @@
 							<option value="4">初三</option>
 							<option value="5">高一</option>
 							<option value="6">高二</option>
-							<option value="7">高三</option>
-							<option value="8" selected>其他</option>
-						</select>
-					</div>
-					<br>
-				</div>
-				<div class="row">
-					<!-- introduction -->
-					<div class="form-group col-md-8">
-						<label for="introduction">课程简介</label>
-						<textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"> </textarea>
-					</div>
-					<br>
-				</div>
-				<!-- 提交按钮 -->
-				<button type="submit" class="btn btn-primary">发布课程</button>
-			</form>
-		</div>
-	</div>
+                            <option value="7">高三</option>
+                            <option value="8" selected>其他</option>
+                        </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="row">
+                    <!-- introduction -->
+                    <div class="form-group col-md-8">
+                        <label for="introduction">课程简介</label>
+                        <textarea type="text" class="form-control" id="introduction" name="introduction" rows="12"
+                                  placeholder="为你的课程添加介绍"> </textarea>
+                    </div>
+                    <br>
+                </div>
+                <!-- 提交按钮 -->
+                <button type="submit" class="btn btn-primary">发布课程</button>
+            </form>
+        </div>
+    </div>
 {% endblock content %}
