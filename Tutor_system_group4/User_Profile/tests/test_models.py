@@ -74,3 +74,12 @@ class UserModelTest(TestCase):
         # teacher = user.teacher_profile
         teacher = Teacher.objects.get(id=1)
         self.assertEqual(teacher.name, 'test_user_teacher')
+
+
+class UserLoginFormTest(TestCase):
+    """测试登录表单字段是否符合预期"""
+
+    def test_login_form_username_field_label(self):
+        form = UserLoginForm()
+        self.assertTrue(form.fields['username'].label == None or form.fields['username'].label == 'username')
+        self.assertTrue(form.fields['password'].label == None or form.fields['password'].label == 'password')
