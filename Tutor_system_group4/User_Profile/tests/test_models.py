@@ -61,7 +61,7 @@ class UserModelTest(TestCase):
     def test_introduction_lable(self):
         student = Student.objects.get(id=1)
         label = student._meta.get_field('briefintroduction').verbose_name
-        self.assertEquals(label, '教师信息')
+        self.assertEquals(label, '学生信息')
 
     def test_introduction_text(self):
         student = Student.objects.get(id=1)
