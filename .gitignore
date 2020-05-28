@@ -33,3 +33,4 @@ share/python-wheels/
 liuhuquestion.md
 Tutor_system_group4/db.sqlite3
 Tutor_system_group4/media/avatar
+migrations/
