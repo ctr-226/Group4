@@ -45,7 +45,7 @@ def student_profile_update(request, id):
 
     elif request.method == 'GET':
         student_form = StudentProfileForm()
-        context = {'form': student_form , 'student_profile':student_profile}
+        context = {'form': student_form, 'student_profile': student_profile}
         return render(request, 'User_Profile/student_profile_update.html', context)
     else:
         return HttpResponse("请使用GET或POST请求数据")
@@ -79,7 +79,7 @@ def teacher_profile_update(request, id):
 
     elif request.method == 'GET':
         teacher_form = TeacherProfileForm()
-        context = {'teacher_form': teacher_form , 'teacher_profile':teacher_profile}
+        context = {'teacher_form': teacher_form, 'teacher_profile': teacher_profile}
         return render(request, 'User_Profile/teacher_profile_update.html', context)
     else:
         return HttpResponse("请使用GET或POST请求数据")
@@ -156,16 +156,12 @@ def register(request):
                 student_profile.mailbox = email
                 student_profile.phone = phone
                 student_profile.save()
+                # 转到登录界面
             return HttpResponseRedirect('/user/login/')
         else:
             return HttpResponse("提供的表单不符合规则")
 
     else:
         form = UserRegisterForm()
-        return render(request, 'User_Profile/register.html', {'form': form})
-
-
-
-
-
-
+        context = {'form': form}
+        return render(request, 'User_Profile/register.html', context)

@@ -3,25 +3,29 @@ from django import forms
 # 引入 User 模型 ，用户数据都存在这一模型对应数据库中
 from django.contrib.auth.models import User
 # 引入 Profile 模型
-from .models import Student,Teacher
+from .models import Student, Teacher
 from .models import User
 import re
+
 
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['age', 'gender', 'grade' , 'avatar' , 'name' , 
-                    'briefintroduction' , 'phone' , 'mailbox']
+        fields = ['age', 'gender', 'grade', 'avatar', 'name',
+                  'briefintroduction', 'phone', 'mailbox']
+
 
 class TeacherProfileForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ['age', 'gender', 'grade' , 'avatar' , 'name' , 
-                    'briefintroduction' , 'phone' , 'mailbox' ]
+        fields = ['age', 'gender', 'grade', 'avatar', 'name',
+                  'briefintroduction', 'phone', 'mailbox']
+
 
 def email_check(email):
     pattern = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")
     return re.match(pattern, email)
+
 
 class UserRegisterForm(forms.Form):
     username = forms.CharField(label='Username', max_length=50)
@@ -49,7 +53,7 @@ class UserRegisterForm(forms.Form):
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
 
-        if len(password1) < 5:
+        if len(password1) < 4:
             raise forms.ValidationError("Your password is too short.")
         elif len(password1) > 20:
             raise forms.ValidationError("Your password is too long.")
