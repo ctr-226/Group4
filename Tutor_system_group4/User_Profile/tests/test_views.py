@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, LiveServerTestCase, Client
 import datetime
 from Course.models import CourseDetail
 from django.contrib.auth.decorators import login_required

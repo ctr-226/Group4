@@ -19,7 +19,7 @@ class StudentProfileViewTests(TestCase):
                                               phone='13697112122')
 
     def test_csrf(self):
-        url = reverse('student_profile_update', kwargs={'id': 1})
+        url = reverse('User_Profile:student_profile_update', kwargs={'id': 1})
         response = self.client.get(url)
         self.assertContains(response, 'csrfmiddlewaretoken')
 
@@ -39,7 +39,7 @@ class UserRegisterFormTest(TestCase):
     def test_email_field_label(self):
         form = UserRegisterForm()
         label = form.fields['email'].label
-        self.assertEqual(label, 'email')
+        self.assertEqual(label, 'Email')
 
     def test_user_attribute_required(self):
         form = UserRegisterForm()
