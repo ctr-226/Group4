@@ -30,7 +30,6 @@ share/python-wheels/
 *.swp
 *.DS_Store
 *.sqlite3
-liuhuquestion.md
 Tutor_system_group4/db.sqlite3
 Tutor_system_group4/media/avatar
-migrations/
+Tutor_system_group4/*/migrations/
