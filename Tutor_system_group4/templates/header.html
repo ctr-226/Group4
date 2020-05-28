@@ -5,39 +5,75 @@
 <script src="{% static 'popper/popper.js' %}"></script>
 <!-- 引入bootstrap的js文件 -->
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-
+<div class="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+            <div class="container">
             <!-- 导航栏商标 -->
-            <a class="navbar-brand" href="{% url 'index' %}">家教平台</a>
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'image/logo1.png' %}" width="40" height="40" class="d-inline">
+                家教平台</a>
             <!-- 导航入口 -->
-            <div>
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <!-- 如果用户已经登录，则显示用户名下拉菜单 -->
+                {% if user.is_authenticated %}
+            <div class="navbar-collapse">
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="#"></a>
+                    </li>
+                    <li class="nav-item justify-content-center">
+                        <a class="nav-link " href="{% url 'index' %}">首页</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'filter' %}">筛选课程</a>
+                    </li>
+                </ul>
+            </div>
+                    <div>
+                    <ul class="navbar-nav">
+                        <!-- 如果用户已经登录，则显示用户名下拉菜单 -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.is_student %}
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学员 {{ user.username }}</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="{% url 'index' %} ">首页</a>
-                            {% if user.is_student %}
                             <a class="dropdown-item" href="{% url 'User_Profile:student_profile_update' user.id %}">个人信息</a>
-                            {% elif user.is_teacher %}
+                        {% else %}
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">教员 {{ user.username }}</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'index' %} ">首页</a>
                             <a class="dropdown-item" href="{% url 'User_Profile:teacher_profile_update' user.id %}">个人信息</a>
                             <a class="dropdown-item" href="{% url 'Course:increase_course' %}">发布课程</a>
-                            {% endif %}
+                        {% endif %}
+
+
                             <a class="dropdown-item" href="{% url 'Course:manage_course' %}  ">我的课程</a>
                             <a class="divider dropdown-item"></a>
                             <a class="dropdown-item" href="{% url 'User_Profile:logout' %} ">退出登录</a>
                         </div>
                     </li>
-                    {% else %}
+                    </ul>
+                    </div>
+
+
+
+                {% else %}
                     <!--如果用户未登录，则显示“登录”-->
-                    <li class="nav-item">
+                    <div >
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'User_Profile:register' %}">注册</a>
+                    </li>
+                        <li class="nav-item">
                         <a class="nav-link" href="{% url 'User_Profile:login' %}">登录</a>
                     </li>
-                    {% endif %}
-                </ul>
+                    </ul>
+                    </div>
+
+                {% endif %}
             </div>
-        </div>
     </nav>
+</div>

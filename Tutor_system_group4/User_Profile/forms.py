@@ -53,7 +53,7 @@ class UserRegisterForm(forms.Form):
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
 
-        if len(password1) < 5:
+        if len(password1) < 4:
             raise forms.ValidationError("Your password is too short.")
         elif len(password1) > 20:
             raise forms.ValidationError("Your password is too long.")
@@ -71,5 +71,6 @@ class UserRegisterForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
+    """登录用表单，用于以POST提交数据，仅供与数据库验证，故表单类和模型无直接关系"""
     username = forms.CharField()
     password = forms.CharField()

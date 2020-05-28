@@ -28,36 +28,41 @@
                     {% csrf_token %}
                 <div class="form-group col-md">
                     <label for="id_username">用户名</label>
-                    <input type="text" class="form-control" id="id_username" name="username" required>
+                    <input type="text" class="form-control" id="id_username" name="username" placeholder="用户名长度小于100个字符"
+                           required>
                 </div>
                 <!-- 邮箱 -->
                 <div class="form-group col-md">
                     <label for="id_email">Email</label>
-                    <input type="text" class="form-control" id="id_email" name="email">
+                    <input type="email" class="form-control" id="id_email" placeholder="请设置合法邮箱地址" name="email">
                 </div>
                 <!-- 密码 -->
                 <div class="form-group col-md">
                     <label for="id_password1">设置密码</label>
-                    <input type="password" class="form-control" id="id_password1" name="password1" required>
+                    <input type="password" class="form-control" id="id_password1" name="password1" placeholder="请设置密码"
+                           required>
                 </div>
                 <!-- 确认密码 -->
                 <div class="form-group col-md">
                     <label for="id_password2">确认密码</label>
-                    <input type="password" class="form-control" id="id_password2" name="password2" required>
+                    <input type="password" class="form-control" id="id_password2" name="password2" placeholder="请重复密码"
+                           required>
                 </div>
                 <div class="form-group col-md">
                     <label for="id_phone">手机号</label>
-                    <input type="text" class="form-control" id="id_phone" name="phone" required>
+                    <input type="text" class="form-control" id="id_phone" name="phone" placeholder="请输入12位手机号码"
+                           required>
                 </div>
                 <div class="form-group col-md">
                     <label for="id_user_attribute">属性</label>
-                    <select class="form-control" id="id_user_attribute" name="user_attribute" >
+                    <select class="form-control" id="id_user_attribute" name="user_attribute">
                         <option value="0">教员</option>
                         <option value="1">学生</option>
                     </select>
                 </div>
                 <!-- 提交按钮 -->
-                <button type="submit" class="btn btn-primary">提交</button> 
+                <button type="submit" class="btn btn-primary">提交</button>
+                 
                </form>
             </div>
         </div>

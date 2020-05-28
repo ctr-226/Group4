@@ -62,6 +62,7 @@ class StudentProfileFormTests(TestCase):
 
 
 class UserRegisterFormTest(TestCase):
+    # 测试基本的注册表单属性
     def test_username_field_label(self):
         form = UserRegisterForm()
         label = form.fields['username'].label

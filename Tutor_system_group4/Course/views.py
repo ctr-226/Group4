@@ -117,6 +117,7 @@ def match(request, coursedetail_id):
 
 
 # 同意申请
+@login_required(login_url='/user/login/')
 def agree_match(request, coursedetail_id):
     course_applying = CourseDetail.objects.get(id=coursedetail_id)
     selected_student = Student.objects.get(id=request.POST['choice'])
@@ -160,6 +161,7 @@ def delete_course(request, coursedetail_id):
 
 # 课程管理
 # 学生和老师共同使用这个视图函数
+@login_required(login_url='/user/login/')
 def manage_course(request):
     # 通过request获得user对象
     user = request.user

@@ -6,44 +6,45 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="container mt-3">
-            
-        <div class = "col-md-12">
-            <p class = "lead">课程名：{{ course.nick_name }}</p>
+    <div class="container mt-3 content">
+
+        <div class="col-md-12">
+            <p class="lead">课程名：{{ course.nick_name }}</p>
             <div class="row">
                 <div class="col-md-3">
-                    授课老师：<a href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id%}">{{ course.teacher.name }}</a>
+                    授课老师：<a
+                        href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id %}">{{ course.teacher.name }}</a>
                 </div>
                 <div class="col-md-3">课程收费：{{ course.charge }}/小时</div>
             </div>
             <br>
-            
+
             <div class="row">
                 <!--使用.get_**_display方法显示**的CHOICE值-->
-                <div class="col-md-3">年级：{{course.get_grade_course_display}}</div>
-                <div class="col-md-3">科目：{{course.get_subject_display}}</div>
+                <div class="col-md-3">年级：{{ course.get_grade_course_display }}</div>
+                <div class="col-md-3">科目：{{ course.get_subject_display }}</div>
             </div>
             <br>
-            
+
             <div class="row">
                 <div class="col-md-6">
-                {% if course.state_match %}
-                    <p class="text-danger">课程状态：上课中</p>
-                {% else %}
-                    <p class="text-success">课程状态：可申请</p>
-                {% endif %}
+                    {% if course.state_match %}
+                        <p class="text-danger">课程状态：上课中</p>
+                    {% else %}
+                        <p class="text-success">课程状态：可申请</p>
+                    {% endif %}
                 </div>
             </div>
-                
+
             <div class="row">
                 <div class="col-md-6">
-                课程简介：{{course.introduction}}
+                    课程简介：{{ course.introduction }}
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6">
-                课程评论：{{ course.comment }}
+                    课程评论：{{ course.comment }}
                 </div>
             </div>
             <br>
@@ -51,66 +52,70 @@
 
         <div class="col-md-12">
             {% if request.user.id == course.teacher.teacher_user.id %}
-            <h3 class="text-center">申请学生名单</h3>
-            <table class="table">
-                <thead>
+                <h3 class="text-center">申请学生名单</h3>
+                <table class="table">
+                    <thead>
                     <tr>
                         <th>姓名</th>
                         <th>年级</th>
                         <th>性别</th>
                         <th>联系电话</th>
                         <th>邮箱</th>
-                        
+
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {% for student in course.student_applied.all %}
                         <tr>
-                            <td><a href = "{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{student.name}}</a></td>
-                            <td>{{student.get_grade_display}}</td>
-                            <td>{{student.get_gender_display}}</td>
-                            <td>{{student.phone}}</td>
-                            <td>{{student.mailbox}}</td>
-                            
+                            <td>
+                                <a href="{% url 'User_Profile:student_profile_update' student.student_user_id %}">{{ student.name }}</a>
+                            </td>
+                            <td>{{ student.get_grade_display }}</td>
+                            <td>{{ student.get_gender_display }}</td>
+                            <td>{{ student.phone }}</td>
+                            <td>{{ student.mailbox }}</td>
+
                         </tr>
                     {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
             {% endif %}
         </div>
 
         <br>
-        <div class = "col-6">
+        <div class="col-6">
             {% if request.user.is_student and course.state_match == 0 %}
-            <a href='{% url "Course:match" coursedetail_id %}'> <button class="btn btn-primary">申请课程</button> </a>
+                <a href='{% url "Course:match" coursedetail_id %}'>
+                    <button class="btn btn-primary">申请课程</button>
+                </a>
             {% endif %}
         </div>
 
         <br>
-        <div class = "col-6">
+        <div class="col-6">
             {% if request.user.id == course.teacher.teacher_user.id %}
-            <a href='#' onclick="confirm_delete()">
-                <button class="btn btn-primary">删除课程</button> 
-            </a>
+                <a href='#' onclick="confirm_delete()">
+                    <button class="btn btn-primary">删除课程</button>
+                </a>
             {% endif %}
         </div>
 
-<script>
-    // 删除课程的函数
-    function confirm_delete() {
-        // 调用layer弹窗组件
-        layer.open({
-            title: "确认删除",
-            content: "确认删除这个课程吗？",
-            // 点击确定按钮后调用的回调函数
-            yes: function(index, layero) {
-                // 指定应当前往的 url
-                location.href='{% url "Course:delete_course" coursedetail_id %}'
-            },
-        })
-    }
-</script>
+    <div class="container" style="height: 30px"></div>
 
-        
+        <script>
+            // 删除课程的函数
+            function confirm_delete() {
+                // 调用layer弹窗组件
+                layer.open({
+                    title: "确认删除",
+                    content: "确认删除这个课程吗？",
+                    // 点击确定按钮后调用的回调函数
+                    yes: function (index, layero) {
+                        // 指定应当前往的 url
+                        location.href = '{% url "Course:delete_course" coursedetail_id %}'
+                    },
+                })
+            }
+        </script>
     </div>
 {% endblock content %}

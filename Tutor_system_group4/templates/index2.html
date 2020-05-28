@@ -8,30 +8,22 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <!--中等屏幕占4份,小屏占6份,超小占12份-->
-            <div class="col-3">
-                <img src="../static/image/logo.jpg" alt="上海交大logo" style="width:200px"/>
-            </div>
-            {% if request.user.is_student %}
-            <div class="col-7 text-right" style="margin-top: 20px;">
-                <p>我是学生：
-                    <a href='{% url "filter" %}'>筛选课程</a>
-                    <a href='{% url "Course:manage_course" %}'>我学习的课程</a></p>
-            </div>
-            {% else %}
-            <div class="col-7 text-right" style="margin-top: 20px;">
-                <p>我是老师：
-                    <a href='{% url "Course:increase_course" %}'>发布课程</a>
-                    <a href='{% url "Course:manage_course" %}'>我教授的课程</a></p>
-            </div>
-            {% endif %}
-        </div>
-        <div class="clearfix"></div>
-    </div>
     <!--3.轮播图(扣过来)-->
-    <div class="container">
+    <div class="container" style="height: 20px"></div>
+    <!--<style>
+    .blur{
+
+        filter: blur(3px);
+
+	-webkit-filter: blur(3px);  /* chrome, opera */
+
+	-ms-filter: blur(3px);
+
+	-moz-filter: blur(3px);
+    }
+    </style>
+    -->
+    <div class="container col-md-9">
         <div class="align-content-xl-center">
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -41,13 +33,26 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../static/image/door.jpg" class="d-block w-100" alt="...">
+                        <img src="{% static 'image/check5.jpg' %}" class="d-block w-100 blur" alt="...">
+                        <div class="carousel-caption d-none d-md-block text-dark " style="background-color: rgba(255,255,255,0.7)">
+                            <h3>家教源自各个高校</h3>
+                            <h5>更加丰富的考试经验 更高水平的个人素养</h5>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../static/image/one.jpg" class="d-block w-100" alt="...">
+                        <img src="{% static 'image/check2.jpg' %}" class="d-block w-100 blur" alt="...">
+
+                        <div class="carousel-caption d-none d-md-block  text-dark " style="background-color: rgba(225,225,225,0.6)">
+                            <h3>一对一辅导教学</h3>
+                            <h5>提高更快，效率更高</h5>
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../static/image/two.jpg" class="d-block w-100" alt="...">
+                        <img src="{% static 'image/check3.jpg' %}" class="d-block w-100 blur" alt="...">
+                        <div class="carousel-caption d-none d-md-block text-dark " style="background-color: rgba(225,225,225,0.5)">
+                            <h3>自由的社区</h3>
+                            <h5>更随心地选择</h5>
+                        </div>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -87,14 +92,5 @@
             {% endfor %}
         </div>
     </div>
-    <!--友情链接-->
-    <div class="text-center">
-        <p><h5>友情链接</h5></p>
-        <ul class="list-inline">
-            <li><a href="https://zsb.sjtu.edu.cn" target="_blank">上海交通大学本科招生网</a></li>
-            <li><a href="https://jwc.sjtu.edu.cn" target="_blank">上海交通大学本科教学信息网（教务处）</a></li>
-            <li><a href="https://lib.sjtu.edu.cn" target="_blank">上海交通大学图书馆</a></li>
-            <li><a href="https://oc.sjtu.edu.cn" target="_blank">上海交通大学在线教学平台</a></li>
-        </ul>
-    </div>
+
 {% endblock content %}
