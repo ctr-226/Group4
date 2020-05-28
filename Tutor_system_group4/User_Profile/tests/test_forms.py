@@ -8,8 +8,8 @@ from User_Profile.models import Student, User, Teacher
 
 from django.urls import reverse
 
+#学生修改个人信息表单的测试
 class StudentProfileFormTests(TestCase):
-
     #对于模型表单，表单字段的label属性根据模型字段的verbose_name属性设置，并将第一个字母大写。
     def test_name_field(self):
         form = StudentProfileForm()

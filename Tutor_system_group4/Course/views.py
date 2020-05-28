@@ -106,8 +106,7 @@ def match(request, coursedetail_id):
     this_user = User.objects.get(id=request.user.id)
     # 虽然前端控制只有学生浏览课程详情页面时才有“申请”的按钮，但这里多一个判断更安全
     if this_user.is_student == True:
-        # 多对多中间表加一个元组
-        # applicant = Student.objects.get(student_user_id=request.user.id)
+        # 多对多中间表加一个元组，下面this_user.student_profile使用了外键的related_name属性
         applicant = this_user.student_profile
         course_applying.student_applied.add(applicant)
         course_applying.save()

@@ -9,8 +9,8 @@ from User_Profile.models import Student, User, Teacher
 
 from django.urls import reverse
 
+#自己或他人查看个人信息页面视图函数的测试
 class StudentProfileFormTests(TestCase):
-
     def setUp(self):
         # 这里新建user元组对应的id应该是默认的1
         self.client = Client()
