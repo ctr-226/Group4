@@ -16,32 +16,32 @@
 		<div class="col-md-12">
 			<form method="post" action=".">
 				{% csrf_token %}
-				<div class="row">
-					<!-- nickname -->
-					<div class="form-group col-md-4">
-						<label for="nick_name">课程名称</label>
-						<input type="text" class="form-control" id="nick_name" name="nick_name">
-					</div>
-					<br>
-				
-					<!-- charge -->
-					<div class="form-group col-md-4">
-						<label for="charge">单次课每小时收费价格/元</label>
-						<input type="text" class="form-control" id="charge" name="charge">
-					</div>
-					<br>
-				</div>
-				
-				<div class="row">
-					<!-- subject -->
-					<div class="form-group col-md-4">
-						<label for="subject">课程科目</label>
-						<select class="form-control" id="subject" name="subject">
-							<option value="zh">语文</option>
-							<option value="math" selected>数学</option>
-							<option value="en">英语</option>
-							<option value="phy">物理</option>
-							<option value="che">化学</option>
+                <div class="row">
+                    <!-- nickname -->
+                    <div class="form-group col-md-4">
+                        <label for="nick_name">课程名称</label>
+                        <input type="text" class="form-control" id="nick_name" name="nick_name">
+                    </div>
+                    <br>
+
+                    <!-- charge -->
+                    <div class="form-group col-md-4">
+                        <label for="charge">单次课每小时收费价格/元</label>
+                        <input type="text" class="form-control" id="charge" name="charge">
+                    </div>
+                    <br>
+                </div>
+
+                <div class="row">
+                    <!-- subject -->
+                    <div class="form-group col-md-4">
+                        <label for="subject">课程科目</label>
+                        <select class="form-control" id="subject" name="subject">
+                            <option value="zh">语文</option>
+                            <option value="math" selected>数学</option>
+                            <option value="en">英语</option>
+                            <option value="phy">物理</option>
+                            <option value="che">化学</option>
 							<option value="bio">生物</option>
 							<option value="pol">政治</option>
 							<option value="his">历史</option>

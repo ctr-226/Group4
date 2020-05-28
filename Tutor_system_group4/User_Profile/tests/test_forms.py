@@ -52,6 +52,3 @@ class UserRegisterFormTest(TestCase):
         max_length = form.fields['phone'].max_length
         self.assertEqual(label, '电话')
         self.assertEqual(max_length, 12)
-
-
-

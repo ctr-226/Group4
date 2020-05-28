@@ -67,7 +67,7 @@ class Student(models.Model):
         verbose_name = "学生"
 
     def __str__(self):
-        #  self.id 将文章标题返回
+        #  self.name 将学生姓名返回
         return self.name
 
 
@@ -120,5 +120,5 @@ class Teacher(models.Model):
         verbose_name = "家教"
 
     def __str__(self):
-        # return self.id 将文章标题返回
+        # return self.name 将老师姓名返回
         return self.name

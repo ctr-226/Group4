@@ -8,9 +8,4 @@ from django.shortcuts import render, redirect
 from Course.forms import CourseForm
 from Course.models import CourseDetail
 
-
-
-
-
-
 # Create your tests here.
