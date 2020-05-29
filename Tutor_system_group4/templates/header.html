@@ -8,11 +8,11 @@
 <div class="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <!-- 导航栏交大图标 -->
+            <!-- 导航栏交大logo -->
             <a class="navbar-brand" href="{% url 'index' %}">
                 <img src="{% static 'image/logo1.png' %}" width="40" height="40" class="d-inline">家教平台</a>
                 {% if user.is_authenticated %}
-            <!--直观的导航-->
+            <!--在交大logo旁直观的导航-->
             <div class="navbar-collapse">
                 <ul class="navbar-nav ">
                     <li class="nav-item ">
@@ -50,7 +50,7 @@
                 </li>
             </ul>
             {% else %}
-            <!--如果用户未登录，则显示“登录”-->
+            <!--如果用户未登录，则显示“登录”和“注册”-->
             <div>
                 <ul class="navbar-nav">
                     <li class="nav-item">

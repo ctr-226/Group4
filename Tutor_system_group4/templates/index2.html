@@ -13,6 +13,7 @@
     <div class="container" style="height: 20px"></div>
     <div class="container col-md-9">
         <div class="align-content-xl-center">
+            <!--定义轮播，并且是自动交替变化的轮播-->
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
                 <!--姿态指示器-->
                 <ol class="carousel-indicators">
@@ -20,7 +21,7 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <!--三张轮播图-->
+                <!--三张轮播图，每张图片上加上字幕，起到广告作用-->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="{% static 'image/check5.jpg' %}" class="d-block w-100 blur" alt="...">
@@ -45,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <!--上一个/下一个控制器-->
+                <!--上一个/下一个控制器，可以通过点击控制器找到想看的图片-->
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -58,23 +59,23 @@
         </div>
     </div>
 
-    <!--课程筛选卡片容器-->
+    <!--课程筛选卡片容器，推荐学生/老师可能感兴趣的课程-->
     <div class="container">
         <div class="row mt-2">
             {% for  cours in course %}
             <div class="col-4 mb-4">
                 <!-- 卡片容器 -->
                 <div class="card h-100">
-                    <!-- 标题 -->
+                    <!--课程标题 -->
                     <h4 class="card-header">{{ cours.nick_name }}
                         <span class="text-muted"
                               style="font-size:0.5em">{{ cours.get_grade_course_display }}—{{ cours.get_subject_display }}</span>
                     </h4>
-                    <!-- 摘要 -->
+                    <!--课程介绍-->
                     <div class="card-body">
                         <p class="card-text">{{ cours.introduction }}.</p>
                     </div>
-                    <!-- 注脚 -->
+                    <!--课程注脚-->
                     <div class="card-footer">
                         <span class="pt-2" style="float:right">{{ cours.teacher }}</span>
                         <a href='{% url "Course:detail_course" cours.id %}' class="btn btn-primary">了解课程</a>
@@ -84,5 +85,4 @@
             {% endfor %}
         </div>
     </div>
-
 {% endblock content %}

@@ -13,6 +13,7 @@
     <div class="container" style="height: 20px"></div>
     <div class="container col-md-9">
         <div class="align-content-xl-center">
+            <!--定义轮播，并且是自动交替变化的轮播-->
             <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
                 <!--姿态指示器-->
                 <ol class="carousel-indicators">
@@ -20,7 +21,7 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
-                <!--三张轮播图-->
+                <!--三张轮播图，每张图片上加上字幕，起到广告作用-->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="{% static 'image/check5.jpg' %}" class="d-block w-100 blur" alt="...">
@@ -44,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <!--上一个/下一个控制器-->
+                <!--上一个/下一个控制器，可以通过点击控制器找到想看的图片-->
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
