@@ -8,31 +8,6 @@
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
-    <!--
-    <div class="container-fluid">
-        <div class="row">
-            --中等屏幕占4份,小屏占6份,超小占12份-
-
-            <div class="col-3 ">
-                <img src="{% static 'image/logo.jpg' %}" alt="上海交大logo" style="width:200px"/>
-            </div>
-            {% if request.user.is_student %}
-            <div class="col-7 text-right" style="margin-top: 20px;">
-                <p>我是学生：
-                    <a href='{% url "filter" %}'>筛选课程</a>
-                    <a href='{% url "Course:manage_course" %}'>我学习的课程</a></p>
-            </div>
-            {% else %}
-            <div class="col-7 text-right" style="margin-top: 20px;">
-                <p>我是老师：
-                    <a href='{% url "Course:increase_course" %}'>发布课程</a>
-                    <a href='{% url "Course:manage_course" %}'>我教授的课程</a></p>
-            </div>
-            {% endif %}
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    -->
     <!--3.轮播图(扣过来)-->
     <div class="container" style="height: 20px"></div>
     <!--<style>
