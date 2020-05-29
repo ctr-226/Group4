@@ -9,20 +9,20 @@
     <div class="container mt-3 content">
 
         <div class="col-md-12">
-            <p class="lead">课程名：{{ course.nick_name }}</p>
+            <p class="lead"><b>课程名</b>：{{ course.nick_name }}</p>
             <div class="row">
                 <div class="col-md-3">
-                    授课老师：<a
+                    <b>授课老师</b>：<a
                         href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id %}">{{ course.teacher.name }}</a>
                 </div>
-                <div class="col-md-3">课程收费：{{ course.charge }}/小时</div>
+                <div class="col-md-3"><b>课程收费</b>：{{ course.charge }}/小时</div>
             </div>
             <br>
 
             <div class="row">
                 <!--使用.get_**_display方法显示**的CHOICE值-->
-                <div class="col-md-3">年级：{{ course.get_grade_course_display }}</div>
-                <div class="col-md-3">科目：{{ course.get_subject_display }}</div>
+                <div class="col-md-3"><b>年级</b>：{{ course.get_grade_course_display }}</div>
+                <div class="col-md-3"><b>科目</b>：{{ course.get_subject_display }}</div>
             </div>
             <br>
 
@@ -35,16 +35,22 @@
                     {% endif %}
                 </div>
             </div>
+            <br>
 
             <div class="row">
                 <div class="col-md-6">
-                    课程简介：{{ course.introduction }}
+                    <b>课程简介：</b>
+                    <br>
+                    {{ course.introduction }}
                 </div>
             </div>
-            <br>
+            <br><br>
+
             <div class="row">
                 <div class="col-md-6">
-                    课程评论：{{ course.comment }}
+                    <b>课程评论：</b>
+                    <br>
+                    {{ course.comment }}
                 </div>
             </div>
             <br>
