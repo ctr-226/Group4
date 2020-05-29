@@ -26,6 +26,7 @@
                 </ul>
             </div>
             <!-- 如果用户已经登录，则显示用户名下拉菜单 -->
+                    <div>
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     {% if user.is_student %}
@@ -34,7 +35,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'index' %} ">首页</a>
                         <a class="dropdown-item" href="{% url 'User_Profile:student_profile_update' user.id %}">个人信息</a>
-                    </div>
+
                     {% else %}
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">教员 {{ user.username }}</a>
@@ -49,6 +50,7 @@
                     </div>
                 </li>
             </ul>
+                    </div>
             {% else %}
             <!--如果用户未登录，则显示“登录”和“注册”-->
             <div>
