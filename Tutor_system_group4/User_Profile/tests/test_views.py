@@ -123,7 +123,12 @@ class LoginViewTests(LiveServerTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'User_Profile/login.html')
 
-    def test_login(self):
+    def test_login_with_right_user(self):
         response = self.client.get(reverse('User_Profile:login'))
         login = self.client.login(username='teacher1', password="123456")
         self.assertTrue(login)
+
+    def test_login_with_wrong_user(self):
+        response = self.client.get(reverse('User_Profile:login'))
+        login = self.client.login(username='teacher1', password="1234567")
+        self.assertFalse(login)
