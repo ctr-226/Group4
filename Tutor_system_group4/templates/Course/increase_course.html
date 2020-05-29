@@ -7,15 +7,15 @@
 {% endblock title %}
 
 {% block content %}
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">请填写课程信息：</div>
-			<br/><br/>
-		</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">请填写课程信息：</div>
+            <br/><br/>
+        </div>
 
-		<div class="col-md-12">
-			<form method="post" action=".">
-				{% csrf_token %}
+        <div class="col-md-12">
+            <form method="post" action=".">
+                {% csrf_token %}
                 <div class="row">
                     <!-- nickname -->
                     <div class="form-group col-md-4">
@@ -43,24 +43,24 @@
                             <option value="en">英语</option>
                             <option value="phy">物理</option>
                             <option value="che">化学</option>
-							<option value="bio">生物</option>
-							<option value="pol">政治</option>
-							<option value="his">历史</option>
-							<option value="geo">地理</option>
-						</select>
-					</div>
-					<br>
-					<!-- grade_course -->
-					<div class="form-group col-md-4">
-						<label for="grade_course">课程适合年级</label>
-						<select class="form-control" id="grade_course" name="grade_course">
-							<option value="0">小学一年级至三年级</option>
-							<option value="1">小学四年级至六年级</option>
-							<option value="2">初一</option>
-							<option value="3">初二</option>
-							<option value="4">初三</option>
-							<option value="5">高一</option>
-							<option value="6">高二</option>
+                            <option value="bio">生物</option>
+                            <option value="pol">政治</option>
+                            <option value="his">历史</option>
+                            <option value="geo">地理</option>
+                        </select>
+                    </div>
+                    <br>
+                    <!-- grade_course -->
+                    <div class="form-group col-md-4">
+                        <label for="grade_course">课程适合年级</label>
+                        <select class="form-control" id="grade_course" name="grade_course">
+                            <option value="0">小学一年级至三年级</option>
+                            <option value="1">小学四年级至六年级</option>
+                            <option value="2">初一</option>
+                            <option value="3">初二</option>
+                            <option value="4">初三</option>
+                            <option value="5">高一</option>
+                            <option value="6">高二</option>
                             <option value="7">高三</option>
                             <option value="8" selected>其他</option>
                         </select>
