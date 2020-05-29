@@ -7,25 +7,21 @@
 
 {% block content %}
     <div class="container mt-3 content">
-
         <div class="col-md-12">
             <p class="lead">课程名：{{ course.nick_name }}</p>
             <div class="row">
                 <div class="col-md-3">
-                    授课老师：<a
-                        href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id %}">{{ course.teacher.name }}</a>
+                    授课老师：<a href="{% url 'User_Profile:teacher_profile_update' course.teacher.teacher_user_id %}">{{ course.teacher.name }}</a>
                 </div>
                 <div class="col-md-3">课程收费：{{ course.charge }}/小时</div>
             </div>
             <br>
-
             <div class="row">
                 <!--使用.get_**_display方法显示**的CHOICE值-->
                 <div class="col-md-3">年级：{{ course.get_grade_course_display }}</div>
                 <div class="col-md-3">科目：{{ course.get_subject_display }}</div>
             </div>
             <br>
-
             <div class="row">
                 <div class="col-md-6">
                     {% if course.state_match %}
@@ -35,7 +31,6 @@
                     {% endif %}
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-6">
                     课程简介：{{ course.introduction }}
@@ -49,7 +44,6 @@
             </div>
             <br>
         </div>
-
         <div class="col-md-12">
             {% if request.user.id == course.teacher.teacher_user.id %}
                 <h3 class="text-center">申请学生名单</h3>
@@ -61,7 +55,6 @@
                         <th>性别</th>
                         <th>联系电话</th>
                         <th>邮箱</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -74,14 +67,12 @@
                             <td>{{ student.get_gender_display }}</td>
                             <td>{{ student.phone }}</td>
                             <td>{{ student.mailbox }}</td>
-
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             {% endif %}
         </div>
-
         <br>
         <div class="col-6">
             {% if request.user.is_student and course.state_match == 0 %}
@@ -90,7 +81,6 @@
                 </a>
             {% endif %}
         </div>
-
         <br>
         <div class="col-6">
             {% if request.user.id == course.teacher.teacher_user.id %}
@@ -99,8 +89,7 @@
                 </a>
             {% endif %}
         </div>
-
-    <div class="container" style="height: 30px"></div>
+        <div class="container" style="height: 30px"></div>
 
         <script>
             // 删除课程的函数
