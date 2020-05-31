@@ -30,7 +30,7 @@
 - 学生：
   - 对于自己心仪的课程，可以点击申请并和老师取得联系。
   - 在老师通过申请之后，成功匹配到此课程的学生便可以随时提交对于此课程的评价。
-- 网站url：
+- 本地测试URL：
   - 后台管理：http://127.0.0.1:8000/admin/
   - 注册：http://127.0.0.1:8000/user/register/
     登陆：http://127.0.0.1:8000/user/login/
@@ -38,3 +38,5 @@
   - 教师新增课程：http://127.0.0.1:8000/course/increase_course/
   - 课程详情界面：http://127.0.0.1:8000/course/detail_course/1/
   - 课程管理界面：http://127.0.0.1:8000/course/manage_course/
+
+- 部署地址：https://group4.ml
